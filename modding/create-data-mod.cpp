@@ -2,7 +2,7 @@
 #include "genie/dat/DatFile.h"
 #include <fstream>
 #include <iostream>
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 #include <string>
 
 #define SLOBYTE(x) (*((int8_t *)&(x)))
