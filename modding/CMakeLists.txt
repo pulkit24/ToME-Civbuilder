@@ -1,12 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(create-data-mod VERSION 1.0)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -ljsoncpp")
 add_subdirectory(genieutils EXCLUDE_FROM_ALL)
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(JSONCPP REQUIRED jsoncpp)
 include_directories(
         "genieutils/include"
-        ${JSONCPP_INCLUDE_DIRS}
         "."
 )
 add_executable(
@@ -16,4 +13,4 @@ add_executable(
     helpers.cpp
 )
 set_property(TARGET create-data-mod PROPERTY CXX_STANDARD 17)
-target_link_libraries(create-data-mod genieutils ${JSONCPP_LIBRARIES})
+target_link_libraries(create-data-mod genieutils jsoncpp)

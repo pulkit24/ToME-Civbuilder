@@ -1,7 +1,7 @@
 #ifndef CIVBUILDER_H
 #define CIVBUILDER_H
 
-#include <json/json.h>
+#include <jsoncpp/json/json.h>
 #include <math.h>
 #include <time.h>
 
