@@ -1,0 +1,20 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ecca6f6..65348fb 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -84,6 +84,7 @@ endif(${GU_LANG_SUPPORT})
+ 
+ set(DAT_SRC
+     src/dat/Research.cpp 
++    src/dat/ResearchLocation.cpp
+    
+     src/dat/Civ.cpp
+     src/dat/TechageEffect.cpp
+@@ -117,6 +118,7 @@ set(DAT_SRC
+     src/dat/unit/Type50.cpp
+     src/dat/unit/Projectile.cpp
+     src/dat/unit/Creatable.cpp
++    src/dat/unit/TrainLocation.cpp
+     src/dat/unit/Building.cpp
+     )
+ 
