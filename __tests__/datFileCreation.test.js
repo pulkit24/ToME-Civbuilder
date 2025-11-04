@@ -1,4 +1,4 @@
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -38,22 +38,23 @@ describe('Dat File Creation', () => {
     expect(fs.existsSync(vanillaDatPath)).toBe(true);
 
     // This is the exact command that crashes according to the issue log
-    const cmd = `${createDataModPath} ${testDataPath} ${vanillaDatPath} ${outputDatPath} ${outputAiConfigPath}`;
+    // Use execFileSync instead of execSync to avoid shell injection
+    const args = [testDataPath, vanillaDatPath, outputDatPath, outputAiConfigPath];
 
     let stdout, stderr;
     let exitCode = 0;
 
     try {
-      // Execute the command
-      stdout = execSync(cmd, {
+      // Execute the command safely without shell
+      stdout = execFileSync(createDataModPath, args, {
         encoding: 'utf8',
         cwd: projectRoot,
         timeout: 30000, // 30 second timeout
       });
     } catch (error) {
-      stderr = error.stderr;
-      stdout = error.stdout;
-      exitCode = error.status;
+      stderr = error.stderr || error.message;
+      stdout = error.stdout || '';
+      exitCode = error.status !== null ? error.status : (error.signal ? 139 : 1);
     }
 
     // Log output for debugging
