@@ -40,7 +40,18 @@ void Civbuilder::setTrainTime(unit::Creatable& creatable, int16_t trainTime) {
 
 
 void Civbuilder::initialize() {
-    this->numCivs = 50;
+    // Log loaded dat file information
+    cout << "[C++]: Dat file loaded with " << df->Civs.size() << " civilizations" << endl;
+    
+    // Use actual civ count from dat file instead of hardcoded value
+    this->numCivs = df->Civs.size();
+    cout << "[C++]: Using numCivs = " << this->numCivs << endl;
+    
+    // Validate civ count is reasonable
+    if (this->numCivs < 1 || this->numCivs > 100) {
+        cerr << "[C++]: WARNING - Unusual civ count: " << this->numCivs << endl;
+        cerr << "[C++]: Expected range: 1-100. Dat file may be corrupted." << endl;
+    }
 
     this->duplicationUnits = {};
 
@@ -395,37 +406,98 @@ void Civbuilder::createData() {
 }
 
 void Civbuilder::assignData() {
+    cout << "[C++]: Assigning architectures..." << endl;
     this->assignArchitectures();
+    cout << "[C++]: Assigning languages..." << endl;
     this->assignLanguages();
+    cout << "[C++]: Assigning wonders..." << endl;
     this->assignWonders();
+    cout << "[C++]: Assigning castles..." << endl;
     this->assignCastles();
+    cout << "[C++]: Assigning unique units..." << endl;
     this->assignUniqueUnits();
+    cout << "[C++]: Assigning basic techs..." << endl;
     this->assignBasicTechs();
+    cout << "[C++]: Assigning unique techs..." << endl;
     this->assignUniqueTechs();
+    cout << "[C++]: Assigning civ bonuses..." << endl;
     this->assignCivBonuses();
+    cout << "[C++]: Data assignment completed" << endl;
 }
 
 void Civbuilder::assignWonders() {
-    // Create wonder graphic dictionary
+    cout << "[C++]: Assigning wonders for " << numCivs << " civs" << endl;
+    
+    // Create wonder graphic dictionary with bounds checking
     for (int i = 0; i < numCivs; i++) {
+        if (i + 1 >= df->Civs.size()) {
+            cerr << "[C++]: WARNING - Cannot access Civ[" << (i+1) << "], only " 
+                 << df->Civs.size() << " civs available" << endl;
+            break;
+        }
+        if (df->Civs[i + 1].Units.size() <= 276) {
+            cerr << "[C++]: WARNING - Civ " << (i+1) << " has only " 
+                 << df->Civs[i + 1].Units.size() << " units (need >276 for wonder)" << endl;
+            continue;
+        }
         wonderGraphics.push_back(this->df->Civs[i + 1].Units[276]);
     }
 
     for (int i = 0; i < this->config["wonder"].size(); i++) {
-        this->df->Civs[i + 1].Units[276] = wonderGraphics[this->config["wonder"][i].asInt()];
+        if (i + 1 >= df->Civs.size()) {
+            cerr << "[C++]: WARNING - Cannot assign wonder to Civ[" << (i+1) << "]" << endl;
+            break;
+        }
+        if (df->Civs[i + 1].Units.size() <= 276) {
+            cerr << "[C++]: WARNING - Cannot assign wonder to Civ " << (i+1) << endl;
+            continue;
+        }
+        int wonderIndex = this->config["wonder"][i].asInt();
+        if (wonderIndex >= 0 && wonderIndex < wonderGraphics.size()) {
+            this->df->Civs[i + 1].Units[276] = wonderGraphics[wonderIndex];
+        } else {
+            cerr << "[C++]: WARNING - Invalid wonder index " << wonderIndex << endl;
+        }
     }
+    cout << "[C++]: Wonder assignment completed" << endl;
 }
 
 void Civbuilder::assignCastles() {
-    // Create castle graphic dictionary
+    cout << "[C++]: Assigning castles for " << numCivs << " civs" << endl;
+    
+    // Create castle graphic dictionary with bounds checking
     for (int i = 0; i < numCivs; i++) {
+        if (i + 1 >= df->Civs.size()) {
+            cerr << "[C++]: WARNING - Cannot access Civ[" << (i+1) << "], only " 
+                 << df->Civs.size() << " civs available" << endl;
+            break;
+        }
+        if (df->Civs[i + 1].Units.size() <= 82) {
+            cerr << "[C++]: WARNING - Civ " << (i+1) << " has only " 
+                 << df->Civs[i + 1].Units.size() << " units (need >82 for castle)" << endl;
+            continue;
+        }
         castleGraphics.push_back(this->df->Civs[i + 1].Units[82]);
     }
 
-    // Assign castles
+    // Assign castles with bounds checking
     for (int i = 0; i < this->config["castle"].size(); i++) {
-        this->df->Civs[i + 1].Units[82] = castleGraphics[this->config["castle"][i].asInt()];
+        if (i + 1 >= df->Civs.size()) {
+            cerr << "[C++]: WARNING - Cannot assign castle to Civ[" << (i+1) << "]" << endl;
+            break;
+        }
+        if (df->Civs[i + 1].Units.size() <= 82) {
+            cerr << "[C++]: WARNING - Cannot assign castle to Civ " << (i+1) << endl;
+            continue;
+        }
+        int castleIndex = this->config["castle"][i].asInt();
+        if (castleIndex >= 0 && castleIndex < castleGraphics.size()) {
+            this->df->Civs[i + 1].Units[82] = castleGraphics[castleIndex];
+        } else {
+            cerr << "[C++]: WARNING - Invalid castle index " << castleIndex << endl;
+        }
     }
+    cout << "[C++]: Castle assignment completed" << endl;
 }
 
 // Give civilizations the appropriate sfx files
@@ -470,67 +542,131 @@ void Civbuilder::assignLanguages() {
 // Algorithm for transforming one array to another when we can only copy from one index to another and have only one temp slot (gaia civ stores architectures)
 // Abstracted version in javascript: https://github.com/Krakenmeister/CopyTransform
 void Civbuilder::assignArchitectures() {
+    cout << "[C++]: Processing architecture assignments for " << this->numCivs << " civs" << endl;
+    
     vector<int> dest = {};
     for (int i = 0; i < this->config["architecture"].size(); i++) {
         dest.push_back(this->config["architecture"][i].asInt());
     }
+    
+    cout << "[C++]: Config has " << dest.size() << " architecture entries" << endl;
+    
     while (dest.size() < this->numCivs) {
         dest.push_back(1);
     }
+    
+    cout << "[C++]: Extended dest to " << dest.size() << " entries" << endl;
+    
     // Save the architecture of one of each type for copying
     vector<int> repArch = {3, 1, 5, 8, 15, 7, 20, 22, 25, 28, 33};
+    
+    // Add bounds checking
     for (int i = 0; i < dest.size(); i++) {
         if (find(repArch.begin(), repArch.end(), (i + 1)) == repArch.end()) {
-            copyArchitecture(df, repArch[dest[i] - 1], (i + 1));
+            int archIndex = dest[i] - 1;
+            if (archIndex < 0 || archIndex >= repArch.size()) {
+                cerr << "[C++]: WARNING - Invalid architecture index " << archIndex 
+                     << " for civ " << i << ", skipping" << endl;
+                continue;
+            }
+            if (repArch[archIndex] >= df->Civs.size()) {
+                cerr << "[C++]: WARNING - Architecture source civ " << repArch[archIndex] 
+                     << " out of range, skipping" << endl;
+                continue;
+            }
+            if ((i + 1) >= df->Civs.size()) {
+                cerr << "[C++]: WARNING - Target civ " << (i+1) 
+                     << " out of range, skipping" << endl;
+                continue;
+            }
+            copyArchitecture(df, repArch[archIndex], (i + 1));
         }
     }
+    
+    cout << "[C++]: Initial architecture copy completed" << endl;
+    
     // Count how many other civs want to copy your architecture
     vector<int> dependencies = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     for (int i = 0; i < repArch.size(); i++) {
         for (int j = 0; j < repArch.size(); j++) {
-            if ((i != j) && (dest[repArch[j] - 1] == (i + 1))) {
+            int destIndex = repArch[j] - 1;
+            if (destIndex >= 0 && destIndex < dest.size() && (i != j) && (dest[destIndex] == (i + 1))) {
                 dependencies[i]++;
             }
         }
     }
 
     int cycleStart = -1;
-    this->df->Civs[0].IconSet = -1;
+    if (df->Civs.size() > 0) {
+        this->df->Civs[0].IconSet = -1;
+    }
 
     while (vectorSum(dependencies) > 0) {
         // Find the least dependent architecture that has yet to be copied to
         int minIndex = -1;
         for (int i = 0; i < dependencies.size(); i++) {
-            if (dest[repArch[i] - 1] != this->df->Civs[repArch[i]].IconSet) {
-                if (minIndex == -1) {
-                    minIndex = i;
-                } else if (dependencies[i] < dependencies[minIndex]) {
-                    minIndex = i;
+            int repArchIndex = repArch[i];
+            if (repArchIndex < df->Civs.size()) {
+                int destRepArchIndex = repArch[i] - 1;
+                if (destRepArchIndex >= 0 && destRepArchIndex < dest.size() 
+                    && dest[destRepArchIndex] != this->df->Civs[repArchIndex].IconSet) {
+                    if (minIndex == -1) {
+                        minIndex = i;
+                    } else if (dependencies[i] < dependencies[minIndex]) {
+                        minIndex = i;
+                    }
                 }
             }
         }
+        
+        if (minIndex == -1) {
+            cerr << "[C++]: WARNING - Could not find valid minIndex, breaking architecture copy loop" << endl;
+            break;
+        }
+        
+        int repArchMinIndex = repArch[minIndex] - 1;
+        if (repArchMinIndex < 0 || repArchMinIndex >= dest.size()) {
+            cerr << "[C++]: WARNING - Invalid repArchMinIndex, breaking" << endl;
+            break;
+        }
+        
         if (dependencies[minIndex] == 0) {
-            if (this->df->Civs[0].IconSet == dest[repArch[minIndex] - 1]) {
+            if (df->Civs.size() > 0 && this->df->Civs[0].IconSet == dest[repArchMinIndex]) {
                 // If this is the last in a cycle, copy from the temp slot
-                copyArchitecture(df, 0, repArch[minIndex]);
-                dependencies[cycleStart]--;
-                cycleStart = -1;
-                this->df->Civs[0].IconSet = -1;
+                if (repArch[minIndex] < df->Civs.size()) {
+                    copyArchitecture(df, 0, repArch[minIndex]);
+                    dependencies[cycleStart]--;
+                    cycleStart = -1;
+                    this->df->Civs[0].IconSet = -1;
+                }
             } else {
                 // Copy without worries since there are no dependencies
-                copyArchitecture(df, repArch[dest[repArch[minIndex] - 1] - 1], repArch[minIndex]);
-                dependencies[dest[repArch[minIndex] - 1] - 1]--;
+                int srcArch = dest[repArchMinIndex] - 1;
+                if (srcArch >= 0 && srcArch < repArch.size() 
+                    && repArch[srcArch] < df->Civs.size() 
+                    && repArch[minIndex] < df->Civs.size()) {
+                    copyArchitecture(df, repArch[srcArch], repArch[minIndex]);
+                    dependencies[dest[repArchMinIndex] - 1]--;
+                }
             }
         } else {
             // Only dependency-cycles remain, so copy info from first in cycle to temp slot
-            copyArchitecture(df, repArch[minIndex], 0);
-            copyArchitecture(df, repArch[dest[repArch[minIndex] - 1] - 1], repArch[minIndex]);
-            dependencies[dest[repArch[minIndex] - 1] - 1]--;
-            cycleStart = minIndex;
+            int srcArch = dest[repArchMinIndex] - 1;
+            if (df->Civs.size() > 0 && srcArch >= 0 && srcArch < repArch.size() 
+                && repArch[minIndex] < df->Civs.size() 
+                && repArch[srcArch] < df->Civs.size()) {
+                copyArchitecture(df, repArch[minIndex], 0);
+                copyArchitecture(df, repArch[srcArch], repArch[minIndex]);
+                dependencies[dest[repArchMinIndex] - 1]--;
+                cycleStart = minIndex;
+            }
         }
     }
 
-    this->df->Civs[0].IconSet = 2;
+    if (df->Civs.size() > 0) {
+        this->df->Civs[0].IconSet = 2;
+    }
+    cout << "[C++]: Architecture assignment completed" << endl;
 }
 
 // Create a unique tech given parameters and an effect
@@ -828,11 +964,37 @@ void Civbuilder::setupData() {
     }
 
     // Copy the attack tree task from onager
+    cout << "[C++]: Copying attack tree tasks for " << df->Civs.size() << " civs" << endl;
     for (int k = 0; k < df->Civs.size(); k++) {
+        // Add bounds checking to prevent crashes with different dat file versions
+        if (this->df->Civs[k].Units.size() <= 280) {
+            cerr << "[C++]: WARNING - Civ " << k << " has only " << this->df->Civs[k].Units.size() 
+                 << " units (need >280). Skipping attack tree task copy." << endl;
+            continue;
+        }
+        if (this->df->Civs[k].Units.size() <= 550) {
+            cerr << "[C++]: WARNING - Civ " << k << " has only " << this->df->Civs[k].Units.size() 
+                 << " units (need >550). Skipping attack tree task copy." << endl;
+            continue;
+        }
+        
+        // Additional check for task list size
+        if (this->df->Civs[k].Units[550].Bird.TaskList.size() <= 4) {
+            cerr << "[C++]: WARNING - Civ " << k << " Unit[550] has only " 
+                 << this->df->Civs[k].Units[550].Bird.TaskList.size() 
+                 << " tasks (need >4). Skipping." << endl;
+            continue;
+        }
+        
         this->df->Civs[k].Units[280].Bird.TaskList.push_back(this->df->Civs[k].Units[550].Bird.TaskList[4]);
-        // Disable attacking trees unless it's the civ with the bonus
-        this->df->Civs[k].Units[280].Bird.TaskList[5].ClassID = -1;
+        
+        // Check if TaskList[5] exists before accessing
+        if (this->df->Civs[k].Units[280].Bird.TaskList.size() > 5) {
+            // Disable attacking trees unless it's the civ with the bonus
+            this->df->Civs[k].Units[280].Bird.TaskList[5].ClassID = -1;
+        }
     }
+    cout << "[C++]: Attack tree task copy completed" << endl;
 
     // Give villagers their own armor class
     for (Civ &civ : df->Civs) {
