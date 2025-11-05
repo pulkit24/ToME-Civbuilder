@@ -23,14 +23,23 @@ npm run test:watch
 
 ## Current Tests
 
-### Dat File Creation Test
+### Dat File Creation Tests
 
-This test reproduces the crash issue reported in the GitHub issue. It uses the exact input data from the crash log to verify the C++ `create-data-mod` executable behavior.
+These tests reproduce the crash issue reported in the GitHub issue. They test all available dat files with the exact input data from the crash log.
 
-**Status**: Currently failing with segmentation fault (exit code 139) - this is expected and reproduces the reported crash.
+**Status**: All dat files currently crash with the test data - this is expected and reproduces the reported crash.
 
 **Test File**: `__tests__/datFileCreation.test.js`
 **Test Data**: `__tests__/fixtures/crash-test-data.json`
+
+#### Tested Dat Files:
+
+1. **empires2_x2_p1.dat** - Current default dat file (crashes)
+2. **empires2_x2_p1_3k.dat** - 3K dat file (crashes, but worked before merge #5)
+3. **empires2_x2_p1_august2025.dat** - August 2025 dat file (crashes, status unknown)
+4. **empires2_x2_p1_october2025.dat** - October 2025 dat file (crashes, status unknown)
+
+The tests show that all dat files crash with a `std::length_error: vector::_M_default_append` exception, which suggests the issue is in the C++ code handling the dat file processing.
 
 ## Setup for Local Testing
 
