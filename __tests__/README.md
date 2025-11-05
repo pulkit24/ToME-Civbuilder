@@ -41,6 +41,26 @@ These tests reproduce the crash issue reported in the GitHub issue. They test al
 
 The tests show that all dat files crash with a `std::length_error: vector::_M_default_append` exception, which suggests the issue is in the C++ code handling the dat file processing.
 
+### Debug Tests
+
+**Test File**: `__tests__/debugCrash.test.js`
+
+This test provides debugging information and recommendations for investigating the crash:
+
+1. **Likely root cause**: The code has `numCivs = 50` hardcoded (line 43 in `civbuilder.cpp`), but different dat files may have different numbers of civilizations:
+   - 3K dat files typically have 45 civs
+   - Current DE dat files have 50+ civs
+   - Future versions may have 56+ civs
+
+2. **The crash location**: The error occurs during the "Reconfiguring" phase, likely in the loop at line 831 that iterates `df->Civs.size()` and accesses specific unit IDs (280, 550) that may not exist in all civs or dat file versions.
+
+3. **Recommended debugging steps**:
+   - Run with `gdb` to get exact crash location and backtrace
+   - Add debug output to print `df->Civs.size()` vs `numCivs`
+   - Check if all civs in the dat file have the expected units
+   - Make `numCivs` dynamic: `this->numCivs = df->Civs.size();`
+   - Add bounds checking before accessing civ units
+
 ## Setup for Local Testing
 
 1. Initialize git submodules:
