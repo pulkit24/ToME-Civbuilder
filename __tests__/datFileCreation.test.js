@@ -88,24 +88,24 @@ describe('Dat File Creation', () => {
     }
   };
 
-  // Test the original dat file that crashes
-  test('should crash with empires2_x2_p1.dat (current bug)', () => {
-    testDatFileCreation('empires2_x2_p1.dat', false);
+  // Test the original dat file - should now work with the off-by-one fix
+  test('should successfully create dat file with empires2_x2_p1.dat', () => {
+    testDatFileCreation('empires2_x2_p1.dat', true);
   }, 60000);
 
-  // Test the 3k dat file - also crashes but user said it worked before merge
-  // TODO: This should pass once the bug is fixed
-  test('should crash with empires2_x2_p1_3k.dat (worked before merge #5)', () => {
+  // Test the 3k dat file - still has issues (vector length error)
+  // TODO: This needs further investigation
+  test('should crash with empires2_x2_p1_3k.dat (still has vector length error)', () => {
     testDatFileCreation('empires2_x2_p1_3k.dat', false);
   }, 60000);
 
-  // Test the august2025 dat file (also crashes)
-  test('should crash with empires2_x2_p1_august2025.dat (status unknown)', () => {
-    testDatFileCreation('empires2_x2_p1_august2025.dat', false);
+  // Test the august2025 dat file - should now work
+  test('should successfully create dat file with empires2_x2_p1_august2025.dat', () => {
+    testDatFileCreation('empires2_x2_p1_august2025.dat', true);
   }, 60000);
 
-  // Test the october2025 dat file (also crashes)
-  test('should crash with empires2_x2_p1_october2025.dat (status unknown)', () => {
-    testDatFileCreation('empires2_x2_p1_october2025.dat', false);
+  // Test the october2025 dat file - should now work
+  test('should successfully create dat file with empires2_x2_p1_october2025.dat', () => {
+    testDatFileCreation('empires2_x2_p1_october2025.dat', true);
   }, 60000);
 });

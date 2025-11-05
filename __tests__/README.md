@@ -25,19 +25,30 @@ npm run test:watch
 
 ### Dat File Creation Tests
 
-These tests reproduce the crash issue reported in the GitHub issue. They test all available dat files with the exact input data from the crash log.
+These tests validate dat file creation with different dat file versions using the exact input data from the crash log.
 
-**Status**: All dat files currently crash with the test data - this is expected and reproduces the reported crash.
+**Status**: **FIXED** - The off-by-one error has been resolved. 3 out of 4 dat files now work correctly.
 
 **Test File**: `__tests__/datFileCreation.test.js`
 **Test Data**: `__tests__/fixtures/crash-test-data.json`
 
 #### Tested Dat Files:
 
-1. **empires2_x2_p1.dat** - Current default dat file (crashes)
-2. **empires2_x2_p1_3k.dat** - 3K dat file (crashes, but worked before merge #5)
-3. **empires2_x2_p1_august2025.dat** - August 2025 dat file (crashes, status unknown)
-4. **empires2_x2_p1_october2025.dat** - October 2025 dat file (crashes, status unknown)
+1. **empires2_x2_p1.dat** - Current default dat file ✅ **WORKING**
+2. **empires2_x2_p1_3k.dat** - 3K dat file ❌ Still has vector length error (needs investigation)
+3. **empires2_x2_p1_august2025.dat** - August 2025 dat file ✅ **WORKING**
+4. **empires2_x2_p1_october2025.dat** - October 2025 dat file ✅ **WORKING**
+
+#### Fix Applied
+
+**Off-by-one error**: The code was using `numCivs = df->Civs.size()` which included Gaia (Civ[0]). When looping with `i < numCivs` and accessing `Civs[i+1]`, it tried to access index 54 when only 0-53 existed.
+
+**Solution**: Changed to `numCivs = df->Civs.size() - 1` because:
+- Civ[0] is Gaia/template
+- Player civs are Civ[1] through Civ[df->Civs.size()-1]
+- numCivs now represents player civ count (excluding Gaia)
+
+Also added bounds checking for `TrainLocations` array access to prevent crashes.
 
 The tests show that all dat files crash with a `std::length_error: vector::_M_default_append` exception, which suggests the issue is in the C++ code handling the dat file processing.
 

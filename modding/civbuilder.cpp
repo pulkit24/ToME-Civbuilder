@@ -41,15 +41,17 @@ void Civbuilder::setTrainTime(unit::Creatable& creatable, int16_t trainTime) {
 
 void Civbuilder::initialize() {
     // Log loaded dat file information
-    cout << "[C++]: Dat file loaded with " << df->Civs.size() << " civilizations" << endl;
+    cout << "[C++]: Dat file loaded with " << df->Civs.size() << " civilization slots" << endl;
     
     // Use actual civ count from dat file instead of hardcoded value
-    this->numCivs = df->Civs.size();
-    cout << "[C++]: Using numCivs = " << this->numCivs << endl;
+    // Civ[0] is Gaia/template, player civs are Civ[1] through Civ[df->Civs.size()-1]
+    // So numCivs represents the number of player civs (not including Gaia)
+    this->numCivs = df->Civs.size() - 1;
+    cout << "[C++]: Using numCivs = " << this->numCivs << " (player civs, Civ[0] is Gaia)" << endl;
     
     // Validate civ count is reasonable
     if (this->numCivs < 1 || this->numCivs > 100) {
-        cerr << "[C++]: WARNING - Unusual civ count: " << this->numCivs << endl;
+        cerr << "[C++]: WARNING - Unusual player civ count: " << this->numCivs << endl;
         cerr << "[C++]: Expected range: 1-100. Dat file may be corrupted." << endl;
     }
 
@@ -5339,7 +5341,10 @@ void Civbuilder::createTeamBonuses() {
 }
 
 void Civbuilder::reconfigureEffects() {
+    cout << "[C++]: Starting reconfigureEffects..." << endl;
+    
     // Give classes these bonuses so that they can be modified with effects
+    cout << "[C++]: Giving class bonuses..." << endl;
     giveClassNewBonus(this->df, 6, 10);
     giveUnitsNewBonus(this->df, this->unitClasses["steppe"], 10);
     giveClassNewBonus(this->df, 22, 10);
@@ -5365,35 +5370,41 @@ void Civbuilder::reconfigureEffects() {
     giveClassNewBonus(this->df, 52, 19);
     giveClassNewBonus(this->df, 36, 19);
 
+    cout << "[C++]: Recompiling units lists..." << endl;
     // Recompile units list
     vector<int> barracksUnits = {};
     for (int i = 0; i < this->df->Civs[0].Units.size(); i++) {
-        if (this->df->Civs[0].Units[i].Creatable.TrainLocations[0].UnitID == 12) {
+        if (this->df->Civs[0].Units[i].Creatable.TrainLocations.size() > 0 
+            && this->df->Civs[0].Units[i].Creatable.TrainLocations[0].UnitID == 12) {
             barracksUnits.push_back(i);
         }
     }
 
     vector<int> stableUnits = {};
     for (int i = 0; i < this->df->Civs[0].Units.size(); i++) {
-        if (this->df->Civs[0].Units[i].Creatable.TrainLocations[0].UnitID == 101) {
+        if (this->df->Civs[0].Units[i].Creatable.TrainLocations.size() > 0 
+            && this->df->Civs[0].Units[i].Creatable.TrainLocations[0].UnitID == 101) {
             stableUnits.push_back(i);
         }
     }
 
     vector<int> rangeUnits = {};
     for (int i = 0; i < this->df->Civs[0].Units.size(); i++) {
-        if (this->df->Civs[0].Units[i].Creatable.TrainLocations[0].UnitID == 87) {
+        if (this->df->Civs[0].Units[i].Creatable.TrainLocations.size() > 0 
+            && this->df->Civs[0].Units[i].Creatable.TrainLocations[0].UnitID == 87) {
             rangeUnits.push_back(i);
         }
     }
 
     vector<int> workshopUnits = {};
     for (int i = 0; i < this->df->Civs[0].Units.size(); i++) {
-        if (this->df->Civs[0].Units[i].Creatable.TrainLocations[0].UnitID == 49) {
+        if (this->df->Civs[0].Units[i].Creatable.TrainLocations.size() > 0 
+            && this->df->Civs[0].Units[i].Creatable.TrainLocations[0].UnitID == 49) {
             workshopUnits.push_back(i);
         }
     }
 
+    cout << "[C++]: Recreating building bonuses..." << endl;
     // Recreate barracks bonuses
     this->df->Effects[333].EffectCommands.clear();
     this->df->Effects[334].EffectCommands.clear();
