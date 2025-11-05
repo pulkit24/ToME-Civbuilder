@@ -6,7 +6,8 @@ WORKDIR /app
 # Copy source code including prebuilt C++ binaries
 COPY . .
 # Ensure Unix line endings for all shell scripts after copying source
-RUN apt-get update && apt-get install -y dos2unix && \
+RUN apt-get update && apt-get install -y dos2unix libjsoncpp24 zip && \
+    rm -rf /var/lib/apt/lists/* && \
     find ./process_mod -name "*.sh" -exec dos2unix {} \; && \
     find ./modding/scripts -name "*.sh" -exec dos2unix {} \;
 
