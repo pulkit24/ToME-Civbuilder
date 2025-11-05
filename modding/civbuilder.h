@@ -35,7 +35,7 @@ class Civbuilder {
     int vilpike = -1;
     int vilhalb = -1;
 
-    int numCivs;
+    int numPlayerCivs;
 
     vector<vector<int>> duplicationUnits;
     vector<vector<int>> multipliedEffects;

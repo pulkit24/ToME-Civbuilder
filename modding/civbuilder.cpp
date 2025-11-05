@@ -45,13 +45,13 @@ void Civbuilder::initialize() {
     
     // Use actual civ count from dat file instead of hardcoded value
     // Civ[0] is Gaia/template, player civs are Civ[1] through Civ[df->Civs.size()-1]
-    // So numCivs represents the number of player civs (not including Gaia)
-    this->numCivs = df->Civs.size() - 1;
-    cout << "[C++]: Using numCivs = " << this->numCivs << " (player civs, Civ[0] is Gaia)" << endl;
+    // So numPlayerCivs represents the number of player civs (not including Gaia)
+    this->numPlayerCivs = df->Civs.size() - 1;
+    cout << "[C++]: Using numPlayerCivs = " << this->numPlayerCivs << " (player civs, Civ[0] is Gaia)" << endl;
     
     // Validate civ count is reasonable
-    if (this->numCivs < 1 || this->numCivs > 100) {
-        cerr << "[C++]: WARNING - Unusual player civ count: " << this->numCivs << endl;
+    if (this->numPlayerCivs < 1 || this->numPlayerCivs > 100) {
+        cerr << "[C++]: WARNING - Unusual player civ count: " << this->numPlayerCivs << endl;
         cerr << "[C++]: Expected range: 1-100. Dat file may be corrupted." << endl;
     }
 
@@ -428,10 +428,10 @@ void Civbuilder::assignData() {
 }
 
 void Civbuilder::assignWonders() {
-    cout << "[C++]: Assigning wonders for " << numCivs << " civs" << endl;
+    cout << "[C++]: Assigning wonders for " << numPlayerCivs << " civs" << endl;
     
     // Create wonder graphic dictionary with bounds checking
-    for (int i = 0; i < numCivs; i++) {
+    for (int i = 0; i < numPlayerCivs; i++) {
         if (i + 1 >= df->Civs.size()) {
             cerr << "[C++]: WARNING - Cannot access Civ[" << (i+1) << "], only " 
                  << df->Civs.size() << " civs available" << endl;
@@ -465,10 +465,10 @@ void Civbuilder::assignWonders() {
 }
 
 void Civbuilder::assignCastles() {
-    cout << "[C++]: Assigning castles for " << numCivs << " civs" << endl;
+    cout << "[C++]: Assigning castles for " << numPlayerCivs << " civs" << endl;
     
     // Create castle graphic dictionary with bounds checking
-    for (int i = 0; i < numCivs; i++) {
+    for (int i = 0; i < numPlayerCivs; i++) {
         if (i + 1 >= df->Civs.size()) {
             cerr << "[C++]: WARNING - Cannot access Civ[" << (i+1) << "], only " 
                  << df->Civs.size() << " civs available" << endl;
@@ -544,7 +544,7 @@ void Civbuilder::assignLanguages() {
 // Algorithm for transforming one array to another when we can only copy from one index to another and have only one temp slot (gaia civ stores architectures)
 // Abstracted version in javascript: https://github.com/Krakenmeister/CopyTransform
 void Civbuilder::assignArchitectures() {
-    cout << "[C++]: Processing architecture assignments for " << this->numCivs << " civs" << endl;
+    cout << "[C++]: Processing architecture assignments for " << this->numPlayerCivs << " civs" << endl;
     
     vector<int> dest = {};
     for (int i = 0; i < this->config["architecture"].size(); i++) {
@@ -553,7 +553,7 @@ void Civbuilder::assignArchitectures() {
     
     cout << "[C++]: Config has " << dest.size() << " architecture entries" << endl;
     
-    while (dest.size() < this->numCivs) {
+    while (dest.size() < this->numPlayerCivs) {
         dest.push_back(1);
     }
     

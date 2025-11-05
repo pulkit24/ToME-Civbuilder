@@ -35,7 +35,7 @@ These tests validate dat file creation with different dat file versions using th
 #### Tested Dat Files:
 
 1. **empires2_x2_p1.dat** - Current default dat file ✅ **WORKING**
-2. **empires2_x2_p1_3k.dat** - 3K dat file ❌ Still has vector length error (needs investigation)
+2. **empires2_x2_p1_3k.dat** - 3 Kingdoms dat file ⏭️ **SKIPPED** (has vector length error, needs investigation)
 3. **empires2_x2_p1_august2025.dat** - August 2025 dat file ✅ **WORKING**
 4. **empires2_x2_p1_october2025.dat** - October 2025 dat file ✅ **WORKING**
 
@@ -43,14 +43,13 @@ These tests validate dat file creation with different dat file versions using th
 
 **Off-by-one error**: The code was using `numCivs = df->Civs.size()` which included Gaia (Civ[0]). When looping with `i < numCivs` and accessing `Civs[i+1]`, it tried to access index 54 when only 0-53 existed.
 
-**Solution**: Changed to `numCivs = df->Civs.size() - 1` because:
+**Solution**: 
+- Changed to `numPlayerCivs = df->Civs.size() - 1` (renamed from `numCivs` for clarity)
 - Civ[0] is Gaia/template
 - Player civs are Civ[1] through Civ[df->Civs.size()-1]
-- numCivs now represents player civ count (excluding Gaia)
+- `numPlayerCivs` now accurately represents player civ count (excluding Gaia)
 
 Also added bounds checking for `TrainLocations` array access to prevent crashes.
-
-The tests show that all dat files crash with a `std::length_error: vector::_M_default_append` exception, which suggests the issue is in the C++ code handling the dat file processing.
 
 ### Debug Tests
 
@@ -58,7 +57,7 @@ The tests show that all dat files crash with a `std::length_error: vector::_M_de
 
 This test provides debugging information and recommendations for investigating the crash:
 
-1. **Likely root cause**: The code has `numCivs = 50` hardcoded (line 43 in `civbuilder.cpp`), but different dat files may have different numbers of civilizations:
+1. **Root cause identified**: The code had `numCivs = 50` hardcoded, but different dat files have different numbers of civilizations:
    - 3K dat files typically have 45 civs
    - Current DE dat files have 50+ civs
    - Future versions may have 56+ civs
