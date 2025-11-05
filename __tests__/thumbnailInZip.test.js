@@ -24,7 +24,7 @@ describe('Thumbnail in Mod Zip', () => {
       }
       const testDir = path.join(modsDir, testId);
       if (fs.existsSync(testDir)) {
-        execSync(`rm -rf "${testDir}"`, { cwd: appDir });
+        fs.rmSync(testDir, { recursive: true, force: true });
       }
     } catch (error) {
       console.log('Cleanup error:', error.message);
@@ -32,11 +32,9 @@ describe('Thumbnail in Mod Zip', () => {
   });
 
   test('should check if zip command is available', () => {
-    try {
+    expect(() => {
       execSync('which zip', { stdio: 'pipe' });
-    } catch (error) {
-      throw new Error('zip command not found. This would cause thumbnail.jpg to not be included in mod files when using Docker.');
-    }
+    }).not.toThrow();
   });
 
   test('should include thumbnail.jpg in mod zip after running createModFolder and zipModFolder scripts', () => {
@@ -120,7 +118,7 @@ describe('Thumbnail in Mod Zip', () => {
         }
         const testDir = path.join(modsDir, testIdUI);
         if (fs.existsSync(testDir)) {
-          execSync(`rm -rf "${testDir}"`, { cwd: appDir });
+          fs.rmSync(testDir, { recursive: true, force: true });
         }
       } catch (error) {
         console.log('Cleanup error:', error.message);
