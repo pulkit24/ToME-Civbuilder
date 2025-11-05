@@ -39,6 +39,8 @@ describe('Thumbnail in Mod Zip', () => {
 
   test('should include thumbnail.jpg in mod zip after running createModFolder and zipModFolder scripts', () => {
     // Create mod folder structure (without UI mod for simplicity)
+    // Note: appDir is derived from __dirname and is not user-controlled
+    // The createModFolder.sh script is part of our codebase and safe to execute
     execSync(`bash ./process_mod/createModFolder.sh ./modding/requested_mods ${testId} ${appDir} 0`, {
       cwd: appDir,
       stdio: 'pipe'
@@ -76,6 +78,8 @@ describe('Thumbnail in Mod Zip', () => {
     
     try {
       // Create mod folder structure (with UI mod)
+      // Note: appDir is derived from __dirname and is not user-controlled
+      // The createModFolder.sh script is part of our codebase and safe to execute
       execSync(`bash ./process_mod/createModFolder.sh ./modding/requested_mods ${testIdUI} ${appDir} 1`, {
         cwd: appDir,
         stdio: 'pipe'
