@@ -20,6 +20,7 @@ npm run test:watch
 
 - `__tests__/` - Test files (files ending with `.test.js`)
 - `__tests__/fixtures/` - Test data and fixtures
+- `__tests__/helpers/` - Helper scripts and utilities (not run as tests)
 
 ## Current Tests
 
