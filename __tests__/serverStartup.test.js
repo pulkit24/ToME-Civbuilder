@@ -6,6 +6,8 @@ describe('Server Startup', () => {
   let serverProcess;
   const port = 4000;
   const startupTimeout = 10000; // 10 seconds for server to start
+  const additionalTestTimeout = 2000; // Additional time for test assertions
+  const httpTestTimeout = 5000; // Additional time for HTTP request test
   
   afterEach((done) => {
     // Clean up: kill server process if it's still running
@@ -88,7 +90,7 @@ describe('Server Startup', () => {
         done(new Error('Server did not start within timeout period'));
       }
     }, startupTimeout);
-  }, startupTimeout + 2000);
+  }, startupTimeout + additionalTestTimeout);
 
   test('should respond to HTTP requests', (done) => {
     const projectRoot = path.join(__dirname, '..');
@@ -151,5 +153,5 @@ describe('Server Startup', () => {
         done(new Error('Server did not start within timeout period'));
       }
     }, startupTimeout);
-  }, startupTimeout + 5000);
+  }, startupTimeout + httpTestTimeout);
 });
