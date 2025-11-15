@@ -1072,8 +1072,8 @@ const specialNodes = {
 };
 
 //Name, Name String ID, Picture Index, Name String ID (Elite), Elite Tech ID, Node ID, Node ID (Elite)
-const numVanillaUnits = 2462;
-const numVanillaTechs = 1267;
+const numVanillaUnits = 2538;
+const numVanillaTechs = 1510;
 const UUArray = [
 	["Longbowman", 5107, 41, 5456, 360, 8, 530],
 	["Throwing Axeman", 5111, 46, 5461, 363, 281, 531],
