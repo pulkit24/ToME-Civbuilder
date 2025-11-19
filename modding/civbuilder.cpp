@@ -2569,7 +2569,11 @@ void Civbuilder::createUniqueTechs() {
     // Obsidian Arrows
     e.EffectCommands.clear();
     e.Name = "Obsidian Arrows";
-    e.EffectCommands.push_back(createEC(4, -1, 0, 9, amountTypetoD(6, 21)));
+    //e.EffectCommands.push_back(createEC(4, -1, 0, 9, amountTypetoD(6, 21))); // this does it for all archer lines including skirmishers
+    // just set foot archers
+    for (int i = 0; i < this->unitClasses["footArcher"].size(); i++) {
+        e.EffectCommands.push_back(createEC(4, this->unitClasses["footArcher"][i], -1, 9, amountTypetoD(6, 21)));
+    }
     createUT(40, 0, e, "Obsidian Arrows", {300, 0, 0, 300}, 40, 7501);
 
     // Tortoise Engineers
@@ -3032,10 +3036,13 @@ void Civbuilder::createCivBonuses() {
     e.EffectCommands.push_back(createEC(5, -1, 19, 13, 1.2));
     this->createCivBonus(171, e, "C-Bonus, Trade 20% faster");
 
-    // Squires affects archers
+    // Squires affects foot archers and skirmishers
     e.EffectCommands.clear();
     for (int i = 0; i < this->unitClasses["footArcher"].size(); i++) {
         e.EffectCommands.push_back(createEC(5, this->unitClasses["footArcher"][i], -1, 5, 1.1));
+    }
+    for (int i = 0; i < this->unitClasses["skirmisher"].size(); i++) {
+        e.EffectCommands.push_back(createEC(5, this->unitClasses["skirmisher"][i], -1, 5, 1.1));
     }
     this->createCivBonus(172, e, "C-Bonus, Squires affects archers", {215});
 
