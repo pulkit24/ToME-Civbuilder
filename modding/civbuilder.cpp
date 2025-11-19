@@ -3032,10 +3032,13 @@ void Civbuilder::createCivBonuses() {
     e.EffectCommands.push_back(createEC(5, -1, 19, 13, 1.2));
     this->createCivBonus(171, e, "C-Bonus, Trade 20% faster");
 
-    // Squires affects archers
+    // Squires affects foot archers and skirmishers
     e.EffectCommands.clear();
     for (int i = 0; i < this->unitClasses["footArcher"].size(); i++) {
         e.EffectCommands.push_back(createEC(5, this->unitClasses["footArcher"][i], -1, 5, 1.1));
+    }
+    for (int i = 0; i < this->unitClasses["skirmisher"].size(); i++) {
+        e.EffectCommands.push_back(createEC(5, this->unitClasses["skirmisher"][i], -1, 5, 1.1));
     }
     this->createCivBonus(172, e, "C-Bonus, Squires affects archers", {215});
 
