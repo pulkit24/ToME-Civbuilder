@@ -2,10 +2,10 @@
   <div class="app-layout">
     <nav class="navigation" v-if="showNavigation">
       <NuxtLink to="/v2" class="nav-button">Home</NuxtLink>
-      <button class="nav-button">Help</button>
-      <button class="nav-button">About</button>
-      <button class="nav-button">Events</button>
-      <button class="nav-button">Updates</button>
+      <NuxtLink to="/v2/help" class="nav-button">Help</NuxtLink>
+      <NuxtLink to="/v2/about" class="nav-button">About</NuxtLink>
+      <button class="nav-button" disabled>Events</button>
+      <NuxtLink to="/v2/updates" class="nav-button">Updates</NuxtLink>
     </nav>
     
     <main class="content">
@@ -13,12 +13,14 @@
     </main>
     
     <footer class="links" v-if="showNavigation">
-      <img 
-        src="/img/kraken_invite.png" 
-        alt="Krakenmeister's Maelstrom" 
-        class="discord-invite"
-      />
-      <button class="donate-button">Donate</button>
+      <a href="https://discord.gg/vQxck6JDwf" target="_blank" rel="noopener noreferrer">
+        <img 
+          src="/img/kraken_invite.png" 
+          alt="Krakenmeister's Maelstrom" 
+          class="discord-invite"
+        />
+      </a>
+      <a href="https://www.buymeacoffee.com/krakenmeister" target="_blank" rel="noopener noreferrer" class="donate-button">Donate</a>
     </footer>
   </div>
 </template>
@@ -49,6 +51,7 @@ const showNavigation = computed(() => {
   bottom: 5vh;
   left: 2vw;
   gap: min(1vw, 2vh);
+  z-index: 100;
 }
 
 .nav-button {
@@ -65,12 +68,18 @@ const showNavigation = computed(() => {
   text-align: center;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  width: 100%;
 }
 
-.nav-button:hover {
+.nav-button:hover:not(:disabled) {
   background: linear-gradient(to bottom, rgba(160, 82, 45, 0.95), rgba(139, 69, 19, 0.95));
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .content {
@@ -87,6 +96,7 @@ const showNavigation = computed(() => {
   flex-direction: column;
   gap: 1rem;
   align-items: flex-end;
+  z-index: 100;
 }
 
 .discord-invite {
@@ -110,6 +120,9 @@ const showNavigation = computed(() => {
   font-family: 'Cinzel', serif;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
 
 .donate-button:hover {

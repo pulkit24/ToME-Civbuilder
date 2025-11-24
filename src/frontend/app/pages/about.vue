@@ -1,0 +1,157 @@
+<template>
+  <div class="about-page">
+    <h1 class="page-title">About</h1>
+    
+    <div class="content-wrapper">
+      <div class="about-content">
+        <p class="about-paragraph">
+          This is an easy-to-use tool for creating civilizations for Age of Empires II DE. Although more complex mods can be made with the Advanced Genie Editor,
+          it takes time to learn and does not have any multiplayer capabilities!
+        </p>
+        
+        <p class="about-paragraph">
+          There are three options on this website -- Randomized Civilizations, Civilization Building, and Civilization Drafting. Randomized Civilizations will scramble the bonuses, tech trees,
+          unique units, and much more for all factions at the click of the button. Each click will download a .zip file which contains two mod .zip files inside -- one for the data mod and one for the UI mod. You
+          can extract these and put them in your local mods folder, or publish them on the Mod Workshop by following the instructions given in the "Help" page. Please credit this website in the description
+          of your mod so that others can enjoy this site too!
+        </p>
+        
+        <p class="about-paragraph">
+          For a singleplayer experience (or maximum combo-power), you can create your own civilizations with any of the bonuses/techs/etc. in the base-game or created by me. If you want to
+          create your own bonuses, you'll have to learn how to use the Advanced Genie Editor (or send me a suggestion on discord at Krakenmeister#1672, and I might add it!). Once you build a civilization, you can
+          download the preset as a .json file. You can view civilizations from their .json preset file, as well as combine multiple presets into a single mod containing those civilizations. After combining, the mod
+          can be downloaded and published just like the randomized civilizations. Note that there are a few techs and bonuses, that if shared among multiple civilizations while combining, cause compatibility issues.
+          UI mod issues are extremely minor and have no affect on gameplay, but data mod issues are critical and are not available to download.
+        </p>
+        
+        <p class="about-paragraph">
+          If you want to play a game with friends, one player has to create the draft. 250 tech tree points is recommended to force players to choose somewhat between strategies, but most
+          people prefer the full 500 point trees or even the ultra-low 100 point trees for an extra challenge!
+        </p>
+        
+        <div class="credit-section">
+          <h2>Credits</h2>
+          <p>Created by <strong>Krakenmeister</strong></p>
+          <p>Join the community on <a href="https://discord.gg/vQxck6JDwf" target="_blank" rel="noopener noreferrer">Discord</a></p>
+          <p>Support the project on <a href="https://www.buymeacoffee.com/krakenmeister" target="_blank" rel="noopener noreferrer">Buy Me a Coffee</a></p>
+        </div>
+        
+        <div class="back-button-wrapper">
+          <NuxtLink to="/v2" class="back-button">Back to Home</NuxtLink>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// About page - no additional logic needed
+</script>
+
+<style scoped>
+.about-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: min(6vh, 3vw);
+  color: hsl(52, 100%, 50%);
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 3px 3px 5px black;
+  font-family: 'Cinzel', serif;
+}
+
+.content-wrapper {
+  background: rgba(0, 0, 0, 0.8);
+  border: 3px solid hsl(52, 100%, 50%);
+  border-radius: 8px;
+  padding: 2rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.about-content {
+  color: #ffffff;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.about-paragraph {
+  margin-bottom: 1.5rem;
+  text-indent: 2rem;
+  text-align: justify;
+}
+
+.credit-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid hsl(52, 100%, 50%);
+}
+
+.credit-section h2 {
+  color: hsl(52, 100%, 50%);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-family: 'Cinzel', serif;
+}
+
+.credit-section p {
+  margin-bottom: 0.5rem;
+}
+
+.credit-section a {
+  color: hsl(52, 100%, 60%);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.credit-section a:hover {
+  color: hsl(52, 100%, 70%);
+  text-decoration: underline;
+}
+
+.back-button-wrapper {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.back-button {
+  padding: 1rem 2rem;
+  background: linear-gradient(to bottom, rgba(139, 69, 19, 0.85), rgba(101, 67, 33, 0.85));
+  color: hsl(52, 100%, 50%);
+  border: 3px solid hsl(52, 100%, 50%);
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-family: 'Cinzel', serif;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: linear-gradient(to bottom, rgba(160, 82, 45, 0.95), rgba(139, 69, 19, 0.95));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    padding: 1rem;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .about-content {
+    font-size: 1rem;
+  }
+  
+  .about-paragraph {
+    text-indent: 1rem;
+  }
+}
+</style>
