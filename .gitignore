@@ -1,4 +1,5 @@
 package-lock.json
+!src/frontend/package-lock.json
 #modding/genieutils
 modding/oldgenieutils
 node_modules
