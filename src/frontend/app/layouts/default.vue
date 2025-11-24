@@ -8,11 +8,7 @@
       <NuxtLink to="/updates" class="nav-button">Updates</NuxtLink>
     </nav>
     
-    <main class="content">
-      <slot />
-    </main>
-    
-    <footer class="links" v-if="showNavigation">
+    <div class="top-right-links" v-if="showNavigation">
       <a href="https://discord.gg/vQxck6JDwf" target="_blank" rel="noopener noreferrer">
         <img 
           src="/img/kraken_invite.png" 
@@ -21,7 +17,11 @@
         />
       </a>
       <a href="https://www.buymeacoffee.com/krakenmeister" target="_blank" rel="noopener noreferrer" class="donate-button">Donate</a>
-    </footer>
+    </div>
+    
+    <main class="content">
+      <slot />
+    </main>
   </div>
 </template>
 
@@ -88,9 +88,9 @@ const showNavigation = computed(() => {
   color: white;
 }
 
-.links {
+.top-right-links {
   position: fixed;
-  bottom: 2vh;
+  top: 2vh;
   right: 2vw;
   display: flex;
   flex-direction: column;
