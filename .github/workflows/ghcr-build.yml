@@ -1,8 +1,14 @@
 name: Build and publish Docker image
 on:
-  push:
-    branches: [main]
+  release:
+    types: [published]
   pull_request:
+  workflow_call:
+    inputs:
+      tag_name:
+        description: 'The tag name for the release'
+        required: false
+        type: string
     
 permissions:
   contents: read
@@ -15,6 +21,7 @@ jobs:
       - name: Checkout repository (with submodules)
         uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.tag_name || github.ref }}
           submodules: 'recursive'
           fetch-depth: 0
 
@@ -28,13 +35,33 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Determine image tags
+        id: tags
+        run: |
+          if [ "${{ github.event_name }}" = "release" ] || [ "${{ github.event_name }}" = "workflow_call" ]; then
+            # For workflow_call, prioritize inputs.tag_name; for release events, use github.event.release.tag_name
+            if [ -n "${{ inputs.tag_name }}" ]; then
+              TAG_NAME="${{ inputs.tag_name }}"
+            elif [ -n "${{ github.event.release.tag_name }}" ]; then
+              TAG_NAME="${{ github.event.release.tag_name }}"
+            else
+              echo "Error: No tag name available for release build"
+              exit 1
+            fi
+            echo "tags=ghcr.io/fritz-net/aoe2-civbuilder:latest,ghcr.io/fritz-net/aoe2-civbuilder:${TAG_NAME}" >> $GITHUB_OUTPUT
+            echo "push=true" >> $GITHUB_OUTPUT
+          else
+            echo "tags=ghcr.io/fritz-net/aoe2-civbuilder:${{ github.sha }}" >> $GITHUB_OUTPUT
+            echo "push=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           file: Dockerfile.build-cpp
           platforms: linux/amd64
-          push: ${{ github.event_name == 'push' }}
-          tags: ghcr.io/fritz-net/aoe2-civbuilder:latest,ghcr.io/fritz-net/aoe2-civbuilder:${{ github.sha }}
+          push: ${{ steps.tags.outputs.push }}
+          tags: ${{ steps.tags.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

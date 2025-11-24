@@ -100,8 +100,8 @@ void Civbuilder::initialize() {
     this->unitClasses["archery"] = {UNIT_ARCHER, UNIT_CROSSBOWMAN, UNIT_ARBALESTER, UNIT_HAND_CANNONEER, UNIT_SKIRMISHER, UNIT_ELITE_SKIRMISHER, UNIT_IMPERIAL_SKIRMISHER, UNIT_CAVALRY_ARCHER,
                                    UNIT_HEAVY_CAVALRY_ARCHER, UNIT_SLINGER, UNIT_GENITOUR, UNIT_ELITE_GENITOUR, UNIT_GRENADIER, UNIT_XIANBEI_RAIDER};
     this->unitClasses["workshop"] = {UNIT_BATTERING_RAM, UNIT_BATTERING_RAM_1, UNIT_CAPPED_RAM, UNIT_SIEGE_RAM, UNIT_MANGONEL, UNIT_ONAGER, UNIT_SIEGE_ONAGER, UNIT_SIEGE_TOWER,
-                                   UNIT_SIEGE_TOWER_1, UNIT_BOMBARD_CANNON, UNIT_SCORPION, UNIT_HEAVY_SCORPION, UNIT_HOUFNICE, UNIT_ARMORED_ELEPHANT, UNIT_SIEGE_ELEPHANT, UNIT_WAR_CHARIOT__FOCUS_FIRE,
-                                   UNIT_WAR_CHARIOT__BARRAGE, UNIT_MOUNTED_TREBUCHET, UNIT_TRACTION_TREBUCHET, UNIT_FLAMING_CAMEL, UNIT_ROCKET_CART, UNIT_HEAVY_ROCKET_CART};
+                                   UNIT_SIEGE_TOWER_1, UNIT_BOMBARD_CANNON, UNIT_SCORPION, UNIT_HEAVY_SCORPION, UNIT_HOUFNICE, UNIT_ARMORED_ELEPHANT, UNIT_SIEGE_ELEPHANT, UNIT_WAR_CHARIOT_FOCUS_FIRE,
+                                   UNIT_WAR_CHARIOT_BARRAGE, UNIT_MOUNTED_TREBUCHET, UNIT_TRACTION_TREBUCHET, UNIT_FLAMING_CAMEL, UNIT_ROCKET_CART, UNIT_HEAVY_ROCKET_CART};
     this->unitClasses["elephant"] = {UNIT_WAR_ELEPHANT, UNIT_ELITE_WAR_ELEPHANT, UNIT_ELEPHANT_ARCHER, UNIT_ELITE_ELEPHANT_ARCHER, UNIT_BALLISTA_ELEPHANT, UNIT_ELITE_BALLISTA_ELEPHANT, UNIT_BATTLE_ELEPHANT, UNIT_ELITE_BATTLE_ELEPHANT,
                                    UNIT_ARMORED_ELEPHANT, UNIT_SIEGE_ELEPHANT};
     this->unitClasses["gunpowder"] = {UNIT_HAND_CANNONEER, UNIT_BOMBARD_CANNON, UNIT_CANNON_GALLEON, UNIT_ELITE_CANNON_GALLEON, UNIT_JANISSARY, UNIT_ELITE_JANISSARY, UNIT_ORGAN_GUN, UNIT_ELITE_ORGAN_GUN,
@@ -110,7 +110,7 @@ void Civbuilder::initialize() {
     this->unitClasses["camel"] = {UNIT_CAMEL_RIDER, UNIT_HEAVY_CAMEL_RIDER, UNIT_IMPERIAL_CAMEL_RIDER, UNIT_CAMEL_ARCHER, UNIT_ELITE_CAMEL_ARCHER, UNIT_FLAMING_CAMEL, UNIT_MAMELUKE, UNIT_ELITE_MAMELUKE,
                                    UNIT_CAMEL_SCOUT, UNIT_MOUNTED_TREBUCHET};
     this->unitClasses["explosive"] = {UNIT_DEMOLITION_SHIP, UNIT_HEAVY_DEMOLITION_SHIP, UNIT_DEMOLITION_RAFT, UNIT_PETARD, UNIT_FLAMING_CAMEL, UNIT_HDSQD, UNIT_GRENADIER};
-    this->unitClasses["scorpion"] = {UNIT_SCORPION, UNIT_PROJECTILE_SGY__FIRE};
+    this->unitClasses["scorpion"] = {UNIT_SCORPION, UNIT_PROJECTILE_SGY_FIRE};
     this->unitClasses["unique"] = {UNIT_LONGBOWMAN, UNIT_ELITE_LONGBOWMAN, UNIT_THROWING_AXEMAN, UNIT_ELITE_THROWING_AXEMAN, UNIT_HUSKARL, UNIT_ELITE_HUSKARL, UNIT_TEUTONIC_KNIGHT, UNIT_ELITE_TEUTONIC_KNIGHT,
                                    UNIT_SAMURAI, UNIT_ELITE_SAMURAI, UNIT_CHU_KO_NU, UNIT_ELITE_CHU_KO_NU, UNIT_CATAPHRACT, UNIT_ELITE_CATAPHRACT, UNIT_MAMELUKE, UNIT_ELITE_MAMELUKE,
                                    UNIT_WAR_ELEPHANT, UNIT_ELITE_WAR_ELEPHANT, UNIT_JANISSARY, UNIT_ELITE_JANISSARY, UNIT_BERSERK, UNIT_ELITE_BERSERK, UNIT_MANGUDAI, UNIT_ELITE_MANGUDAI,
@@ -119,9 +119,9 @@ void Civbuilder::initialize() {
                                    UNIT_KAMAYUK, UNIT_ELITE_KAMAYUK, UNIT_MAGYAR_HUSZAR, UNIT_ELITE_MAGYAR_HUSZAR, UNIT_BOYAR, UNIT_ELITE_BOYAR, UNIT_ORGAN_GUN, UNIT_ELITE_ORGAN_GUN,
                                    UNIT_SHOTEL_WARRIOR, UNIT_ELITE_SHOTEL_WARRIOR, UNIT_GBETO, UNIT_ELITE_GBETO, UNIT_CAMEL_ARCHER, UNIT_ELITE_CAMEL_ARCHER, UNIT_BALLISTA_ELEPHANT, UNIT_ELITE_BALLISTA_ELEPHANT,
                                    UNIT_KARAMBIT_WARRIOR, UNIT_ELITE_KARAMBIT_WARRIOR, UNIT_ARAMBAI, UNIT_ELITE_ARAMBAI, UNIT_RATTAN_ARCHER, UNIT_ELITE_RATTAN_ARCHER, UNIT_KONNIK, UNIT_ELITE_KONNIK,
-                                   UNIT_KONNIK__DISMOUNTED, UNIT_ELITE_KONNIK__DISMOUNTED, UNIT_KESHIK, UNIT_ELITE_KESHIK, UNIT_KIPCHAK, UNIT_ELITE_KIPCHAK, UNIT_LEITIS, UNIT_ELITE_LEITIS,
+                                   UNIT_KONNIK_DISMOUNTED, UNIT_ELITE_KONNIK_DISMOUNTED, UNIT_KESHIK, UNIT_ELITE_KESHIK, UNIT_KIPCHAK, UNIT_ELITE_KIPCHAK, UNIT_LEITIS, UNIT_ELITE_LEITIS,
                                    UNIT_COUSTILLIER, UNIT_ELITE_COUSTILLIER, UNIT_SERJEANT, UNIT_ELITE_SERJEANT, UNIT_OBUCH, UNIT_OBUCH_D, UNIT_HUSSITE_WAGON, UNIT_ELITE_HUSSITE_WAGON,
-                                   UNIT_URUMI_SWORDSMAN, UNIT_ELITE_URUMI_SWORDSMAN, UNIT_RATHA__MELEE, UNIT_ELITE_RATHA__MELEE, UNIT_CHAKRAM_THROWER, UNIT_ELITE_CHAKRAM_THROWER, UNIT_RATHA, UNIT_ELITE_RATHA,
+                                   UNIT_URUMI_SWORDSMAN, UNIT_ELITE_URUMI_SWORDSMAN, UNIT_RATHA_MELEE, UNIT_ELITE_RATHA_MELEE, UNIT_CHAKRAM_THROWER, UNIT_ELITE_CHAKRAM_THROWER, UNIT_RATHA, UNIT_ELITE_RATHA,
                                    UNIT_COMPOSITE_BOWMAN, UNIT_ELITE_COMPOSITE_BOWMAN, UNIT_MONASPA, UNIT_ELITE_MONASPA, UNIT_WHITE_FEATHER_GUARD, UNIT_ELITE_WHITE_FEATHER_GUARD, UNIT_FIRE_ARCHER, UNIT_ELITE_FIRE_ARCHER,
                                    UNIT_TIGER_CAVALRY, UNIT_ELITE_TIGER_CAVALRY, UNIT_IRON_PAGODA, UNIT_ELITE_IRON_PAGODA, UNIT_LIAO_DAO, UNIT_ELITE_LIAO_DAO};
     this->unitClasses["steppe"] = {UNIT_STEPPE_LANCER, UNIT_ELITE_STEPPE_LANCER};
@@ -251,42 +251,42 @@ void Civbuilder::initialize() {
     this->civBonuses[CIV_BONUS_109_CAN_BUILD_DONJON] = {775};
 
     this->teamBonuses[0] = TECH_KAMANDARAN;
-    this->teamBonuses[1] = TECH_C_BONUS___5_MONK_HP_6;
+    this->teamBonuses[1] = TECH_C_BONUS_PLUS_5_MONK_HP_6;
     this->teamBonuses[2] = TECH_BERSERK;
     this->teamBonuses[3] = TECH_CUMAN_MERC_PART2;
     this->teamBonuses[4] = TECH_LECHITIC_LEGACY;
     this->teamBonuses[5] = TECH_MALAY;
-    this->teamBonuses[6] = TECH_C_BONUS__FREE_HAND_CART;
-    this->teamBonuses[7] = TECH_C_BONUS___15__FARMERS;
-    this->teamBonuses[8] = TECH_C_BONUS__HUNTING_BONUSES;
-    this->teamBonuses[9] = TECH_C_BONUS__CAVALRY__5__SPEED_AGE2;
+    this->teamBonuses[6] = TECH_C_BONUS_FREE_HAND_CART;
+    this->teamBonuses[7] = TECH_C_BONUS_PLUS_15_PERCENT_FARMERS;
+    this->teamBonuses[8] = TECH_C_BONUS_HUNTING_BONUSES;
+    this->teamBonuses[9] = TECH_C_BONUS_CAVALRY_PLUS_5_PERCENT_SPEED_AGE2;
     this->teamBonuses[10] = TECH_BOGSVEIGAR;
-    this->teamBonuses[11] = TECH_C_BONUS__ARCHER_RANGE__1;
-    this->teamBonuses[12] = TECH_C_BONUS__DOMINANT_LOS;
+    this->teamBonuses[11] = TECH_C_BONUS_ARCHER_RANGE_PLUS_1;
+    this->teamBonuses[12] = TECH_C_BONUS_DOMINANT_LOS;
     this->teamBonuses[13] = TECH_YASAMA;
     this->teamBonuses[14] = TECH_EL_DORADO;
     this->teamBonuses[15] = TECH_ELITE_TARKAN;
     this->teamBonuses[16] = TECH_CRENELLATIONS;
-    this->teamBonuses[17] = TECH_C_BONUS___10_POP;
-    this->teamBonuses[18] = TECH_C_BONUS__INF__1_ATTACK_CASTLE;
-    this->teamBonuses[19] = TECH_C_BONUS__CAMEL_RIDER_ATTACK_SPEED;
+    this->teamBonuses[17] = TECH_C_BONUS_PLUS_10_POP;
+    this->teamBonuses[18] = TECH_C_BONUS_INF_PLUS_1_ATTACK_CASTLE;
+    this->teamBonuses[19] = TECH_C_BONUS_CAMEL_RIDER_ATTACK_SPEED;
     this->teamBonuses[20] = TECH_RENAME_UNITS;
     this->teamBonuses[21] = TECH_DRILL;
-    this->teamBonuses[22] = TECH_C_BONUS__MONASTERY_TECHS__50__COST;
-    this->teamBonuses[23] = TECH_C_BONUS___1_INF_ATTK_1;
+    this->teamBonuses[22] = TECH_C_BONUS_MONASTERY_TECHS_50_PERCENT_COST;
+    this->teamBonuses[23] = TECH_C_BONUS_PLUS_1_INF_ATTK_1;
     this->teamBonuses[24] = TECH_IRONCLAD;
     this->teamBonuses[25] = TECH_MONK_RANGED_HEAL;
-    this->teamBonuses[26] = TECH_SPIES_TREASON;
-    this->teamBonuses[27] = TECH_C_BONUS___5_MONK_HP_3;
-    this->teamBonuses[28] = TECH_C_BONUS__TC_AND_DOCK_WORK_RATE;
+    this->teamBonuses[26] = TECH_SPIES_AND_TREASON;
+    this->teamBonuses[27] = TECH_C_BONUS_PLUS_5_MONK_HP_3;
+    this->teamBonuses[28] = TECH_C_BONUS_TC_AND_DOCK_WORK_RATE;
     this->teamBonuses[29] = TECH_HUSSITE_REFORMS;
     this->teamBonuses[30] = TECH_SARACEN_ZEALOTRY;
     this->teamBonuses[31] = TECH_SARACENS_UT;
-    this->teamBonuses[32] = TECH_C_BONUS__FEUDAL_TC;
-    this->teamBonuses[33] = TECH_C_BONUS__GALLEY__20__FIRE;
-    this->teamBonuses[34] = TECH_C_BONUS__TC__15;
+    this->teamBonuses[32] = TECH_C_BONUS_FEUDAL_TC;
+    this->teamBonuses[33] = TECH_C_BONUS_GALLEY_PLUS_20_PERCENT_FIRE;
+    this->teamBonuses[34] = TECH_C_BONUS_TC_PLUS_15_PERCENT;
     this->teamBonuses[35] = TECH_VIETNAMESE;
-    this->teamBonuses[36] = TECH_C_BONUS__TC__20;
+    this->teamBonuses[36] = TECH_C_BONUS_TC_PLUS_20_PERCENT;
 
     this->castleUniqueTechIDs[0] = TECH_ATLATL;
     this->castleUniqueTechIDs[1] = TECH_KASBAH;
@@ -394,55 +394,55 @@ void Civbuilder::initialize() {
     this->impUniqueTechIDs[57] = TECH_THUNDERCLAP_BOMBS;
     this->impUniqueTechIDs[58] = TECH_ORDO_CAVALRY;
 
-    this->uuTechIDs[0] = {TECH_LONGBOW__MAKE_AVAIL, TECH_ELITE_LONGBOW};
-    this->uuTechIDs[1] = {TECH_THROWING_AXEMEN__MAKE_AVAIL, TECH_ELITE_THROWING_AXEMEN};
-    this->uuTechIDs[2] = {TECH_HUSKARL__MAKE_AVAIL, TECH_ELITE_HUSKARL};
-    this->uuTechIDs[3] = {TECH_TEUTONIC_KNIGHT__MAKE_AVAIL, TECH_ELITE_TEUTONIC_KNIGHT};
-    this->uuTechIDs[4] = {TECH_SAMURAI__MAKE_AVAIL, TECH_ELITE_SAMURAI};
-    this->uuTechIDs[5] = {TECH_CHU_KO_NU__MAKE_AVAIL, TECH_ELITE_CHU_KO_NU};
-    this->uuTechIDs[6] = {TECH_CATAPHRACT__MAKE_AVAIL, TECH_ELITE_CATAPHRACT};
-    this->uuTechIDs[7] = {TECH_MAMELUKE__MAKE_AVAIL, TECH_ELITE_MAMELUKE};
-    this->uuTechIDs[8] = {TECH_WAR_ELEPHANT__MAKE_AVAIL, TECH_ELITE_WAR_ELEPHANT};
-    this->uuTechIDs[9] = {TECH_JANNISARY__MAKE_AVAIL, TECH_ELITE_JANNISARY};
+    this->uuTechIDs[0] = {TECH_LONGBOW_MAKE_AVAIL, TECH_ELITE_LONGBOW};
+    this->uuTechIDs[1] = {TECH_THROWING_AXEMEN_MAKE_AVAIL, TECH_ELITE_THROWING_AXEMEN};
+    this->uuTechIDs[2] = {TECH_HUSKARL_MAKE_AVAIL, TECH_ELITE_HUSKARL};
+    this->uuTechIDs[3] = {TECH_TEUTONIC_KNIGHT_MAKE_AVAIL, TECH_ELITE_TEUTONIC_KNIGHT};
+    this->uuTechIDs[4] = {TECH_SAMURAI_MAKE_AVAIL, TECH_ELITE_SAMURAI};
+    this->uuTechIDs[5] = {TECH_CHU_KO_NU_MAKE_AVAIL, TECH_ELITE_CHU_KO_NU};
+    this->uuTechIDs[6] = {TECH_CATAPHRACT_MAKE_AVAIL, TECH_ELITE_CATAPHRACT};
+    this->uuTechIDs[7] = {TECH_MAMELUKE_MAKE_AVAIL, TECH_ELITE_MAMELUKE};
+    this->uuTechIDs[8] = {TECH_WAR_ELEPHANT_MAKE_AVAIL, TECH_ELITE_WAR_ELEPHANT};
+    this->uuTechIDs[9] = {TECH_JANNISARY_MAKE_AVAIL, TECH_ELITE_JANNISARY};
     this->uuTechIDs[10] = {TECH_BERSERK, TECH_ELITE_BERSERK};
-    this->uuTechIDs[11] = {TECH_MOBILE_SIEGE_UNIT__MAKE_AVAIL, TECH_ELITE_MANGUDAI};
-    this->uuTechIDs[12] = {TECH_WOAD_BERSERKER__MAKE_AVAIL, TECH_ELITE_WOAD_RAIDER};
-    this->uuTechIDs[13] = {TECH_CONQUISTADOR__MAKE_AVAIL, TECH_ELITE_CONQUISTADOR};
+    this->uuTechIDs[11] = {TECH_MOBILE_SIEGE_UNIT_MAKE_AVAIL, TECH_ELITE_MANGUDAI};
+    this->uuTechIDs[12] = {TECH_WOAD_BERSERKER_MAKE_AVAIL, TECH_ELITE_WOAD_RAIDER};
+    this->uuTechIDs[13] = {TECH_CONQUISTADOR_MAKE_AVAIL, TECH_ELITE_CONQUISTADOR};
     this->uuTechIDs[14] = {TECH_JAGUAR_MAN, TECH_ELITE_JAGUAR_MAN};
-    this->uuTechIDs[15] = {TECH_PLUMED_ARCHER__MAKE_AVAIL, TECH_ELITE_PLUMED_ARCHER};
-    this->uuTechIDs[16] = {TECH_TARKAN__MAKE_AVAIL, TECH_ELITE_TARKAN};
+    this->uuTechIDs[15] = {TECH_PLUMED_ARCHER_MAKE_AVAIL, TECH_ELITE_PLUMED_ARCHER};
+    this->uuTechIDs[16] = {TECH_TARKAN_MAKE_AVAIL, TECH_ELITE_TARKAN};
     this->uuTechIDs[17] = {TECH_WAR_WAGON, TECH_ELITE_WAR_WAGON};
-    this->uuTechIDs[18] = {TECH_GENOESE_BOW__MAKE_AVAIL, TECH_ELITE_GENOESE_BOW};
-    this->uuTechIDs[19] = {TECH_GHULAM__MAKE_AVAIL, TECH_ELITE_GHULAM};
-    this->uuTechIDs[20] = {TECH_KAMAYUK__MAKE_AVAIL, TECH_ELITE_KAMAYUK};
-    this->uuTechIDs[21] = {TECH_MAGYAR_HUSZAR__MAKE_AVAIL, TECH_ELITE_MAGYAR_HUSZAR};
-    this->uuTechIDs[22] = {TECH_BOYAR__MAKE_AVAIL, TECH_ELITE_SIEGE_TOWER};
-    this->uuTechIDs[23] = {TECH_ORGAN_GUN__MAKE_AVAIL, TECH_ELITE_ORGAN_GUN};
-    this->uuTechIDs[24] = {TECH_SHOTEL_WARRIOR__MAKE_AVAIL, TECH_ELITE_ETHIOPIA_UNIT};
-    this->uuTechIDs[25] = {TECH_GBETO__MAKE_AVAIL, TECH_ELITE_MALI_UNIT};
-    this->uuTechIDs[26] = {TECH_CAMEL_ARCHER__MAKE_AVAIL, TECH_ELITE_CAMEL_ARCHER};
-    this->uuTechIDs[27] = {TECH_BALLISTA_ELEPHANT__MAKE_AVAIL, TECH_ELITE_BALLISTA_ELEPHANT};
-    this->uuTechIDs[28] = {TECH_KARAMBIT_WARRIOR__MAKE_AVAIL, TECH_ELITE_KARAMBIT_WARRIOR};
-    this->uuTechIDs[29] = {TECH_ARAMBAI__MAKE_AVAIL, TECH_ELITE_ARAMBAI};
-    this->uuTechIDs[30] = {TECH_RATTAN_ARCHER__MAKE_AVAIL, TECH_ELITE_RATTAN_ARCHER};
-    this->uuTechIDs[31] = {TECH_KONNIK__MAKE_AVAIL, TECH_ELITE_KONNIK};
-    this->uuTechIDs[32] = {TECH_KESHIK__MAKE_AVAIL, TECH_ELITE_KESHIK};
-    this->uuTechIDs[33] = {TECH_KIPCHAK__MAKE_AVAIL, TECH_ELITE_KIPCHAK};
-    this->uuTechIDs[34] = {TECH_LEITIS__MAKE_AVAIL, TECH_ELITE_LEITIS};
-    this->uuTechIDs[35] = {TECH_COUSTILLIER__MAKE_AVAIL, TECH_ELITE_COUSTILLIER};
-    this->uuTechIDs[36] = {TECH_SERJEANT__MAKE_AVAIL, TECH_ELITE_SERJEANT};
-    this->uuTechIDs[37] = {TECH_OBUCH__MAKE_AVAIL, TECH_ELITE_OBUCH};
-    this->uuTechIDs[38] = {TECH_HUSSITE_WAGON__MAKE_AVAIL, TECH_ELITE_HUSSITE_WAGON};
-    this->uuTechIDs[78] = {TECH_CHAKRAM_THROWER__MAKE_AVAIL, TECH_ELITE_CHAKRAM_THROWER};
-    this->uuTechIDs[79] = {TECH_URUMI_SWORDSMAN__MAKE_AVAIL, TECH_ELITE_URUMI_SWORDSMAN};
-    this->uuTechIDs[80] = {TECH_RATHA__MAKE_AVAIL, TECH_ELITE_RATHA};
-    this->uuTechIDs[81] = {TECH_COMPOSITE_BOWMAN__MAKE_AVAIL, TECH_ELITE_COMPOSITE_BOWMAN};
-    this->uuTechIDs[82] = {TECH_MONASPA__MAKE_AVAIL, TECH_ELITE_MONASPA};
-    this->uuTechIDs[83] = {TECH_WHITE_FEATHER_GUARD__MAKE_AVAIL, TECH_ELITE_WHITE_FEATHER_GUARD};
-    this->uuTechIDs[84] = {TECH_FIRE_ARCHER__MAKE_AVAIL, TECH_ELITE_FIRE_ARCHER};
-    this->uuTechIDs[85] = {TECH_TIGER_CAVALRY__MAKE_AVAIL, TECH_ELITE_TIGER_CAVALRY};
-    this->uuTechIDs[86] = {TECH_IRON_PAGODA__MAKE_AVAIL, TECH_ELITE_IRON_PAGODA};
-    this->uuTechIDs[87] = {TECH_LIAO_DAO__MAKE_AVAIL, TECH_ELITE_LIAO_DAO};
+    this->uuTechIDs[18] = {TECH_GENOESE_BOW_MAKE_AVAIL, TECH_ELITE_GENOESE_BOW};
+    this->uuTechIDs[19] = {TECH_GHULAM_MAKE_AVAIL, TECH_ELITE_GHULAM};
+    this->uuTechIDs[20] = {TECH_KAMAYUK_MAKE_AVAIL, TECH_ELITE_KAMAYUK};
+    this->uuTechIDs[21] = {TECH_MAGYAR_HUSZAR_MAKE_AVAIL, TECH_ELITE_MAGYAR_HUSZAR};
+    this->uuTechIDs[22] = {TECH_BOYAR_MAKE_AVAIL, TECH_ELITE_SIEGE_TOWER};
+    this->uuTechIDs[23] = {TECH_ORGAN_GUN_MAKE_AVAIL, TECH_ELITE_ORGAN_GUN};
+    this->uuTechIDs[24] = {TECH_SHOTEL_WARRIOR_MAKE_AVAIL, TECH_ELITE_ETHIOPIA_UNIT};
+    this->uuTechIDs[25] = {TECH_GBETO_MAKE_AVAIL, TECH_ELITE_MALI_UNIT};
+    this->uuTechIDs[26] = {TECH_CAMEL_ARCHER_MAKE_AVAIL, TECH_ELITE_CAMEL_ARCHER};
+    this->uuTechIDs[27] = {TECH_BALLISTA_ELEPHANT_MAKE_AVAIL, TECH_ELITE_BALLISTA_ELEPHANT};
+    this->uuTechIDs[28] = {TECH_KARAMBIT_WARRIOR_MAKE_AVAIL, TECH_ELITE_KARAMBIT_WARRIOR};
+    this->uuTechIDs[29] = {TECH_ARAMBAI_MAKE_AVAIL, TECH_ELITE_ARAMBAI};
+    this->uuTechIDs[30] = {TECH_RATTAN_ARCHER_MAKE_AVAIL, TECH_ELITE_RATTAN_ARCHER};
+    this->uuTechIDs[31] = {TECH_KONNIK_MAKE_AVAIL, TECH_ELITE_KONNIK};
+    this->uuTechIDs[32] = {TECH_KESHIK_MAKE_AVAIL, TECH_ELITE_KESHIK};
+    this->uuTechIDs[33] = {TECH_KIPCHAK_MAKE_AVAIL, TECH_ELITE_KIPCHAK};
+    this->uuTechIDs[34] = {TECH_LEITIS_MAKE_AVAIL, TECH_ELITE_LEITIS};
+    this->uuTechIDs[35] = {TECH_COUSTILLIER_MAKE_AVAIL, TECH_ELITE_COUSTILLIER};
+    this->uuTechIDs[36] = {TECH_SERJEANT_MAKE_AVAIL, TECH_ELITE_SERJEANT};
+    this->uuTechIDs[37] = {TECH_OBUCH_MAKE_AVAIL, TECH_ELITE_OBUCH};
+    this->uuTechIDs[38] = {TECH_HUSSITE_WAGON_MAKE_AVAIL, TECH_ELITE_HUSSITE_WAGON};
+    this->uuTechIDs[78] = {TECH_CHAKRAM_THROWER_MAKE_AVAIL, TECH_ELITE_CHAKRAM_THROWER};
+    this->uuTechIDs[79] = {TECH_URUMI_SWORDSMAN_MAKE_AVAIL, TECH_ELITE_URUMI_SWORDSMAN};
+    this->uuTechIDs[80] = {TECH_RATHA_MAKE_AVAIL, TECH_ELITE_RATHA};
+    this->uuTechIDs[81] = {TECH_COMPOSITE_BOWMAN_MAKE_AVAIL, TECH_ELITE_COMPOSITE_BOWMAN};
+    this->uuTechIDs[82] = {TECH_MONASPA_MAKE_AVAIL, TECH_ELITE_MONASPA};
+    this->uuTechIDs[83] = {TECH_WHITE_FEATHER_GUARD_MAKE_AVAIL, TECH_ELITE_WHITE_FEATHER_GUARD};
+    this->uuTechIDs[84] = {TECH_FIRE_ARCHER_MAKE_AVAIL, TECH_ELITE_FIRE_ARCHER};
+    this->uuTechIDs[85] = {TECH_TIGER_CAVALRY_MAKE_AVAIL, TECH_ELITE_TIGER_CAVALRY};
+    this->uuTechIDs[86] = {TECH_IRON_PAGODA_MAKE_AVAIL, TECH_ELITE_IRON_PAGODA};
+    this->uuTechIDs[87] = {TECH_LIAO_DAO_MAKE_AVAIL, TECH_ELITE_LIAO_DAO};
 }
 
 void Civbuilder::configure() {
@@ -2320,48 +2320,48 @@ void Civbuilder::createNewUnits() {
 
     // Create TC spearmen
     for (Civ &civ : this->df->Civs) {
-        civ.Units[tcSpearman] = civ.Units[93];
-        civ.Units[tcPikeman] = civ.Units[358];
-        civ.Units[tcHalberdier] = civ.Units[359];
-        civ.Units[tcSpearman].Name = "TCPKEMN";
-        civ.Units[tcPikeman].Name = "TCPKM";
-        civ.Units[tcHalberdier].Name = "TCHLBDM";
-        setTrainLocationID(civ.Units[tcSpearman].Creatable, 109);
-        setTrainLocationID(civ.Units[tcPikeman].Creatable, 109);
-        setTrainLocationID(civ.Units[tcHalberdier].Creatable, 109);
+        civ.Units[UNIT_TC_SPEARMAN] = civ.Units[93];
+        civ.Units[UNIT_TC_PIKEMAN] = civ.Units[358];
+        civ.Units[UNIT_TC_HALBERDIER] = civ.Units[359];
+        civ.Units[UNIT_TC_SPEARMAN].Name = "TCPKEMN";
+        civ.Units[UNIT_TC_PIKEMAN].Name = "TCPKM";
+        civ.Units[UNIT_TC_HALBERDIER].Name = "TCHLBDM";
+        setTrainLocationID(civ.Units[UNIT_TC_SPEARMAN].Creatable, 109);
+        setTrainLocationID(civ.Units[UNIT_TC_PIKEMAN].Creatable, 109);
+        setTrainLocationID(civ.Units[UNIT_TC_HALBERDIER].Creatable, 109);
     }
-    this->df->Effects[189].EffectCommands.push_back(createEC(3, tcSpearman, tcHalberdier, -1, 0));
-    this->duplicationUnits.push_back({93, tcSpearman, tcPikeman});
-    this->duplicationUnits.push_back({358, tcPikeman, tcHalberdier});
-    this->duplicationUnits.push_back({359, tcHalberdier, -1});
+    this->df->Effects[189].EffectCommands.push_back(createEC(3, UNIT_TC_SPEARMAN, UNIT_TC_HALBERDIER, -1, 0));
+    this->duplicationUnits.push_back({93, UNIT_TC_SPEARMAN, UNIT_TC_PIKEMAN});
+    this->duplicationUnits.push_back({358, UNIT_TC_PIKEMAN, UNIT_TC_HALBERDIER});
+    this->duplicationUnits.push_back({359, UNIT_TC_HALBERDIER, -1});
 
     // Create the TC siege tower
     for (Civ &civ : this->df->Civs) {
         civ.Resources[29] = 1;
-        civ.Units[tcSiegeTower] = civ.Units[1105];
-        civ.Units[tcSiegeTower].Name = "SIEGTWR_F";
-        setTrainLocation(civ.Units[tcSiegeTower].Creatable, 109, 9);
-        civ.Units[tcSiegeTower].Creatable.ResourceCosts[0].Type = 29;
-        civ.Units[tcSiegeTower].Creatable.ResourceCosts[0].Amount = 1;
-        civ.Units[tcSiegeTower].Creatable.ResourceCosts[0].Flag = 1;
-        civ.Units[tcSiegeTower].Creatable.ResourceCosts[1] = civ.Units[tcSiegeTower].Creatable.ResourceCosts[2];
-        civ.Units[tcSiegeTower].Creatable.ResourceCosts[2].Type = -1;
-        civ.Units[tcSiegeTower].Creatable.ResourceCosts[2].Amount = 0;
-        civ.Units[tcSiegeTower].Creatable.ResourceCosts[2].Flag = 0;
+        civ.Units[UNIT_TC_SIEGE_TOWER] = civ.Units[1105];
+        civ.Units[UNIT_TC_SIEGE_TOWER].Name = "SIEGTWR_F";
+        setTrainLocation(civ.Units[UNIT_TC_SIEGE_TOWER].Creatable, 109, 9);
+        civ.Units[UNIT_TC_SIEGE_TOWER].Creatable.ResourceCosts[0].Type = 29;
+        civ.Units[UNIT_TC_SIEGE_TOWER].Creatable.ResourceCosts[0].Amount = 1;
+        civ.Units[UNIT_TC_SIEGE_TOWER].Creatable.ResourceCosts[0].Flag = 1;
+        civ.Units[UNIT_TC_SIEGE_TOWER].Creatable.ResourceCosts[1] = civ.Units[UNIT_TC_SIEGE_TOWER].Creatable.ResourceCosts[2];
+        civ.Units[UNIT_TC_SIEGE_TOWER].Creatable.ResourceCosts[2].Type = -1;
+        civ.Units[UNIT_TC_SIEGE_TOWER].Creatable.ResourceCosts[2].Amount = 0;
+        civ.Units[UNIT_TC_SIEGE_TOWER].Creatable.ResourceCosts[2].Flag = 0;
     }
-    this->duplicationUnits.push_back({1105, tcSiegeTower, -1});
+    this->duplicationUnits.push_back({1105, UNIT_TC_SIEGE_TOWER, -1});
 
     // Create small farms
     for (Civ &civ : this->df->Civs) {
-        civ.Units[smallFarm] = civ.Units[50];
-        civ.Units[smallDeadFarm] = civ.Units[357];
-        civ.Units[smallRiceFarm] = civ.Units[1187];
-        civ.Units[smallDeadRiceFarm] = civ.Units[1188];
-        civ.Units[smallFarmDrop] = civ.Units[1193];
-        civ.Units[smallFarmStack] = civ.Units[1194];
-        civ.Units[smallRiceFarmDrop] = civ.Units[1195];
+        civ.Units[UNIT_SMALL_FARM] = civ.Units[50];
+        civ.Units[UNIT_SMALL_DEAD_FARM] = civ.Units[357];
+        civ.Units[UNIT_SMALL_RICE_FARM] = civ.Units[1187];
+        civ.Units[UNIT_SMALL_DEAD_RICE_FARM] = civ.Units[1188];
+        civ.Units[UNIT_SMALL_FARM_DROP] = civ.Units[1193];
+        civ.Units[UNIT_SMALL_FARM_STACK] = civ.Units[1194];
+        civ.Units[UNIT_SMALL_RICE_FARM_DROP] = civ.Units[1195];
 
-        vector<int> newFarms = {smallFarm, smallDeadFarm, smallRiceFarm, smallDeadRiceFarm, smallFarmDrop, smallFarmStack, smallRiceFarmDrop};
+        vector<int> newFarms = {UNIT_SMALL_FARM, UNIT_SMALL_DEAD_FARM, UNIT_SMALL_RICE_FARM, UNIT_SMALL_DEAD_RICE_FARM, UNIT_SMALL_FARM_DROP, UNIT_SMALL_FARM_STACK, UNIT_SMALL_RICE_FARM_DROP};
         for (int i = 0; i < newFarms.size(); i++) {
             if (civ.Units[newFarms[i]].CollisionSize.x == 1.5) {
                 civ.Units[newFarms[i]].CollisionSize.x = 1;
@@ -2377,109 +2377,109 @@ void Civbuilder::createNewUnits() {
             }
         }
     }
-    this->duplicationUnits.push_back({50, smallFarm, -1});
-    this->duplicationUnits.push_back({357, smallDeadFarm, -1});
-    this->duplicationUnits.push_back({1187, smallRiceFarm, -1});
-    this->duplicationUnits.push_back({1188, smallDeadRiceFarm, -1});
-    this->duplicationUnits.push_back({1193, smallFarmDrop, -1});
-    this->duplicationUnits.push_back({1194, smallFarmStack, -1});
-    this->duplicationUnits.push_back({1195, smallRiceFarmDrop, -1});
+    this->duplicationUnits.push_back({50, UNIT_SMALL_FARM, -1});
+    this->duplicationUnits.push_back({357, UNIT_SMALL_DEAD_FARM, -1});
+    this->duplicationUnits.push_back({1187, UNIT_SMALL_RICE_FARM, -1});
+    this->duplicationUnits.push_back({1188, UNIT_SMALL_DEAD_RICE_FARM, -1});
+    this->duplicationUnits.push_back({1193, UNIT_SMALL_FARM_DROP, -1});
+    this->duplicationUnits.push_back({1194, UNIT_SMALL_FARM_STACK, -1});
+    this->duplicationUnits.push_back({1195, UNIT_SMALL_RICE_FARM_DROP, -1});
 
     // Create Royal Lancer Cavalry
     for (Civ &civ : this->df->Civs) {
-        civ.Units[royalLancer] = civ.Units[1372];
-        civ.Units[royalLancer].Name = "RSLANCER";
-        civ.Units[royalLancer].LanguageDLLName = 5242;
-        civ.Units[royalLancer].LanguageDLLCreation = 6242;
-        civ.Units[royalLancer].LanguageDLLHelp = 26242;
-        civ.Units[royalLancer].StandingGraphic = {10510, 10511};
-        civ.Units[royalLancer].Type50.AttackGraphic = 10508;
-        civ.Units[royalLancer].DyingGraphic = 10509;
-        civ.Units[royalLancer].DeadFish.WalkingGraphic = 10513;
-        civ.Units[royalLancer].HitPoints = 100;
-        civ.Units[royalLancer].Type50.DisplayedAttack = 13;
-        civ.Units[royalLancer].Type50.Attacks[0].Amount = 13;
+        civ.Units[UNIT_ROYAL_LANCER] = civ.Units[1372];
+        civ.Units[UNIT_ROYAL_LANCER].Name = "RSLANCER";
+        civ.Units[UNIT_ROYAL_LANCER].LanguageDLLName = 5242;
+        civ.Units[UNIT_ROYAL_LANCER].LanguageDLLCreation = 6242;
+        civ.Units[UNIT_ROYAL_LANCER].LanguageDLLHelp = 26242;
+        civ.Units[UNIT_ROYAL_LANCER].StandingGraphic = {10510, 10511};
+        civ.Units[UNIT_ROYAL_LANCER].Type50.AttackGraphic = 10508;
+        civ.Units[UNIT_ROYAL_LANCER].DyingGraphic = 10509;
+        civ.Units[UNIT_ROYAL_LANCER].DeadFish.WalkingGraphic = 10513;
+        civ.Units[UNIT_ROYAL_LANCER].HitPoints = 100;
+        civ.Units[UNIT_ROYAL_LANCER].Type50.DisplayedAttack = 13;
+        civ.Units[UNIT_ROYAL_LANCER].Type50.Attacks[0].Amount = 13;
     }
-    this->unitClasses["steppe"].push_back(royalLancer);
+    this->unitClasses["steppe"].push_back(UNIT_ROYAL_LANCER);
 
     // Create Royal Battle Elephant
     for (Civ &civ : this->df->Civs) {
-        civ.Units[royalElephant] = civ.Units[1134];
-        civ.Units[royalElephant].Name = "RBATELE";
-        civ.Units[royalElephant].LanguageDLLName = 5241;
-        civ.Units[royalElephant].LanguageDLLCreation = 6241;
-        civ.Units[royalElephant].LanguageDLLHelp = 26241;
+        civ.Units[UNIT_ROYAL_ELEPHANT] = civ.Units[1134];
+        civ.Units[UNIT_ROYAL_ELEPHANT].Name = "RBATELE";
+        civ.Units[UNIT_ROYAL_ELEPHANT].LanguageDLLName = 5241;
+        civ.Units[UNIT_ROYAL_ELEPHANT].LanguageDLLCreation = 6241;
+        civ.Units[UNIT_ROYAL_ELEPHANT].LanguageDLLHelp = 26241;
 
         // TODO: seem wrong Shrivamsha_Rider and Genitour 
-        //civ.Units[royalElephant].StandingGraphic = {2926, -1};
-        //civ.Units[royalElephant].Type50.AttackGraphic = 2924;
-        //civ.Units[royalElephant].DyingGraphic = 2925;
-        //civ.Units[royalElephant].DeadFish.WalkingGraphic = 2927;
-        civ.Units[royalElephant].HitPoints = 330;
-        civ.Units[royalElephant].Type50.DisplayedAttack = 15;
-        civ.Units[royalElephant].Type50.Attacks[1].Amount = 15;
-        civ.Units[royalElephant].Creatable.DisplayedPierceArmour = 4;
-        civ.Units[royalElephant].Type50.Armours[3].Amount = 4;
+        //civ.Units[UNIT_ROYAL_ELEPHANT].StandingGraphic = {2926, -1};
+        //civ.Units[UNIT_ROYAL_ELEPHANT].Type50.AttackGraphic = 2924;
+        //civ.Units[UNIT_ROYAL_ELEPHANT].DyingGraphic = 2925;
+        //civ.Units[UNIT_ROYAL_ELEPHANT].DeadFish.WalkingGraphic = 2927;
+        civ.Units[UNIT_ROYAL_ELEPHANT].HitPoints = 330;
+        civ.Units[UNIT_ROYAL_ELEPHANT].Type50.DisplayedAttack = 15;
+        civ.Units[UNIT_ROYAL_ELEPHANT].Type50.Attacks[1].Amount = 15;
+        civ.Units[UNIT_ROYAL_ELEPHANT].Creatable.DisplayedPierceArmour = 4;
+        civ.Units[UNIT_ROYAL_ELEPHANT].Type50.Armours[3].Amount = 4;
     }
-    this->unitClasses["elephant"].push_back(royalElephant);
-    this->unitClasses["stable"].push_back(royalElephant);
+    this->unitClasses["elephant"].push_back(UNIT_ROYAL_ELEPHANT);
+    this->unitClasses["stable"].push_back(UNIT_ROYAL_ELEPHANT);
 
     // Create Imperial Scorpion
     for (Civ &civ : this->df->Civs) {
-        civ.Units[impScorpion] = civ.Units[542];
-        civ.Units[impScorpion].Name = "IMPBAL";
-        civ.Units[impScorpion].LanguageDLLName = 5240;
-        civ.Units[impScorpion].LanguageDLLCreation = 6240;
-        civ.Units[impScorpion].LanguageDLLHelp = 26240;
-        civ.Units[impScorpion].HitPoints = 60;
-        civ.Units[impScorpion].Type50.DisplayedAttack = 18;
-        civ.Units[impScorpion].Type50.Attacks[3].Amount = 18;
-        civ.Units[impScorpion].Type50.ProjectileUnitID = impScorpionProjectile;
-        civ.Units[impScorpion].Creatable.SecondaryProjectileUnit = impScorpionProjectile;
-        civ.Units[impScorpionProjectile].Name = "Projectile Imperial Scorpion";
-        civ.Units[impScorpionProjectileFire].Name = "Projectile Imperial Scorpion (Fire)";
-        civ.Units[impScorpionProjectile].Type50.DisplayedAttack = 14;
-        civ.Units[impScorpionProjectile].Type50.Attacks[2].Amount = 14;
-        civ.Units[impScorpionProjectileFire].Type50.DisplayedAttack = 14;
-        civ.Units[impScorpionProjectileFire].Type50.Attacks[2].Amount = 14;
+        civ.Units[UNIT_IMP_SCORPION] = civ.Units[542];
+        civ.Units[UNIT_IMP_SCORPION].Name = "IMPBAL";
+        civ.Units[UNIT_IMP_SCORPION].LanguageDLLName = 5240;
+        civ.Units[UNIT_IMP_SCORPION].LanguageDLLCreation = 6240;
+        civ.Units[UNIT_IMP_SCORPION].LanguageDLLHelp = 26240;
+        civ.Units[UNIT_IMP_SCORPION].HitPoints = 60;
+        civ.Units[UNIT_IMP_SCORPION].Type50.DisplayedAttack = 18;
+        civ.Units[UNIT_IMP_SCORPION].Type50.Attacks[3].Amount = 18;
+        civ.Units[UNIT_IMP_SCORPION].Type50.ProjectileUnitID = UNIT_IMP_SCORPION_PROJECTILE;
+        civ.Units[UNIT_IMP_SCORPION].Creatable.SecondaryProjectileUnit = UNIT_IMP_SCORPION_PROJECTILE;
+        civ.Units[UNIT_IMP_SCORPION_PROJECTILE].Name = "Projectile Imperial Scorpion";
+        civ.Units[UNIT_IMP_SCORPION_PROJECTILE_FIRE].Name = "Projectile Imperial Scorpion (Fire)";
+        civ.Units[UNIT_IMP_SCORPION_PROJECTILE].Type50.DisplayedAttack = 14;
+        civ.Units[UNIT_IMP_SCORPION_PROJECTILE].Type50.Attacks[2].Amount = 14;
+        civ.Units[UNIT_IMP_SCORPION_PROJECTILE_FIRE].Type50.DisplayedAttack = 14;
+        civ.Units[UNIT_IMP_SCORPION_PROJECTILE_FIRE].Type50.Attacks[2].Amount = 14;
     }
-    df->Effects[47].EffectCommands.push_back(createEC(3, impScorpionProjectile, impScorpionProjectileFire, -1, 0));
-    df->Effects[47].EffectCommands.push_back(createEC(4, impScorpion, -1, 9, amountTypetoD(1, 3)));
-    this->unitClasses["scorpion"].push_back(impScorpion);
-    this->unitClasses["workshop"].push_back(impScorpion);
+    df->Effects[47].EffectCommands.push_back(createEC(3, UNIT_IMP_SCORPION_PROJECTILE, UNIT_IMP_SCORPION_PROJECTILE_FIRE, -1, 0));
+    df->Effects[47].EffectCommands.push_back(createEC(4, UNIT_IMP_SCORPION, -1, 9, amountTypetoD(1, 3)));
+    this->unitClasses["scorpion"].push_back(UNIT_IMP_SCORPION);
+    this->unitClasses["workshop"].push_back(UNIT_IMP_SCORPION);
 
     // Create the mill cow
     for (Civ &civ : this->df->Civs) {
-        civ.Units[millCow] = civ.Units[705];
-        civ.Units[millCow].Name = "BABY";
-        setTrainLocation(civ.Units[millCow].Creatable, 68, 2);
-        civ.Units[millCow].Creatable.ResourceCosts[0].Type = 3;
-        civ.Units[millCow].Creatable.ResourceCosts[0].Amount = 10;
+        civ.Units[UNIT_MILL_COW] = civ.Units[705];
+        civ.Units[UNIT_MILL_COW].Name = "BABY";
+        setTrainLocation(civ.Units[UNIT_MILL_COW].Creatable, 68, 2);
+        civ.Units[UNIT_MILL_COW].Creatable.ResourceCosts[0].Type = 3;
+        civ.Units[UNIT_MILL_COW].Creatable.ResourceCosts[0].Amount = 10;
 
-        civ.Units[pastureCow] = civ.Units[705];
-        civ.Units[pastureCow].Name = "BIGBABY";
-        setTrainLocation(civ.Units[pastureCow].Creatable, 1889, 2);
-        civ.Units[pastureCow].Creatable.ResourceCosts[0].Type = 3;
-        civ.Units[pastureCow].Creatable.ResourceCosts[0].Amount = 10;
+        civ.Units[UNIT_PASTURE_COW] = civ.Units[705];
+        civ.Units[UNIT_PASTURE_COW].Name = "BIGBABY";
+        setTrainLocation(civ.Units[UNIT_PASTURE_COW].Creatable, 1889, 2);
+        civ.Units[UNIT_PASTURE_COW].Creatable.ResourceCosts[0].Type = 3;
+        civ.Units[UNIT_PASTURE_COW].Creatable.ResourceCosts[0].Amount = 10;
     }
 
     // Create feudal monk
     for (Civ &civ : this->df->Civs) {
-        civ.Units[feudalMonk] = civ.Units[125];
-        civ.Units[feudalMonk].Name = "MONK_F";
-        for (int i = 0; i < civ.Units[feudalMonk].Bird.TaskList.size(); i++) {
-            if (civ.Units[feudalMonk].Bird.TaskList[i].ActionType == 132) {
+        civ.Units[UNIT_FEUDAL_MONK] = civ.Units[125];
+        civ.Units[UNIT_FEUDAL_MONK].Name = "MONK_F";
+        for (int i = 0; i < civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList.size(); i++) {
+            if (civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].ActionType == 132) {
                 // Remove the ability to pick up relics
-                civ.Units[feudalMonk].Bird.TaskList.erase(civ.Units[feudalMonk].Bird.TaskList.begin() + i);
+                civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList.erase(civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList.begin() + i);
                 i--;
-            } else if (civ.Units[feudalMonk].Bird.TaskList[i].ActionType == 104) {
+            } else if (civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].ActionType == 104) {
                 // Increase conversion times
-                if (civ.Units[feudalMonk].Bird.TaskList[i].WorkValue1 == 4 && civ.Units[feudalMonk].Bird.TaskList[i].WorkValue2 == 10) {
-                    civ.Units[feudalMonk].Bird.TaskList[i].WorkValue1 = 5;
-                    civ.Units[feudalMonk].Bird.TaskList[i].WorkValue2 = 12;
-                } else if (civ.Units[feudalMonk].Bird.TaskList[i].WorkValue1 == 15 && civ.Units[feudalMonk].Bird.TaskList[i].WorkValue2 == 25) {
-                    civ.Units[feudalMonk].Bird.TaskList[i].WorkValue1 = 20;
-                    civ.Units[feudalMonk].Bird.TaskList[i].WorkValue2 = 30;
+                if (civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].WorkValue1 == 4 && civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].WorkValue2 == 10) {
+                    civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].WorkValue1 = 5;
+                    civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].WorkValue2 = 12;
+                } else if (civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].WorkValue1 == 15 && civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].WorkValue2 == 25) {
+                    civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].WorkValue1 = 20;
+                    civ.Units[UNIT_FEUDAL_MONK].Bird.TaskList[i].WorkValue2 = 30;
                 }
             }
         }
@@ -2487,30 +2487,30 @@ void Civbuilder::createNewUnits() {
 
     // Create feudal knight
     for (Civ &civ : this->df->Civs) {
-        civ.Units[feudalKnight] = civ.Units[38];
-        civ.Units[feudalKnight].Name = "KNIGHT_F";
-        civ.Units[feudalKnight].HitPoints = 30;
-        civ.Units[feudalKnight].Speed = 1.25;
-        civ.Units[feudalKnight].LineOfSight = 3;
-        civ.Units[feudalKnight].Bird.SearchRadius = 3;
-        setTrainTime(civ.Units[feudalKnight].Creatable, 45);
+        civ.Units[UNIT_FEUDAL_KNIGHT] = civ.Units[38];
+        civ.Units[UNIT_FEUDAL_KNIGHT].Name = "KNIGHT_F";
+        civ.Units[UNIT_FEUDAL_KNIGHT].HitPoints = 30;
+        civ.Units[UNIT_FEUDAL_KNIGHT].Speed = 1.25;
+        civ.Units[UNIT_FEUDAL_KNIGHT].LineOfSight = 3;
+        civ.Units[UNIT_FEUDAL_KNIGHT].Bird.SearchRadius = 3;
+        setTrainTime(civ.Units[UNIT_FEUDAL_KNIGHT].Creatable, 45);
     }
-    // this->df->Effects[175].EffectCommands.push_back(createEC(3, feudalKnight, 283, -1, 0));
-    // this->df->Effects[253].EffectCommands.push_back(createEC(3, feudalKnight, 569, -1, 0));
-    this->duplicationUnits.push_back({38, feudalKnight, 38});
+    // this->df->Effects[175].EffectCommands.push_back(createEC(3, UNIT_FEUDAL_KNIGHT, 283, -1, 0));
+    // this->df->Effects[253].EffectCommands.push_back(createEC(3, UNIT_FEUDAL_KNIGHT, 569, -1, 0));
+    this->duplicationUnits.push_back({38, UNIT_FEUDAL_KNIGHT, 38});
 
     // Create City Walls
     for (Civ &civ : this->df->Civs) {
-        setTrainLocation(civ.Units[cityWall].Creatable, 118, 8);
-        civ.Units[cityWall].HitPoints = 4800;
-        civ.Units[cityWall].Creatable.DisplayedPierceArmour = 16;
-        civ.Units[cityWall].Type50.DisplayedMeleeArmour = 16;
-        civ.Units[cityWall].Type50.Armours = civ.Units[155].Type50.Armours;
-        civ.Units[cityWall].Type50.Armours[2].Amount = 16;
-        civ.Units[cityWall].Type50.Armours[3].Amount = 16;
-        civ.Units[cityWall].Type50.Armours[6].Amount = 16;
-        civ.Units[cityWall].Creatable.ResourceCosts[0].Amount = 5;
-        civ.Units[cityWall].BlastDefenseLevel = 2;
+        setTrainLocation(civ.Units[UNIT_CITY_WALL].Creatable, 118, 8);
+        civ.Units[UNIT_CITY_WALL].HitPoints = 4800;
+        civ.Units[UNIT_CITY_WALL].Creatable.DisplayedPierceArmour = 16;
+        civ.Units[UNIT_CITY_WALL].Type50.DisplayedMeleeArmour = 16;
+        civ.Units[UNIT_CITY_WALL].Type50.Armours = civ.Units[155].Type50.Armours;
+        civ.Units[UNIT_CITY_WALL].Type50.Armours[2].Amount = 16;
+        civ.Units[UNIT_CITY_WALL].Type50.Armours[3].Amount = 16;
+        civ.Units[UNIT_CITY_WALL].Type50.Armours[6].Amount = 16;
+        civ.Units[UNIT_CITY_WALL].Creatable.ResourceCosts[0].Amount = 5;
+        civ.Units[UNIT_CITY_WALL].BlastDefenseLevel = 2;
         for (int i = 0; i < 16; i++) {
             civ.Units[i + 1579].Type50.Armours[1].Amount = 30;
             civ.Units[i + 1579].Creatable.ResourceCosts[0].Amount = 30;
@@ -2741,8 +2741,8 @@ void Civbuilder::createCivBonuses() {
     // Imperial Scorpion
     e.EffectCommands.clear();
     e.Name = "Imperial Scorpion";
-    e.EffectCommands.push_back(createEC(3, 279, impScorpion, -1, 0));
-    e.EffectCommands.push_back(createEC(3, 542, impScorpion, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 279, UNIT_IMP_SCORPION, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 542, UNIT_IMP_SCORPION, -1, 0));
     this->df->Effects.push_back(e);
 
     Tech t = Tech();
@@ -2769,8 +2769,8 @@ void Civbuilder::createCivBonuses() {
     // Royal Battle Elephant
     e.EffectCommands.clear();
     e.Name = "Royal Battle Elephant";
-    e.EffectCommands.push_back(createEC(3, 1132, royalElephant, -1, 0));
-    e.EffectCommands.push_back(createEC(3, 1134, royalElephant, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 1132, UNIT_ROYAL_ELEPHANT, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 1134, UNIT_ROYAL_ELEPHANT, -1, 0));
     this->df->Effects.push_back(e);
 
     t = Tech();
@@ -2798,8 +2798,8 @@ void Civbuilder::createCivBonuses() {
     // Royal Lancer
     e.EffectCommands.clear();
     e.Name = "Royal Lancer";
-    e.EffectCommands.push_back(createEC(3, 1370, royalLancer, -1, 0));
-    e.EffectCommands.push_back(createEC(3, 1372, royalLancer, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 1370, UNIT_ROYAL_LANCER, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 1372, UNIT_ROYAL_LANCER, -1, 0));
     this->df->Effects.push_back(e);
 
     t = Tech();
@@ -3477,8 +3477,8 @@ void Civbuilder::createCivBonuses() {
 
     // Cows from mills
     e.EffectCommands.clear();
-    e.EffectCommands.push_back(createEC(2, millCow, 1, -1, 0));
-    e.EffectCommands.push_back(createEC(2, pastureCow, 1, -1, 0));
+    e.EffectCommands.push_back(createEC(2, UNIT_MILL_COW, 1, -1, 0));
+    e.EffectCommands.push_back(createEC(2, UNIT_PASTURE_COW, 1, -1, 0));
     this->createCivBonus(CIV_BONUS_222_COWS_MILLS, e, "C-Bonus, Cows from mills");
 
     // Start with a horse
@@ -3870,7 +3870,7 @@ void Civbuilder::createCivBonuses() {
     // Feudal monks
     techIDs.clear();
     e.EffectCommands.clear();
-    e.EffectCommands.push_back(createEC(2, feudalMonk, 1, -1, 0));
+    e.EffectCommands.push_back(createEC(2, UNIT_FEUDAL_MONK, 1, -1, 0));
     e.Name = "Feudal Monk (make avail)";
     df->Effects.push_back(e);
     t = Tech();
@@ -3890,7 +3890,7 @@ void Civbuilder::createCivBonuses() {
     df->Techs.push_back(t);
     techIDs.push_back((int)(df->Techs.size() - 1));
     e.EffectCommands.clear();
-    e.EffectCommands.push_back(createEC(3, feudalMonk, 125, -1, 0));
+    e.EffectCommands.push_back(createEC(3, UNIT_FEUDAL_MONK, 125, -1, 0));
     e.Name = "Upgrade monks Castle";
     df->Effects.push_back(e);
     t = Tech();
@@ -4014,46 +4014,46 @@ void Civbuilder::createCivBonuses() {
 
     // Stone miners generate gold
     this->civBonuses[CIV_BONUS_281_STONE_MINERS_GENERATE_GOLD_IN_ADDITION_TO_STONE] = {
-        TECH_C_BONUS__STONE_MINERS_GENERATE_GOLD, 
+        TECH_C_BONUS_STONE_MINERS_GENERATE_GOLD, 
         TECH_STONE_MINING_GOLD_GENERATION_INCREASE, 
         TECH_STONE_SHAFT_MINING_GOLD_GENERATION_INCREASE
     };
 
     // Winged Hussar replaces Hussar
     this->civBonuses[CIV_BONUS_282_WINGED_HUSSAR_REPLACES_HUSSAR] = {
-        TECH_WINGED_HUSSAR__POLES, 
-        TECH_WINGED_HUSSAR__P__POST_IMPERIAL
+        TECH_WINGED_HUSSAR_POLES, 
+        TECH_WINGED_HUSSAR_P_POST_IMPERIAL
     };
 
     // Chemistry in Castle Age
     this->civBonuses[CIV_BONUS_283_CHEMISTRY_AND_HAND_CANNONEER_AVAILABLE_IN_CASTLE] = {
-        TECH_C_BONUS__EARLIER_CHEMISTRY, 
-        TECH_C_BONUS__EARLIER_HAND_CANNON
+        TECH_C_BONUS_EARLIER_CHEMISTRY, 
+        TECH_C_BONUS_EARLIER_HAND_CANNON
     };
 
     // Spearman-line deals +25% bonus damage
-    this->civBonuses[CIV_BONUS_284_SPEARMEN_DEALS_25_BONUS_DAMAGE] = {TECH_C_BONUS__BONUS_DAMAGE_INCREASE};
+    this->civBonuses[CIV_BONUS_284_SPEARMEN_DEALS_25_BONUS_DAMAGE] = {TECH_C_BONUS_BONUS_DAMAGE_INCREASE};
 
     // Fervor and Sanctity affects villagers
     this->civBonuses[CIV_BONUS_285_FERVOR_AND_SANCTITY_AFFECTS_VILLAGERS] = {
-        TECH_C_BONUS__VILLAGER_SANCTITY, 
-        TECH_C_BONUS__VILLAGER_FERVOR
+        TECH_C_BONUS_VILLAGER_SANCTITY, 
+        TECH_C_BONUS_VILLAGER_FERVOR
     };
 
     // Houfnice
     this->civBonuses[CIV_BONUS_286_CAN_UPGRADE_BOMBARD_CANNONS_TO_HOUFNICE] = {TECH_HOUFNICE};
 
     // Caravanserai
-    this->civBonuses[CIV_BONUS_287_CAN_BUILD_CARAVANSERI_IN_IMPERIAL_AGE] = {TECH_CARAVANSERAI__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_287_CAN_BUILD_CARAVANSERI_IN_IMPERIAL_AGE] = {TECH_CARAVANSERAI_MAKE_AVAIL};
 
     // Gunpowder units +1/+1P
-    this->civBonuses[CIV_BONUS_288_GUNPOWDER_UNITS_1_1P_ARMOR] = {TECH_C_BONUS__GUNPOWDER_ARMOR};
+    this->civBonuses[CIV_BONUS_288_GUNPOWDER_UNITS_1_1P_ARMOR] = {TECH_C_BONUS_GUNPOWDER_ARMOR};
 
     //+200w per age
     this->civBonuses[CIV_BONUS_289_RECEIVE_200_WOOD_WHEN_ADVANCING_TO_THE_NEXT_AGE] = {
-        TECH_C_BONUS___200W_IN_AGE2, 
-        TECH_C_BONUS___200W_IN_AGE3, 
-        TECH_C_BONUS___200W_IN_AGE4
+        TECH_C_BONUS_PLUS_200W_IN_AGE2, 
+        TECH_C_BONUS_PLUS_200W_IN_AGE3, 
+        TECH_C_BONUS_PLUS_200W_IN_AGE4
     };
 
     // Barracks techs cost -50%
@@ -4069,36 +4069,36 @@ void Civbuilder::createCivBonuses() {
     this->civBonuses[CIV_BONUS_290_BARRACKS_TECHNOLOGIES_COST_50] = {(int)(this->df->Techs.size() - 1)};
 
     // Skirmishers and elephant archers attack 25% faster
-    this->civBonuses[CIV_BONUS_291_SKIRMISHERS_AND_ELEPHANT_ARCHERS_ATTACK_25_FASTER] = {TECH_C_BONUS__SKIRM_AND_EA_FASTER_ATTACK};
+    this->civBonuses[CIV_BONUS_291_SKIRMISHERS_AND_ELEPHANT_ARCHERS_ATTACK_25_FASTER] = {TECH_C_BONUS_SKIRM_AND_EA_FASTER_ATTACK};
 
     // Elephant units -25% bonus damage and conversion resist
-    this->civBonuses[CIV_BONUS_292_ELEPHANT_UNITS_RECEIVE_25_LESS_BONUS_DAMAGE] = {TECH_C_BONUS__ELEPHANT_RESISTANCE};
+    this->civBonuses[CIV_BONUS_292_ELEPHANT_UNITS_RECEIVE_25_LESS_BONUS_DAMAGE] = {TECH_C_BONUS_ELEPHANT_RESISTANCE};
 
     // Ships regenerate
-    this->civBonuses[CIV_BONUS_293_SHIPS_REGENERATE_15_HP_PER_MINUTE] = {TECH_C_BONUS__SHIPS_REGENERATE};
+    this->civBonuses[CIV_BONUS_293_SHIPS_REGENERATE_15_HP_PER_MINUTE] = {TECH_C_BONUS_SHIPS_REGENERATE};
 
     // Start with 2 forage bushes
-    this->civBonuses[CIV_BONUS_294_START_WITH_2_FORAGE_BUSHES] = {TECH_C_BONUS__START_W__2_BUSHES};
+    this->civBonuses[CIV_BONUS_294_START_WITH_2_FORAGE_BUSHES] = {TECH_C_BONUS_START_W_AND_2_BUSHES};
 
     // Livestock garrison mills
-    this->civBonuses[CIV_BONUS_295_CAN_GARRISON_MILLS_WITH_LIVESTOCK_TO_PRODUCE_FOOD] = {TECH_C_BONUS__HERDABLES_GARRISON};
+    this->civBonuses[CIV_BONUS_295_CAN_GARRISON_MILLS_WITH_LIVESTOCK_TO_PRODUCE_FOOD] = {TECH_C_BONUS_HERDABLES_GARRISON};
 
     // Mounted units +20/30/40% damage
     this->civBonuses[CIV_BONUS_296_MOUNTED_UNITS_DEAL_20_BONUS_DAMAGE_FEUDAL] = {
-        TECH_C_BONUS___20__CAV_BONUS_DAMAGE, 
-        TECH_C_BONUS___30__CAV_BONUS_DAMAGE, 
-        TECH_C_BONUS___40__CAV_BONUS_DAMAGE
+        TECH_C_BONUS_PLUS_20_PERCENT_CAV_BONUS_DAMAGE, 
+        TECH_C_BONUS_PLUS_30_PERCENT_CAV_BONUS_DAMAGE, 
+        TECH_C_BONUS_PLUS_40_PERCENT_CAV_BONUS_DAMAGE
     };
 
     // Garrison fishing ships
-    this->civBonuses[CIV_BONUS_297_CAN_GARRISON_DOCKS_WITH_FISHING_SHIPS] = {TECH_C_BONUS__DOCKS_GARRISON};
+    this->civBonuses[CIV_BONUS_297_CAN_GARRISON_DOCKS_WITH_FISHING_SHIPS] = {TECH_C_BONUS_DOCKS_GARRISON};
 
     // Thirisadai
-    this->civBonuses[CIV_BONUS_298_CAN_TRAIN_THIRISADAI_IN_DOCKS] = {TECH_THIRISADAI__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_298_CAN_TRAIN_THIRISADAI_IN_DOCKS] = {TECH_THIRISADAI_MAKE_AVAIL};
 
     // Shrivamsha
     this->civBonuses[CIV_BONUS_299_CAN_RECRUIT_SHRIVAMSHA_RIDERS] = {
-        TECH_SHRIVAMSHA_RIDER__MAKE_AVAIL, 
+        TECH_SHRIVAMSHA_RIDER_MAKE_AVAIL, 
         TECH_ELITE_SHRIVAMSHA_RIDER
     };
 
@@ -4106,12 +4106,12 @@ void Civbuilder::createCivBonuses() {
     this->civBonuses[CIV_BONUS_300_CAN_RECRUIT_CAMEL_SCOUTS_IN_FEUDAL_AGE] = {
         TECH_MAKE_CAMELS_AVAILABLE, 
         TECH_UPGRADE_CAMEL_SCOUTS_TO_RIDERS, 
-        TECH_CAMEL_SCOUT__MAKE_AVAIL
+        TECH_CAMEL_SCOUT_MAKE_AVAIL
     };
 
     //+20g per tech
     this->civBonuses[CIV_BONUS_301_GAIN_20_GOLD_FOR_EACH_TECHNOLOGY_RESEARCHED] = {
-        TECH_C_BONUS__TECH_REWARD, 
+        TECH_C_BONUS_TECH_REWARD, 
         TECH_EXCLUDE_AGE2_FROM_TECH_REWARD, 
         TECH_EXCLUDE_AGE3_FROM_TECH_REWARD, 
         TECH_EXCLUDE_AGE4_FROM_TECH_REWARD
@@ -4128,43 +4128,43 @@ void Civbuilder::createCivBonuses() {
     this->createCivBonus(CIV_BONUS_302_NAVY_ARMOR, e, "C-Bonus, Navy armor");
 
     // Battle Elephants +1/+1P armor
-    this->civBonuses[CIV_BONUS_303_ELEPHANT_UNITS_1_1P_ARMOR] = {TECH_C_BONUS__BATTLE_ELEPHANT_ARMOR};
+    this->civBonuses[CIV_BONUS_303_ELEPHANT_UNITS_1_1P_ARMOR] = {TECH_C_BONUS_BATTLE_ELEPHANT_ARMOR};
 
     // Monks +3/+3P armor
-    this->civBonuses[CIV_BONUS_304_MONK_UNITS_3_3P_ARMOR] = {TECH_C_BONUS__MONK_ARMOR};
+    this->civBonuses[CIV_BONUS_304_MONK_UNITS_3_3P_ARMOR] = {TECH_C_BONUS_MONK_ARMOR};
 
     // Blacksmith double effect
     this->civBonuses[CIV_BONUS_305_INFANTRY_RECEIVES_DOUBLE_EFFECT_FROM_BLACKSMITH_ARMOR] = {
-        TECH_C_BONUS__DOUBLE_SCALE_MAIL, 
-        TECH_C_BONUS__DOUBLE_CHAIN_MAIL, 
-        TECH_C_BONUS__DOUBLE_PLATE_MAIL
+        TECH_C_BONUS_DOUBLE_SCALE_MAIL, 
+        TECH_C_BONUS_DOUBLE_CHAIN_MAIL, 
+        TECH_C_BONUS_DOUBLE_PLATE_MAIL
     };
 
     // Scorpions cheap and ballistics
     this->civBonuses[CIV_BONUS_306_SCORPIONS_COST_60_GOLD_AND_BENEFIT_FROM] = {
-        TECH_C_BONUS__CHEAPER_SCORPIONS, 
+        TECH_C_BONUS_CHEAPER_SCORPIONS, 
         TECH_RESERVED_2
     };
 
     // Legionary
     this->civBonuses[CIV_BONUS_307_LEGIONARY_REPLACES_TWO_HANDED_SWORDSMAN_CHAMPION] = {
         TECH_LEGIONARY, 
-        TECH_FTT__DISABLE_MILITIA_UPGRADES
+        TECH_FTT_DISABLE_MILITIA_UPGRADES
     };
 
     // Cavalry Archers +2 attack vs archers
-    this->civBonuses[CIV_BONUS_311_CAVALRY_ARCHERS_2_ATTACK_VS_ARCHERS_EXCEPT] = {TECH_C_BONUS__CA_VS_ARCHERS};
+    this->civBonuses[CIV_BONUS_311_CAVALRY_ARCHERS_2_ATTACK_VS_ARCHERS_EXCEPT] = {TECH_C_BONUS_CA_VS_ARCHERS};
 
     // Eco buildings cheaper + effectiveness
     this->civBonuses[CIV_BONUS_312_WOOD_AND_MINING_UPGRADES_ARE_40_MORE] = {
-        TECH_C_BONUS__CHEAPER_MULE_CART, 
-        TECH_C_BONUS_____DOUBLE_BIT_AXE, 
-        TECH_C_BONUS_____BOW_SAW, 
-        TECH_C_BONUS_____TWO_MAN_SAW, 
-        TECH_C_BONUS_____GOLD_MINING, 
-        TECH_C_BONUS_____GOLD_SHAFT_MINING, 
-        TECH_C_BONUS_____STONE_MINING, 
-        TECH_C_BONUS_____STONE_SHAFT_MINING
+        TECH_C_BONUS_CHEAPER_MULE_CART, 
+        TECH_C_BONUS_PLUS_PERCENT_DOUBLE_BIT_AXE, 
+        TECH_C_BONUS_PLUS_PERCENT_BOW_SAW, 
+        TECH_C_BONUS_PLUS_PERCENT_TWO_MAN_SAW, 
+        TECH_C_BONUS_PLUS_PERCENT_GOLD_MINING, 
+        TECH_C_BONUS_PLUS_PERCENT_GOLD_SHAFT_MINING, 
+        TECH_C_BONUS_PLUS_PERCENT_STONE_MINING, 
+        TECH_C_BONUS_PLUS_PERCENT_STONE_SHAFT_MINING
     };
     this->df->Effects[953].EffectCommands.clear();
     for (int i = 0; i < ecoBuildings.size(); i++) {
@@ -4173,46 +4173,46 @@ void Civbuilder::createCivBonuses() {
 
     // Free relic
     this->civBonuses[CIV_BONUS_313_FIRST_RELIGIOUS_BUILDING_RECEIVES_A_FREE_RELIC] = {
-        TECH_C_BONUS__FREE_RELIC, 
-        TECH_C_BONUS__FREE_RELIC2
+        TECH_C_BONUS_FREE_RELIC, 
+        TECH_C_BONUS_FREE_RELIC2
     };
 
     // Savar
     this->civBonuses[CIV_BONUS_314_SAVAR_REPLACES_PALADIN] = {
         TECH_SAVAR, 
-        TECH_FTT__DISABLE_PALADIN
+        TECH_FTT_DISABLE_PALADIN
     };
 
     // Extra warship missile
-    this->civBonuses[CIV_BONUS_315_GALLEY_LINE_AND_DROMONS_FIRE_AN_ADDITIONAL] = {TECH_C_BONUS__NAVY__1_PROJECTILE};
+    this->civBonuses[CIV_BONUS_315_GALLEY_LINE_AND_DROMONS_FIRE_AN_ADDITIONAL] = {TECH_C_BONUS_NAVY_PLUS_1_PROJECTILE};
 
     // Fortified church
-    this->civBonuses[CIV_BONUS_316_FORTIFIED_CHURCH_REPLACES_MONASTERY] = {TECH_FORTIFIED_CHURCH__GEORGIANS};
+    this->civBonuses[CIV_BONUS_316_FORTIFIED_CHURCH_REPLACES_MONASTERY] = {TECH_FORTIFIED_CHURCH_GEORGIANS};
 
     // Mule carts
-    this->civBonuses[CIV_BONUS_317_MULE_CARTS_REPLACE_LUMBER_CAMPS_AND_MINING_CAMPS] = {TECH_MULE_CART__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_317_MULE_CARTS_REPLACE_LUMBER_CAMPS_AND_MINING_CAMPS] = {TECH_MULE_CART_MAKE_AVAIL};
 
     // Start with mule cart
     this->civBonuses[CIV_BONUS_318_START_WITH_A_MULE_CART] = {
         TECH_NEW_RESEARCH_45, 
-        TECH_C_BONUS__START_W__MULE_CART
+        TECH_C_BONUS_START_W_AND_MULE_CART
     };
 
     // Church work bonus area
-    this->civBonuses[CIV_BONUS_319_RELIGIOUS_BUILDINGS_PROVIDE_VILLAGERS_IN_AN_8] = {TECH_C_BONUS__FORTIFIED_CHURCH_AREA_EFFECT};
+    this->civBonuses[CIV_BONUS_319_RELIGIOUS_BUILDINGS_PROVIDE_VILLAGERS_IN_AN_8] = {TECH_C_BONUS_FORTIFIED_CHURCH_AREA_EFFECT};
 
     // Less bonus damage from higher elevation
-    this->civBonuses[CIV_BONUS_320_UNITS_AND_BUILDINGS_RECEIVE_15_DAMAGE_WHEN] = {TECH_C_BONUS__ELEVATION_BONUS_DEFENSE};
+    this->civBonuses[CIV_BONUS_320_UNITS_AND_BUILDINGS_RECEIVE_15_DAMAGE_WHEN] = {TECH_C_BONUS_ELEVATION_BONUS_DEFENSE};
 
     // Cavalry regen
     this->civBonuses[CIV_BONUS_321_MOUNTED_UNITS_REGENERATE_2_8_14_HP] = {
-        TECH_C_BONUS__CAVALRY_REGENERATION_AGE2, 
-        TECH_C_BONUS__CAVALRY_REGENERATION_AGE3, 
-        TECH_C_BONUS__CAVALRY_REGENERATION_AGE4
+        TECH_C_BONUS_CAVALRY_REGENERATION_AGE2, 
+        TECH_C_BONUS_CAVALRY_REGENERATION_AGE3, 
+        TECH_C_BONUS_CAVALRY_REGENERATION_AGE4
     };
 
     // Flaming camel bonus
-    this->civBonuses[CIV_BONUS_322_FLAMING_CAMELS_AVAILABLE_IN_SIEGE_WORKSHOPS_IN] = {TECH_FLAMING_CAMEL__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_322_FLAMING_CAMELS_AVAILABLE_IN_SIEGE_WORKSHOPS_IN] = {TECH_FLAMING_CAMEL_MAKE_AVAIL};
 
     // Refund stone
     e.EffectCommands.clear();
@@ -4536,13 +4536,13 @@ void Civbuilder::createCivBonuses() {
 
     // 2x2 farms
     e.EffectCommands.clear();
-    e.EffectCommands.push_back(createEC(3, 50, smallFarm, -1, 0));
-    e.EffectCommands.push_back(createEC(3, 357, smallDeadFarm, -1, 0));
-    e.EffectCommands.push_back(createEC(3, 1187, smallRiceFarm, -1, 0));
-    e.EffectCommands.push_back(createEC(3, 1188, smallDeadRiceFarm, -1, 0));
-    e.EffectCommands.push_back(createEC(3, 1193, smallFarmDrop, -1, 0));
-    e.EffectCommands.push_back(createEC(3, 1194, smallFarmStack, -1, 0));
-    e.EffectCommands.push_back(createEC(3, 1195, smallRiceFarmDrop, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 50, UNIT_SMALL_FARM, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 357, UNIT_SMALL_DEAD_FARM, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 1187, UNIT_SMALL_RICE_FARM, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 1188, UNIT_SMALL_DEAD_RICE_FARM, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 1193, UNIT_SMALL_FARM_DROP, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 1194, UNIT_SMALL_FARM_STACK, -1, 0));
+    e.EffectCommands.push_back(createEC(3, 1195, UNIT_SMALL_RICE_FARM_DROP, -1, 0));
     this->createCivBonus(CIV_BONUS_330_2X2_FARMS, e, "C-Bonus, 2x2 farms");
 
     // Archery range techs cost -50%
@@ -4560,7 +4560,7 @@ void Civbuilder::createCivBonuses() {
     // Feudal Knights
     techIDs.clear();
     e.EffectCommands.clear();
-    e.EffectCommands.push_back(createEC(2, feudalKnight, 1, -1, 0));
+    e.EffectCommands.push_back(createEC(2, UNIT_FEUDAL_KNIGHT, 1, -1, 0));
     e.Name = "Feudal Knight (make avail)";
     df->Effects.push_back(e);
 
@@ -4574,7 +4574,7 @@ void Civbuilder::createCivBonuses() {
     techIDs.push_back((int)(df->Techs.size() - 1));
 
     e.EffectCommands.clear();
-    e.EffectCommands.push_back(createEC(3, feudalKnight, 38, -1, 0));
+    e.EffectCommands.push_back(createEC(3, UNIT_FEUDAL_KNIGHT, 38, -1, 0));
     e.Name = "Upgrade knights Feudal";
     df->Effects.push_back(e);
 
@@ -4595,110 +4595,110 @@ void Civbuilder::createCivBonuses() {
     e.EffectCommands.clear();
     e.EffectCommands.push_back(createEC(4, 1105, -1, 9, amountTypetoD(6, 3)));
     e.EffectCommands.push_back(createEC(4, 1105, -1, 9, amountTypetoD(6, 11)));
-    e.EffectCommands.push_back(createEC(4, tcSiegeTower, -1, 9, amountTypetoD(6, 3)));
-    e.EffectCommands.push_back(createEC(4, tcSiegeTower, -1, 9, amountTypetoD(6, 11)));
+    e.EffectCommands.push_back(createEC(4, UNIT_TC_SIEGE_TOWER, -1, 9, amountTypetoD(6, 3)));
+    e.EffectCommands.push_back(createEC(4, UNIT_TC_SIEGE_TOWER, -1, 9, amountTypetoD(6, 11)));
     this->createCivBonus(CIV_BONUS_333_SIEGE_TOWERS_CAN_FIRE_ARROWS, e, "C-Bonus, siege towers fire arrows");
 
     // Fire lancers/ships move faster
     this->civBonuses[CIV_BONUS_334_FIRE_LANCERS_AND_FIRE_SHIPS_MOVE_5] = {
-        TECH_C_BONUS__FIRE_LANCER_SHIP_SPEED_CASTLE, 
-        TECH_C_BONUS__FIRE_LANCER_SHIP_SPEED_IMP
+        TECH_C_BONUS_FIRE_LANCER_AND_SHIP_SPEED_CASTLE, 
+        TECH_C_BONUS_FIRE_LANCER_AND_SHIP_SPEED_IMP
     };
 
     // Archery Unit technologies at the Archery Range and Blacksmith cost -25%
-    this->civBonuses[CIV_BONUS_335_ARCHERY_UNIT_TECHNOLOGIES_AT_THE_ARCHERY_RANGE] = {TECH_C_BONUS__CHEAPER_ARCHER_UPG};
+    this->civBonuses[CIV_BONUS_335_ARCHERY_UNIT_TECHNOLOGIES_AT_THE_ARCHERY_RANGE] = {TECH_C_BONUS_CHEAPER_ARCHER_UPG};
 
     // Siege Weapons and Siege Warships move +10/15% faster in Castle/Imperial Age
     this->civBonuses[CIV_BONUS_336_SIEGE_WEAPONS_AND_SIEGE_WARSHIPS_MOVE_10] = {
-        TECH_C_BONUS__SIEGE__10__MOVEMENT, 
-        TECH_C_BONUS__SIEGE__15__MOVEMENT
+        TECH_C_BONUS_SIEGE_PLUS_10_PERCENT_MOVEMENT, 
+        TECH_C_BONUS_SIEGE_PLUS_15_PERCENT_MOVEMENT
     };
 
     // War Chariots
-    this->civBonuses[CIV_BONUS_337_CAN_RECRUIT_WAR_CHARIOTS] = {TECH_WAR_CHARIOT__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_337_CAN_RECRUIT_WAR_CHARIOTS] = {TECH_WAR_CHARIOT_MAKE_AVAIL};
 
     // Liu Bei
-    this->civBonuses[CIV_BONUS_338_GAIN_ACCESS_TO_LIU_BEI] = {TECH_LIU_BEI__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_338_GAIN_ACCESS_TO_LIU_BEI] = {TECH_LIU_BEI_MAKE_AVAIL};
 
     // Military production buildings and Docks provide +65 food
-    this->civBonuses[CIV_BONUS_339_MILITARY_PRODUCTION_BUILDINGS_AND_DOCKS_PROVIDE_65] = {TECH_C_BONUS__MILITARY_BUILDINGS__65F};
+    this->civBonuses[CIV_BONUS_339_MILITARY_PRODUCTION_BUILDINGS_AND_DOCKS_PROVIDE_65] = {TECH_C_BONUS_MILITARY_BUILDINGS_PLUS_65F};
 
     // Infantry regenerates 10/20/30 HP per minute in Feudal/Castle/Imperial Age
     this->civBonuses[CIV_BONUS_340_INFANTRY_REGENERATES_10_20_30_HP_PER] = {
-        TECH_C_BONUS__INF_REGEN_FEUDAL, 
-        TECH_C_BONUS__INF_REGEN_CASTLE, 
-        TECH_C_BONUS__INF_REGEN_IMP
+        TECH_C_BONUS_INF_REGEN_FEUDAL, 
+        TECH_C_BONUS_INF_REGEN_CASTLE, 
+        TECH_C_BONUS_INF_REGEN_IMP
     };
 
     // Jian Swordsmen and Hei Guang Cavalry +2 attack in Imperial Age
-    this->civBonuses[CIV_BONUS_341_JIAN_SWORDSMEN_AND_HEI_GUANG_CAVALRY_2] = {TECH_C_BONUS__JIAN___HEI_KUANG_ATTACK};
+    this->civBonuses[CIV_BONUS_341_JIAN_SWORDSMEN_AND_HEI_GUANG_CAVALRY_2] = {TECH_C_BONUS_JIAN_HEI_KUANG_ATTACK};
 
     // Careening, Dry Dock available one age earlier, cost and research time -75%
     this->civBonuses[CIV_BONUS_342_CAREENING_DRY_DOCK_AVAILABLE_ONE_AGE_EARLIER] = {
         TECH_CAREENING_REQUIREMENT, 
         TECH_DRY_DOCK_REQUIREMENT, 
-        TECH_C_BONUS__EARLY_CAREENING__DRY_DOCK
+        TECH_C_BONUS_EARLY_CAREENING_DRY_DOCK
     };
 
     // Jian Swordsmen
-    this->civBonuses[CIV_BONUS_343_CAN_RECRUIT_JIAN_SWORDSMEN] = {TECH_JIAN_SWORDSMAN__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_343_CAN_RECRUIT_JIAN_SWORDSMEN] = {TECH_JIAN_SWORDSMAN_MAKE_AVAIL};
 
     // Sun Jian
-    this->civBonuses[CIV_BONUS_344_GAIN_ACCESS_TO_SUN_JIAN] = {TECH_SUN_JIAN__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_344_GAIN_ACCESS_TO_SUN_JIAN] = {TECH_SUN_JIAN_MAKE_AVAIL};
 
     // Receive one free Villager for each Mill, Lumber- and Mining Camp technology researched
     this->civBonuses[CIV_BONUS_345_RECEIVE_ONE_FREE_VILLAGER_FOR_EACH_MILL] = {
-        TECH_C_BONUS__FRE_VILL___BIT_AXE, 
-        TECH_C_BONUS__FRE_VILL___BOW_SAW, 
-        TECH_C_BONUS__FRE_VILL___TWO_MAN_SAW, 
-        TECH_C_BONUS__FRE_VILL___HORSE_COLLAR, 
-        TECH_C_BONUS__FRE_VILL___HEAVY_PLOW, 
-        TECH_C_BONUS__FRE_VILL___CROP_ROTATION, 
-        TECH_C_BONUS__FRE_VILL___GOLD_MINING, 
-        TECH_C_BONUS__FRE_VILL___GOLD_SHAFT, 
-        TECH_C_BONUS__FRE_VILL___STONE_MINING, 
-        TECH_C_BONUS__FRE_VILL___STONE_SHAFT
+        TECH_C_BONUS_FRE_VILL_PLUS_BIT_AXE, 
+        TECH_C_BONUS_FRE_VILL_PLUS_BOW_SAW, 
+        TECH_C_BONUS_FRE_VILL_PLUS_TWO_MAN_SAW, 
+        TECH_C_BONUS_FRE_VILL_PLUS_HORSE_COLLAR, 
+        TECH_C_BONUS_FRE_VILL_PLUS_HEAVY_PLOW, 
+        TECH_C_BONUS_FRE_VILL_PLUS_CROP_ROTATION, 
+        TECH_C_BONUS_FRE_VILL_PLUS_GOLD_MINING, 
+        TECH_C_BONUS_FRE_VILL_PLUS_GOLD_SHAFT, 
+        TECH_C_BONUS_FRE_VILL_PLUS_STONE_MINING, 
+        TECH_C_BONUS_FRE_VILL_PLUS_STONE_SHAFT
     };
 
     // Hei Guang Cavalry and Xianbei Raider +15/30% HP in Castle/Imperial Age
     this->civBonuses[CIV_BONUS_346_HEI_GUANG_CAVALRY_AND_XIANBEI_RAIDER_15] = {
-        TECH_C_BONUS__HEAVY_CAV__15__HP___BL, 
-        TECH_C_BONUS__HEAVY_CAV__30__HP___BL, 
-        TECH_C_BONUS__HEAVY_CAV__15__HP, 
-        TECH_C_BONUS__HEAVY_CAV__30__HP
+        TECH_C_BONUS_HEAVY_CAV_PLUS_15_PERCENT_HP_PLUS_BL, 
+        TECH_C_BONUS_HEAVY_CAV_PLUS_30_PERCENT_HP_PLUS_BL, 
+        TECH_C_BONUS_HEAVY_CAV_PLUS_15_PERCENT_HP, 
+        TECH_C_BONUS_HEAVY_CAV_PLUS_30_PERCENT_HP
     };
 
     // Trebuchet units cost -25%
     this->civBonuses[CIV_BONUS_347_TRACTION_TREBUCHETS_AND_LOU_CHUANS_COST_25] = {TECH_C_BONUS_CHEAPER_TRACTION_TREB};
 
     // Xianbei Raiders
-    this->civBonuses[CIV_BONUS_348_CAN_RECRUIT_XIANBEI_RAIDERS] = {TECH_XIANBEI_RAIDER__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_348_CAN_RECRUIT_XIANBEI_RAIDERS] = {TECH_XIANBEI_RAIDER_MAKE_AVAIL};
 
     // Cao Cao
-    this->civBonuses[CIV_BONUS_349_GAIN_ACCESS_TO_CAO_CAO] = {TECH_CAO_CAO__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_349_GAIN_ACCESS_TO_CAO_CAO] = {TECH_CAO_CAO_MAKE_AVAIL};
 
     // Meat of hunted and livestock animals doesn't decay
-    this->civBonuses[CIV_BONUS_350_MEAT_OF_HUNTED_AND_LIVESTOCK_ANIMALS_DOESN_T_DECAY] = {TECH_C_BONUS__ANIMALS_DON_T_DECAY};
+    this->civBonuses[CIV_BONUS_350_MEAT_OF_HUNTED_AND_LIVESTOCK_ANIMALS_DOESN_T_DECAY] = {TECH_C_BONUS_ANIMALS_DON_T_DECAY};
 
     // Mounted units and Fire Lancers attack +20% faster starting in Feudal Age
-    this->civBonuses[CIV_BONUS_351_MOUNTED_UNITS_AND_FIRE_LANCERS_ATTACK_20] = {TECH_C_BONUS__CAV___FIRE_LANCER__20__ATTACK};
+    this->civBonuses[CIV_BONUS_351_MOUNTED_UNITS_AND_FIRE_LANCERS_ATTACK_20] = {TECH_C_BONUS_CAV_FIRE_LANCER_PLUS_20_PERCENT_ATTACK};
 
     // Siege Engineers available in Castle Age
     this->civBonuses[CIV_BONUS_352_SIEGE_ENGINEERS_AVAILABLE_IN_CASTLE_AGE] = {TECH_SIEGE_ENGINEERS_REQUIREMENT};
 
     // Siege and Fortification upgrades cost -75% wood and research +100% faster
-    this->civBonuses[CIV_BONUS_353_SIEGE_AND_FORTIFICATION_UPGRADES_COST_75_WOOD] = {TECH_C_BONUS__SIEGE_AND_DEFENSIVE_TECHS};
+    this->civBonuses[CIV_BONUS_353_SIEGE_AND_FORTIFICATION_UPGRADES_COST_75_WOOD] = {TECH_C_BONUS_SIEGE_AND_DEFENSIVE_TECHS};
 
     // Units receive -50% friendly fire damage
-    this->civBonuses[CIV_BONUS_354_UNITS_RECEIVE_50_FRIENDLY_FIRE_DAMAGE] = {TECH_C_BONUS__NO_FRIENDLY_DAMAGE};
+    this->civBonuses[CIV_BONUS_354_UNITS_RECEIVE_50_FRIENDLY_FIRE_DAMAGE] = {TECH_C_BONUS_NO_FRIENDLY_DAMAGE};
 
     // Grenadiers
-    this->civBonuses[CIV_BONUS_355_CAN_RECRUIT_GRENADIERS] = {TECH_GRENADIER__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_355_CAN_RECRUIT_GRENADIERS] = {TECH_GRENADIER_MAKE_AVAIL};
 
     // Pastures
     this->df->Effects[1008].EffectCommands.push_back(createEC(102, -1, -1, -1, 216));
     this->civBonuses[CIV_BONUS_356_PASTURES_REPLACE_FARMS_AND_MILL_UPGRADES] = {
-        TECH_C_BONUS__PASTURES, 
+        TECH_C_BONUS_PASTURES, 
         TECH_TRANSHUMANCE, 
         TECH_PASTORALISM, 
         TECH_DOMESTICATION
@@ -4709,19 +4709,19 @@ void Civbuilder::createCivBonuses() {
 
     // Melee attack upgrade effects are doubled
     this->civBonuses[CIV_BONUS_358_MELEE_ATTACK_UPGRADE_EFFECTS_ARE_DOUBLED] = {
-        TECH_C_BONUS__DOUBLE_FORGING, 
-        TECH_C_BONUS__DOUBLE_IRON_CASTING, 
-        TECH_C_BONUS__DOUBLE_BLAST_FURNACE
+        TECH_C_BONUS_DOUBLE_FORGING, 
+        TECH_C_BONUS_DOUBLE_IRON_CASTING, 
+        TECH_C_BONUS_DOUBLE_BLAST_FURNACE
     };
 
     // Skirmishers, Spearman- and Scout Cavalry-line train and upgrade +25% faster
-    this->civBonuses[CIV_BONUS_359_SKIRMISHERS_SPEARMAN_AND_SCOUT_CAVALRY_LINE_TRAIN] = {TECH_C_BONUS__SKIRMS_SPEAR_SCOUT_TRAIN_25__FASTER};
+    this->civBonuses[CIV_BONUS_359_SKIRMISHERS_SPEARMAN_AND_SCOUT_CAVALRY_LINE_TRAIN] = {TECH_C_BONUS_SKIRMS_SPEAR_SCOUT_TRAIN_25_PERCENT_FASTER};
 
     // Heavy Cavalry Archer upgrade available in Castle Age and costs -50%
-    this->civBonuses[CIV_BONUS_360_HEAVY_CAVALRY_ARCHER_UPGRADE_AVAILABLE_IN_CASTLE] = {TECH_C_BONUS__EARLY___CHEAPER_HCA};
+    this->civBonuses[CIV_BONUS_360_HEAVY_CAVALRY_ARCHER_UPGRADE_AVAILABLE_IN_CASTLE] = {TECH_C_BONUS_EARLY_PLUS_CHEAPER_HCA};
 
     // Mounted Trebuchets
-    this->civBonuses[CIV_BONUS_361_CAN_TRAIN_MOUNTED_TREBUCHETS] = {TECH_MOUNTED_TREBUCHET__MAKE_AVAIL};
+    this->civBonuses[CIV_BONUS_361_CAN_TRAIN_MOUNTED_TREBUCHETS] = {TECH_MOUNTED_TREBUCHET_MAKE_AVAIL};
 
     // Make all the trickle bonuses work with each other
     // Stone to gold + roman villagers
@@ -5480,7 +5480,7 @@ void Civbuilder::createTeamBonuses() {
     // TC spearmen
     e.EffectCommands.clear();
     e.Name = "TC Spearman (make available)";
-    e.EffectCommands.push_back(createEC(2, tcSpearman, 1, -1, 0));
+    e.EffectCommands.push_back(createEC(2, UNIT_TC_SPEARMAN, 1, -1, 0));
     this->df->Effects.push_back(e);
     Tech t = this->df->Techs[113];
     t.Name = "Dupl. Feudal Age";
@@ -5869,8 +5869,8 @@ void Civbuilder::reconfigureEffects() {
     }
 
     // Battle elephants +1/+1p affects royal
-    this->df->Effects[679].EffectCommands.push_back(createEC(4, royalElephant, -1, 8, amountTypetoD(1, 3)));
-    this->df->Effects[679].EffectCommands.push_back(createEC(4, royalElephant, -1, 8, amountTypetoD(1, 4)));
+    this->df->Effects[679].EffectCommands.push_back(createEC(4, UNIT_ROYAL_ELEPHANT, -1, 8, amountTypetoD(1, 3)));
+    this->df->Effects[679].EffectCommands.push_back(createEC(4, UNIT_ROYAL_ELEPHANT, -1, 8, amountTypetoD(1, 4)));
 
     // Foot archer bonuses
     this->df->Effects[612].EffectCommands.clear();
@@ -5906,28 +5906,28 @@ void Civbuilder::reconfigureEffects() {
     }
 
     // Steppe lancer effects
-    this->df->Effects[387].EffectCommands.push_back(createEC(5, royalLancer, -1, 0, 1.3));
-    this->df->Effects[724].EffectCommands.push_back(createEC(4, royalLancer, -1, 8, amountTypetoD(1, 3)));
-    this->df->Effects[724].EffectCommands.push_back(createEC(4, royalLancer, -1, 8, amountTypetoD(1, 4)));
-    this->df->Effects[726].EffectCommands.push_back(createEC(5, royalLancer, -1, 101, 0.5));
+    this->df->Effects[387].EffectCommands.push_back(createEC(5, UNIT_ROYAL_LANCER, -1, 0, 1.3));
+    this->df->Effects[724].EffectCommands.push_back(createEC(4, UNIT_ROYAL_LANCER, -1, 8, amountTypetoD(1, 3)));
+    this->df->Effects[724].EffectCommands.push_back(createEC(4, UNIT_ROYAL_LANCER, -1, 8, amountTypetoD(1, 4)));
+    this->df->Effects[726].EffectCommands.push_back(createEC(5, UNIT_ROYAL_LANCER, -1, 101, 0.5));
 
     // Make scorpion effects apply to imp scorp
-    this->df->Effects[647].EffectCommands.push_back(createEC(4, impScorpion, -1, 1, 1));
-    this->df->Effects[647].EffectCommands.push_back(createEC(4, impScorpion, -1, 12, 1));
-    this->df->Effects[647].EffectCommands.push_back(createEC(4, impScorpion, -1, 23, 1));
-    this->df->Effects[663].EffectCommands.push_back(createEC(4, impScorpion, -1, 102, 1));
-    this->df->Effects[663].EffectCommands.push_back(createEC(4, impScorpion, -1, 107, 1));
-    this->df->Effects[900].EffectCommands.push_back(createEC(5, impScorpion, -1, 105, 0.4));
-    this->df->Effects[901].EffectCommands.push_back(createEC(0, impScorpionProjectile, -1, 19, 1));
-    this->df->Effects[901].EffectCommands.push_back(createEC(0, impScorpionProjectileFire, -1, 19, 1));
+    this->df->Effects[647].EffectCommands.push_back(createEC(4, UNIT_IMP_SCORPION, -1, 1, 1));
+    this->df->Effects[647].EffectCommands.push_back(createEC(4, UNIT_IMP_SCORPION, -1, 12, 1));
+    this->df->Effects[647].EffectCommands.push_back(createEC(4, UNIT_IMP_SCORPION, -1, 23, 1));
+    this->df->Effects[663].EffectCommands.push_back(createEC(4, UNIT_IMP_SCORPION, -1, 102, 1));
+    this->df->Effects[663].EffectCommands.push_back(createEC(4, UNIT_IMP_SCORPION, -1, 107, 1));
+    this->df->Effects[900].EffectCommands.push_back(createEC(5, UNIT_IMP_SCORPION, -1, 105, 0.4));
+    this->df->Effects[901].EffectCommands.push_back(createEC(0, UNIT_IMP_SCORPION_PROJECTILE, -1, 19, 1));
+    this->df->Effects[901].EffectCommands.push_back(createEC(0, UNIT_IMP_SCORPION_PROJECTILE_FIRE, -1, 19, 1));
     this->df->Effects[483].EffectCommands.clear();
     this->df->Effects[483].EffectCommands.push_back(createEC(4, 279, -1, 9, amountTypetoD(4, 3)));
     this->df->Effects[483].EffectCommands.push_back(createEC(4, 542, -1, 9, amountTypetoD(4, 3)));
-    this->df->Effects[483].EffectCommands.push_back(createEC(4, impScorpion, -1, 9, amountTypetoD(4, 3)));
+    this->df->Effects[483].EffectCommands.push_back(createEC(4, UNIT_IMP_SCORPION, -1, 9, amountTypetoD(4, 3)));
     this->df->Effects[483].EffectCommands.push_back(createEC(4, 1120, -1, 9, amountTypetoD(2, 3)));
     this->df->Effects[483].EffectCommands.push_back(createEC(4, 1122, -1, 9, amountTypetoD(2, 3)));
-    this->df->Effects[894].EffectCommands.push_back(createEC(5, impScorpion, -1, 10, 0.75));
-    this->df->Effects[891].EffectCommands.push_back(createEC(0, impScorpion, -1, 20, 1));
+    this->df->Effects[894].EffectCommands.push_back(createEC(5, UNIT_IMP_SCORPION, -1, 10, 0.75));
+    this->df->Effects[891].EffectCommands.push_back(createEC(0, UNIT_IMP_SCORPION, -1, 20, 1));
 
     // Make monk techs affect monk units
     for (Civ &civ : this->df->Civs) {
@@ -6273,9 +6273,9 @@ void Civbuilder::cleanup() {
     // Apply random costs modifier
     bool randomCosts = this->config["modifiers"]["randomCosts"].asBool();
     if (randomCosts) {
-        unitSets[40].push_back(royalElephant);
-        unitSets[41].push_back(royalLancer);
-        unitSets[44].push_back(impScorpion);
+        unitSets[40].push_back(UNIT_ROYAL_ELEPHANT);
+        unitSets[41].push_back(UNIT_ROYAL_LANCER);
+        unitSets[44].push_back(UNIT_IMP_SCORPION);
         uniqueUnits = this->unitClasses["unique"];
         randomizeCosts(this->df);
     }
