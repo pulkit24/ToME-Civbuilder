@@ -18,7 +18,7 @@ COPY ./modding/create-data-mod ./modding/build/create-data-mod
 RUN npm install --omit=dev
 
 # Build Nuxt app
-RUN cd nuxt-app && npm install && npm run build
+RUN cd src/frontend && npm install && npm run build
 
 ENV NODE_ENV=production
 

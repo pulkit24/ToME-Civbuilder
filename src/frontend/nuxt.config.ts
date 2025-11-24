@@ -3,13 +3,14 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   
+  // Enable SPA mode (no SSR)
+  ssr: false,
+  
   // Configure modules
   modules: ['@pinia/nuxt'],
   
   // App configuration
   app: {
-    // Base path for routing - can be configured via environment variable
-    baseURL: process.env.NUXT_APP_BASE_URL || '/v2',
     head: {
       title: 'AoE2 Civbuilder',
       meta: [
@@ -26,7 +27,7 @@ export default defineNuxtConfig({
   // Build configuration
   nitro: {
     output: {
-      dir: '../.output-nuxt'
+      dir: '../../.output-nuxt'
     }
   },
   

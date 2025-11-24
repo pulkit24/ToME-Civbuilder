@@ -32,7 +32,7 @@ For drafts, information is passed between clients and server via socket.io. Each
 
 # Vue3/Nuxt4 Frontend
 
-A new modern frontend is being developed using Vue 3 and Nuxt 4. See `./nuxt-app/README.md` for details.
+A new modern frontend is being developed using Vue 3 and Nuxt 4. See `./src/frontend/README.md` for details.
 
 ## Quick Start - New Frontend
 ```bash
@@ -48,6 +48,8 @@ The new frontend will be available at http://localhost:4000/v2
 ## Development - New Frontend
 ```bash
 # Run Nuxt in dev mode (hot reload)
+npm run dev:nuxt
+```
 npm run dev:nuxt
 ```
 

@@ -12,8 +12,8 @@ function integrateNuxt(app) {
 	const indexHtmlPath = path.join(nuxtPublicPath, "index.html");
 
 	// Check if Nuxt build exists
-	if (!fs.existsSync(nuxtOutputPath) || !fs.existsSync(indexHtmlPath)) {
-		console.log("[NUXT] Build not found. Run 'cd nuxt-app && npm run build' to build the Vue3 frontend.");
+	if (!fs.existsSync(nuxtOutputPath)) {
+		console.log("[NUXT] Build not found. Run 'cd src/frontend && npm run build' to build the Vue3 frontend.");
 		return;
 	}
 
@@ -26,7 +26,7 @@ function integrateNuxt(app) {
 			maxAge: "1d",
 			etag: true,
 			lastModified: true,
-			index: false, // Don't automatically serve index.html
+			index: false,
 			setHeaders: (res, filepath) => {
 				// Cache JS/CSS files longer
 				if (filepath.includes("/_nuxt/")) {
@@ -37,15 +37,12 @@ function integrateNuxt(app) {
 	);
 
 	// Handle all /v2/* routes by serving the SPA index.html
-	// Note: This serves a static, pre-built file with a fixed path (not user-controlled).
-	// Rate limiting is handled at the Express level for the entire application.
-	app.get("/v2*", (req, res, next) => {
-		res.sendFile(indexHtmlPath, (err) => {
-			if (err) {
-				console.error("[NUXT] Error serving index.html:", err);
-				next(err);
-			}
-		});
+	app.get("/v2*", (req, res) => {
+		if (fs.existsSync(indexHtmlPath)) {
+			res.sendFile(indexHtmlPath);
+		} else {
+			res.status(404).send("Frontend not built");
+		}
 	});
 
 	console.log("[NUXT] Vue3/Nuxt4 frontend available at /v2");

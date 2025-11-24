@@ -44,6 +44,9 @@ COPY --from=cpp-build /app/modding/build /app/modding/build
 RUN find ./process_mod -name "*.sh" -exec dos2unix {} \; && \
     find ./modding/scripts -name "*.sh" -exec dos2unix {} \;
 
+# Build Nuxt frontend
+RUN cd src/frontend && npm install && npm run build
+
 
 ENV NODE_ENV=production
 

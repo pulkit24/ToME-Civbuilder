@@ -16,7 +16,7 @@ modding/scripts/sample_output.json
 
 # Nuxt build outputs
 .output-nuxt
-nuxt-app/.nuxt
-nuxt-app/.output
-nuxt-app/node_modules
-nuxt-app/dist
+src/frontend/.nuxt
+src/frontend/.output
+src/frontend/node_modules
+src/frontend/dist

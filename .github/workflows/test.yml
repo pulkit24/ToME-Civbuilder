@@ -31,6 +31,9 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
+      - name: Build Nuxt frontend
+        run: npm run build:nuxt
+
       - name: Build C++ component
         run: |
           cd modding
