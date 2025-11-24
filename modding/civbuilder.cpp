@@ -2803,7 +2803,17 @@ void Civbuilder::createCivBonuses() {
 
     // Create civ bonuses that are just a list of free techs
     const vector<vector<int>> freeTechs = {
-        {12, 13, 14, 1012, 1013, 1014}, {67, 68, 75}, {602, 875}, {8, 280}, {322, 441}, {47}, {254, 428, 786}, {213, 249}, {140, 63, 64}, {315}};
+        {12, 13, 14, 1012, 1013, 1014}, // Pasture  & Farm upgrades free (require Mill)
+        {67, 68, 75},
+        {602, 875},
+        {8, 280},
+        {322, 441},
+        {47},
+        {254, 428, 786},
+        {213, 249},
+        {140, 63, 64},
+        {315}
+    };
     for (int i = 0; i < freeTechs.size(); i++) {
         e.EffectCommands.clear();
         for (int j = 0; j < freeTechs[i].size(); j++) {
@@ -3376,6 +3386,7 @@ void Civbuilder::createCivBonuses() {
     t.RequiredTechs.push_back(101);
     t.RequiredTechs.push_back(1014);
     t.RequiredTechCount = 2;
+    setResearchLocation(t, -1, 0, 0);
     this->df->Techs.push_back(t);
     this->df->Techs[1013].RequiredTechs[2] = (int)(this->df->Techs.size() - 1);
     this->civBonuses[CIV_BONUS_105_ECONOMIC_UPGRADES_COST_33_FOOD_AND_AVAILABLE].push_back((int)(this->df->Techs.size() - 1));
@@ -3386,6 +3397,7 @@ void Civbuilder::createCivBonuses() {
     t.RequiredTechs.push_back(102);
     t.RequiredTechs.push_back(1013);
     t.RequiredTechCount = 2;
+    setResearchLocation(t, -1, 0, 0);
     this->df->Techs.push_back(t);
     this->df->Techs[1012].RequiredTechs[2] = (int)(this->df->Techs.size() - 1);
     this->civBonuses[CIV_BONUS_105_ECONOMIC_UPGRADES_COST_33_FOOD_AND_AVAILABLE].push_back((int)(this->df->Techs.size() - 1));
@@ -3399,6 +3411,7 @@ void Civbuilder::createCivBonuses() {
     t.RequiredTechs.push_back(101);
     t.RequiredTechs.push_back(433);
     t.RequiredTechCount = 2;
+    setResearchLocation(t, -1, 0, 0);
     this->df->Techs.push_back(t);
     this->df->Techs[384].RequiredTechs[2] = (int)(this->df->Techs.size() - 1);
     techIDs.push_back((int)(this->df->Techs.size() - 1));
@@ -3409,6 +3422,7 @@ void Civbuilder::createCivBonuses() {
     t.RequiredTechs.push_back(102);
     t.RequiredTechs.push_back(384);
     t.RequiredTechCount = 2;
+    setResearchLocation(t, -1, 0, 0);
     this->df->Techs.push_back(t);
     this->df->Techs[434].RequiredTechs[2] = (int)(this->df->Techs.size() - 1);
     techIDs.push_back((int)(this->df->Techs.size() - 1));
@@ -3452,7 +3466,7 @@ void Civbuilder::createCivBonuses() {
     this->createCivBonus(228, e, "C-Bonus, Warships +attack vs vils");
 
     // Rams generate stone when fighting
-    this->civBonuses[CIV_BONUS_229_RAMS_GENERATE_STONE_BY_RAMMING] = {};
+    this->civBonuses[CIV_BONUS_229_RAMS_GENERATE_STONE_BY_RAMMING] = {}; // empty because its done in `assignCivBonuses` special handling
 
     // TCs +50% work rate in Imperial
     e.EffectCommands.clear();
@@ -3950,7 +3964,7 @@ void Civbuilder::createCivBonuses() {
     // Houfnice
     this->civBonuses[CIV_BONUS_286_CAN_UPGRADE_BOMBARD_CANNONS_TO_HOUFNICE] = {787};
 
-    // Caravanseri
+    // Caravanserai
     this->civBonuses[CIV_BONUS_287_CAN_BUILD_CARAVANSERI_IN_IMPERIAL_AGE] = {518};
 
     // Gunpowder units +1/+1P
@@ -4087,7 +4101,7 @@ void Civbuilder::createCivBonuses() {
     }
     this->createCivBonus(323, e, "C-Bonus, Buildings rebate stone");
 
-    // Villagers cooperate
+    // Villagers cooperate - "Villagers work faster when nearby other villagers"
     e.EffectCommands.clear();
     e.EffectCommands.push_back(createEC(0, -1, 4, 63, 96));
     this->createCivBonus(324, e, "C-Bonus, Villagers cooperate");
