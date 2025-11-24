@@ -3,7 +3,7 @@
     <h1 class="title">Civilization Builder</h1>
     
     <div class="action-buttons">
-      <NuxtLink to="/v2/build" class="action-button">
+      <NuxtLink to="/build" class="action-button">
         Build Civilization
       </NuxtLink>
       

@@ -4,7 +4,7 @@ const express = require("express");
 
 /**
  * Integrates the built Nuxt application with Express
- * Serves the Nuxt app at /v2/* routes as a SPA
+ * Serves the Nuxt app at /v2/* routes as a static site
  */
 function integrateNuxt(app) {
 	const nuxtOutputPath = path.join(__dirname, ".output-nuxt");
@@ -13,20 +13,20 @@ function integrateNuxt(app) {
 
 	// Check if Nuxt build exists
 	if (!fs.existsSync(nuxtOutputPath)) {
-		console.log("[NUXT] Build not found. Run 'cd src/frontend && npm run build' to build the Vue3 frontend.");
+		console.log("[NUXT] Build not found. Run 'npm run build:nuxt' to build the Vue3 frontend.");
 		return;
 	}
 
 	console.log("[NUXT] Integrating Nuxt 4 application...");
 
-	// Serve Nuxt static assets with proper caching
+	// Serve all Nuxt static assets at /v2
 	app.use(
 		"/v2",
 		express.static(nuxtPublicPath, {
 			maxAge: "1d",
 			etag: true,
 			lastModified: true,
-			index: false,
+			index: "index.html",
 			setHeaders: (res, filepath) => {
 				// Cache JS/CSS files longer
 				if (filepath.includes("/_nuxt/")) {
@@ -36,8 +36,8 @@ function integrateNuxt(app) {
 		})
 	);
 
-	// Handle all /v2/* routes by serving the SPA index.html
-	app.get("/v2*", (req, res) => {
+	// Handle SPA fallback for /v2/* routes
+	app.get("/v2/*", (req, res) => {
 		if (fs.existsSync(indexHtmlPath)) {
 			res.sendFile(indexHtmlPath);
 		} else {

@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   
   // App configuration
   app: {
+    baseURL: '/v2/',
     head: {
       title: 'AoE2 Civbuilder',
       meta: [
@@ -19,7 +20,7 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Create your own Age of Empires 2 custom civilizations and generate mods to play with them in-game!' }
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: '/img/kraken_logo_circular.png' }
+        { rel: 'icon', type: 'image/png', href: '/v2/img/kraken_logo_circular.png' }
       ]
     }
   },

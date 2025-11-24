@@ -18,7 +18,7 @@
       
       <div class="placeholder">
         <p>⚙️ Build interface is being migrated to Vue3...</p>
-        <NuxtLink to="/v2" class="back-button">Back to Home</NuxtLink>
+        <NuxtLink to="/" class="back-button">Back to Home</NuxtLink>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
   "scripts": {
     "test": "jest --verbose",
     "test:watch": "jest --watch",
-    "build:nuxt": "cd src/frontend && npm install && npm run build",
+    "build:nuxt": "cd src/frontend && npm ci && npm run generate",
     "dev:nuxt": "cd src/frontend && npm run dev",
     "start": "node server.js"
   },

@@ -22,7 +22,7 @@
         </div>
         
         <div class="back-button-wrapper">
-          <NuxtLink to="/v2" class="back-button">Back to Home</NuxtLink>
+          <NuxtLink to="/" class="back-button">Back to Home</NuxtLink>
         </div>
       </div>
     </div>
