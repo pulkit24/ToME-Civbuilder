@@ -4,7 +4,7 @@
       <NuxtLink to="/v2" class="nav-button">Home</NuxtLink>
       <NuxtLink to="/v2/help" class="nav-button">Help</NuxtLink>
       <NuxtLink to="/v2/about" class="nav-button">About</NuxtLink>
-      <button class="nav-button" disabled>Events</button>
+      <NuxtLink to="/v2/events" class="nav-button">Events</NuxtLink>
       <NuxtLink to="/v2/updates" class="nav-button">Updates</NuxtLink>
     </nav>
     
