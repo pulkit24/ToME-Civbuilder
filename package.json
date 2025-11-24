@@ -1,7 +1,10 @@
 {
   "scripts": {
     "test": "jest --verbose",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "build:nuxt": "cd nuxt-app && npm install && npm run build",
+    "dev:nuxt": "cd nuxt-app && npm run dev",
+    "start": "node server.js"
   },
   "jest": {
     "testMatch": [

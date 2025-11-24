@@ -14,8 +14,11 @@ RUN apt-get update && apt-get install -y dos2unix libjsoncpp24 zip && \
 # No C++ build tools or build steps needed; uses precompiled binaries
 COPY ./modding/create-data-mod ./modding/build/create-data-mod
 
-# Install Node.js dependencies
+# Install Node.js dependencies for main app
 RUN npm install --omit=dev
+
+# Build Nuxt app
+RUN cd nuxt-app && npm install && npm run build
 
 ENV NODE_ENV=production
 

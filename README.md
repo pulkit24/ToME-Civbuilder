@@ -1,6 +1,10 @@
 # AoE2-Civbuilder
 Hosted at https://krakenmeister.com/civbuilder
 
+This project includes both a legacy frontend and a new Vue3/Nuxt4 frontend:
+- **Legacy Frontend**: Available at `/` (or `/civbuilder/`)
+- **New Vue3 Frontend**: Available at `/v2` (in parallel development)
+
 If you want to host the project locally, note that there are a few absolute paths in server.js and createModFolder.sh. All of the necessary C++ files are already compiled, but if you want to recompile them, make sure to clone the submodules and run './modding/scripts/build.sh'.
 
 # How it works
@@ -26,7 +30,30 @@ For drafts, information is passed between clients and server via socket.io. Each
 &emsp;&emsp;5. Randomize the costs of all units if the data.json requested it.
 
 
+# Vue3/Nuxt4 Frontend
+
+A new modern frontend is being developed using Vue 3 and Nuxt 4. See `./nuxt-app/README.md` for details.
+
+## Quick Start - New Frontend
+```bash
+# Build the Nuxt app
+npm run build:nuxt
+
+# Start the server (serves both old and new frontends)
+npm start
+```
+
+The new frontend will be available at http://localhost:4000/v2
+
+## Development - New Frontend
+```bash
+# Run Nuxt in dev mode (hot reload)
+npm run dev:nuxt
+```
+
 # run with Docker
 ```bash
 docker run --rm -e CIVBUILDER_HOSTNAME=http://localhost:4000 -p 4000:4000 ghcr.io/fritz-net/aoe2-civbuilder:latest
 ```
+
+Both frontends (old and new Vue3) are included in the Docker image.

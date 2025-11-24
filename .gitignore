@@ -13,3 +13,10 @@ process_mod/randomName.js
 modding/_codeql_build_dir/
 _codeql_detected_source_root
 modding/scripts/sample_output.json
+
+# Nuxt build outputs
+.output-nuxt
+nuxt-app/.nuxt
+nuxt-app/.output
+nuxt-app/node_modules
+nuxt-app/dist
