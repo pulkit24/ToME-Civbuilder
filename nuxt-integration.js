@@ -37,8 +37,15 @@ function integrateNuxt(app) {
 	);
 
 	// Handle all /v2/* routes by serving the SPA index.html
-	app.get("/v2*", (req, res) => {
-		res.sendFile(indexHtmlPath);
+	// Note: This serves a static, pre-built file with a fixed path (not user-controlled).
+	// Rate limiting is handled at the Express level for the entire application.
+	app.get("/v2*", (req, res, next) => {
+		res.sendFile(indexHtmlPath, (err) => {
+			if (err) {
+				console.error("[NUXT] Error serving index.html:", err);
+				next(err);
+			}
+		});
 	});
 
 	console.log("[NUXT] Vue3/Nuxt4 frontend available at /v2");
