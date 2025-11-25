@@ -1,127 +1,76 @@
 <template>
   <div class="build-page">
-    <h1 class="page-title">Build Your Civilization</h1>
-    
-    <div class="content-wrapper">
-      <div class="info-panel">
-        <p>Welcome to the Civilization Builder!</p>
-        <p>This is the new Vue3/Nuxt4 version.</p>
-        <p><strong>Coming soon:</strong></p>
-        <ul>
-          <li>Tech Tree Editor</li>
-          <li>Flag Builder</li>
-          <li>Civilization Bonuses Selector</li>
-          <li>Unique Units and Technologies</li>
-          <li>Mod Generation</li>
-        </ul>
-      </div>
-      
-      <div class="placeholder">
-        <p>⚙️ Build interface is being migrated to Vue3...</p>
-        <NuxtLink to="/" class="back-button">Back to Home</NuxtLink>
-      </div>
-    </div>
+    <CivBuilder
+      ref="civBuilderRef"
+      :initial-config="initialConfig"
+      next-button-text="Create Civilization"
+      @next="handleNext"
+      @download="handleDownload"
+      @reset="handleReset"
+      @config-loaded="handleConfigLoaded"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-// TODO: Implement civilization building functionality
-// This will include:
-// - Tech tree component
-// - Flag builder component
-// - Bonus selection
-// - Form handling for civ creation
+import type { CivConfig } from '~/composables/useCivData'
+
+const router = useRouter()
+const civBuilderRef = ref<{ civConfig: CivConfig } | null>(null)
+
+const initialConfig = ref<Partial<CivConfig>>({})
+
+// Track if user has made changes
+const hasUnsavedChanges = computed(() => {
+  if (!civBuilderRef.value) return false
+  const config = civBuilderRef.value.civConfig
+  return config?.alias !== '' || config?.description !== ''
+})
+
+// Prevent accidental navigation when user has unsaved changes
+onBeforeRouteLeave((to, from, next) => {
+  if (hasUnsavedChanges.value) {
+    const answer = window.confirm('You have unsaved changes. Are you sure you want to leave?')
+    if (!answer) {
+      next(false)
+      return
+    }
+  }
+  next()
+})
+
+function handleNext(config: CivConfig) {
+  console.log('Civ config:', config)
+  alert(`Civilization "${config.alias}" created successfully!\n\nFull mod creation will be available soon.`)
+}
+
+function handleDownload(config: CivConfig) {
+  console.log('Downloaded config:', config)
+}
+
+function handleReset() {
+  console.log('Config reset')
+}
+
+function handleConfigLoaded(config: CivConfig) {
+  console.log('Config loaded:', config)
+}
 </script>
 
 <style scoped>
 .build-page {
-  padding: 2rem;
-  max-width: 1400px;
+  padding: 6rem 2rem 2rem;
+  padding-left: max(2rem, 14vw);
+  padding-right: max(2rem, 10vw);
+  max-width: 1600px;
   margin: 0 auto;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  color: #d4af37;
-  text-align: center;
-  margin-bottom: 2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.content-wrapper {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: 1fr 1fr;
-}
-
-.info-panel {
-  background: rgba(139, 69, 19, 0.3);
-  border: 2px solid #d4af37;
-  padding: 2rem;
-  border-radius: 8px;
-}
-
-.info-panel h2 {
-  color: #d4af37;
-  margin-bottom: 1rem;
-}
-
-.info-panel ul {
-  margin-left: 2rem;
-  margin-top: 1rem;
-}
-
-.info-panel li {
-  margin-bottom: 0.5rem;
-}
-
-.placeholder {
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px dashed #666;
-  padding: 3rem;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 2rem;
-}
-
-.placeholder p {
-  font-size: 1.5rem;
-  color: #888;
-}
-
-.back-button {
-  padding: 1rem 2rem;
-  background: #8b4513;
-  color: white;
-  border: 2px solid #d4af37;
-  text-decoration: none;
-  font-size: 1.1rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.back-button:hover {
-  background: #a0522d;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 1024px) {
-  .content-wrapper {
-    grid-template-columns: 1fr;
-  }
+  min-height: 80vh;
 }
 
 @media (max-width: 768px) {
-  .page-title {
-    font-size: 1.8rem;
-  }
-  
   .build-page {
     padding: 1rem;
+    padding-top: 4rem;
   }
 }
 </style>
