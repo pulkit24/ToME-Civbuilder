@@ -31,7 +31,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install Node.js dependencies
-RUN npm install --omit=dev
+RUN npm ci --omit=dev
 
 
 # Copy all source code
@@ -43,6 +43,9 @@ COPY --from=cpp-build /app/modding/build /app/modding/build
 # Ensure Unix line endings for build.sh to avoid cross-platform issues
 RUN find ./process_mod -name "*.sh" -exec dos2unix {} \; && \
     find ./modding/scripts -name "*.sh" -exec dos2unix {} \;
+
+# Build Nuxt frontend
+RUN cd src/frontend && npm ci && npm run generate
 
 
 ENV NODE_ENV=production

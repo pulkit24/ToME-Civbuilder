@@ -20,6 +20,7 @@ const makeai = require("./process_mod/modAI.js");
 const { numBonuses, numBasicTechs, nameArr, colours, iconids, blanks, indexDictionary } = require("./process_mod/constants.js");
 const { createCivilizationsJson } = require("./process_mod/createCivilizationsJson.js");
 const commonJs = require("./public/js/common.js");
+const { integrateNuxt } = require("./nuxt-integration.js");
 
 console.log("Starting server...");
 
@@ -109,8 +110,18 @@ app.use(
 );
 app.use(routeSubdir, router);
 
+// Redirect root to the legacy frontend
+if (routeSubdir !== "/") {
+	app.get("/", (req, res) => {
+		res.redirect(routeSubdir);
+	});
+}
+
 app.use(zip());
 app.use(cookieParser());
+
+// Integrate Vue3/Nuxt4 frontend at /v2 routes
+integrateNuxt(app);
 
 function os_func() {
 	this.execCommand = function (cmd, callback, failure) {
