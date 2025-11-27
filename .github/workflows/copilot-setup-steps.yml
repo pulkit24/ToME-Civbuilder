@@ -1,0 +1,53 @@
+# Copilot Setup Steps - https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-environment#preinstalling-tools-or-dependencies-in-copilots-environment
+name: "Copilot Setup Steps"
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+  # The job MUST be called copilot-setup-steps for Copilot to pick it up
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    # Grant the minimal permissions required for setup. If you do not check out the code here,
+    # Copilot will check out the repository after the steps complete.
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install apt packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake git g++ python3-pip libssl-dev libcurl4-openssl-dev zlib1g-dev pkg-config
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install JavaScript dependencies
+        run: |
+          npm ci 
+          cd src/frontend
+          npm ci
+
+      - name: Install Playwright dependency
+        run: |
+          npm i -D playwright
+          # Note: chromium is already installed on the machine; if browsers need to be installed in the agent,
+          # uncomment the following line:
+          # npx playwright install --with-deps
+
+      - name: Build C++ backend
+        run: |
+          cd modding
+          chmod +x ./scripts/build.sh || true
+          ./scripts/build.sh
+
