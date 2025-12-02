@@ -2,8 +2,18 @@
   <div class="techtree-container" :class="{ 'is-maximized': isMaximized }" :style="containerStyle">
     <div class="techtree-toolbar" :style="toolbarStyle">
       <div class="points">{{ pointsLabel }}: {{ techtreePoints }}</div>
-      <button v-if="editable" class="toolbar-btn" @click="handleFill">Fill</button>
-      <button v-if="editable" class="toolbar-btn" @click="handleReset">Reset</button>
+      <button 
+        v-if="editable" 
+        class="toolbar-btn" 
+        @click="handleFill"
+        :title="fillButtonTooltip"
+      >Fill</button>
+      <button 
+        v-if="editable" 
+        class="toolbar-btn" 
+        @click="handleReset"
+        :title="resetButtonTooltip"
+      >Reset</button>
       <button class="toolbar-btn primary" @click="handleDone">{{ doneButtonText }}</button>
     </div>
 
@@ -386,6 +396,19 @@ const pointsLabel = computed(() => props.editable ? 'Points Remaining' : 'Points
 
 const doneButtonText = computed(() => 'Done')
 
+// Tooltip texts for Fill and Reset buttons
+const fillButtonTooltip = computed(() => {
+  if (!data.value) return 'Fill all available techs and units'
+  const totalTechs = allCarets.value.filter(c => !unclickableCarets.includes(c.id) && !isEnabled(c.id)).length
+  return `Fill all empty tech slots (${totalTechs} remaining techs)`
+})
+
+const resetButtonTooltip = computed(() => {
+  if (!data.value) return 'Clear all selections and reset to default'
+  const selectedTechs = allCarets.value.filter(c => isEnabled(c.id) && !['tech_22', 'tech_101', 'tech_102', 'tech_103', 'tech_408'].includes(c.id)).length
+  return `Reset to default tech tree (clear ${selectedTechs} selections)`
+})
+
 // Format sidebar content with bold quantifiers
 const formattedSidebarContent = computed(() => {
   if (!props.sidebarContent) return ''
@@ -725,9 +748,21 @@ function enableCaret(caretId: string) {
   const id = idID(caretId)
   
   if (!localtree.value[type].includes(id)) {
-    localtree.value[type].push(id)
     const techCost = getCaretCost(caretId)
+    
+    // Prevent going negative - check if we have enough points
+    if (techtreePoints.value < techCost) {
+      // Not enough points to enable this caret
+      return
+    }
+    
+    localtree.value[type].push(id)
     techtreePoints.value -= techCost
+    
+    // Ensure we never go negative (safety check)
+    if (techtreePoints.value < 0) {
+      techtreePoints.value = 0
+    }
   }
   
   // Enable linked carets
@@ -793,20 +828,40 @@ function handleLinkedCarets(caretId: string, enable: boolean) {
 }
 
 function handleFill() {
-  localtree.value = [
-    [
-      13, 17, 21, 74, 545, 539, 331, 125, 83, 128, 440, 492, 24, 4, 5, 474, 39, 875, 873, 7, 6, 567, 473, 77, 75, 359, 358, 93, 752, 753, 751,
-      441, 546, 448, 569, 283, 38, 330, 329, 1134, 1132, 1372, 1370, 548, 422, 1258, 1746, 1744, 588, 550, 280, 542, 279, 36, 1105, 532, 529,
-      1103, 691, 420, 528, 527, 1104, 442, 1795, 1904, 1907, 1901, 1903, 1944, 1946, 1942, 1948,
-    ],
-    [12, 45, 49, 50, 68, 70, 72, 79, 82, 84, 87, 101, 103, 104, 109, 199, 209, 276, 562, 584, 598, 621, 792, 236, 235, 234, 155, 117, 487],
-    [
-      435, 22, 101, 102, 103, 408, 47, 436, 437, 875, 215, 602, 39, 219, 212, 211, 201, 200, 199, 75, 68, 67, 80, 82, 81, 77, 76, 74, 375, 374,
-      65, 373, 51, 50, 64, 377, 63, 140, 608, 380, 93, 194, 322, 54, 379, 321, 315, 233, 230, 45, 46, 316, 438, 441, 319, 439, 231, 252, 249, 213,
-      280, 8, 182, 55, 279, 278, 221, 203, 202, 17, 23, 15, 48, 12, 13, 14,
-    ],
-  ]
-  techtreePoints.value = calculatePoints()
+  // Start with reset state (base tree with minimum enabled)
+  handleReset()
+  
+  // Available points after reset
+  let availablePoints = techtreePoints.value
+  
+  // Get all possible techs/units/buildings from allCarets, excluding unclickable and already enabled
+  const enableableCarets: { id: string; cost: number }[] = []
+  
+  for (const caret of allCarets.value) {
+    // Skip unclickable and already enabled carets
+    if (unclickableCarets.includes(caret.id)) continue
+    if (isEnabled(caret.id)) continue
+    
+    const cost = getCaretCost(caret.id)
+    enableableCarets.push({ id: caret.id, cost })
+  }
+  
+  // Sort by cost (cheapest first) to maximize number of techs filled
+  enableableCarets.sort((a, b) => a.cost - b.cost)
+  
+  // Enable as many techs as possible within the point budget
+  for (const { id, cost } of enableableCarets) {
+    if (cost <= availablePoints) {
+      // Check if not already enabled (could have been enabled as parent)
+      if (!isEnabled(id)) {
+        enableCaret(id)
+        availablePoints = techtreePoints.value // Update from actual points
+      }
+    }
+    // Stop if no points left
+    if (availablePoints <= 0) break
+  }
+  
   emit('update:tree', localtree.value)
   emit('update:points', techtreePoints.value)
 }

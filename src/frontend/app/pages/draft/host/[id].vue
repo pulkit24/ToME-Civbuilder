@@ -128,7 +128,7 @@
               v-model="civConfig.tree"
               :points="techTreePoints"
               :editable="true"
-              relative-path="/aoe2techtree"
+              :relative-path="techtreePath"
               @done="handleTechTreeDone"
             />
           </div>
@@ -139,7 +139,10 @@
     <!-- Phase 5: Creating Mod -->
     <div v-else-if="currentPhase === 5" class="creating-phase">
       <h1 class="phase-title">Creating Mod...</h1>
-      <div class="loading-spinner"></div>
+      <div class="creating-phase-box">
+        <div class="loading-spinner"></div>
+        <p class="creating-text">Please wait while your civilization mod is being generated...</p>
+      </div>
     </div>
 
     <!-- Phase 6: Download -->
@@ -195,8 +198,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router'
 import { useDraft } from '~/composables/useDraft'
 import { useBonusData, roundTypeToBonusType } from '~/composables/useBonusData'
 import type { CivConfig } from '~/composables/useCivData'
@@ -208,9 +211,17 @@ import ArchitectureSelector from '~/components/ArchitectureSelector.vue'
 import LanguageSelector from '~/components/LanguageSelector.vue'
 import TechTree from '~/components/TechTree.vue'
 
+const config = useRuntimeConfig()
 const route = useRoute()
 const router = useRouter()
 const draftId = computed(() => route.params.id as string)
+
+// Derive techtree path from runtime config
+const techtreePath = computed(() => {
+  const baseURL = config.app.baseURL || '/v2/'
+  const parentPath = baseURL.replace(/\/v2\/?$/, '') || '/'
+  return parentPath.replace(/\/$/, '') + '/aoe2techtree'
+})
 
 // Join form state
 const needsToJoin = ref(true)
@@ -411,6 +422,9 @@ const handleClear = () => {
 const handleDownload = () => {
   if (!draft.value) return
   
+  // Allow navigation after download initiated
+  allowNavigation.value = true
+  
   // Create a form and submit it to trigger download (like legacy code)
   const form = document.createElement('form')
   form.method = 'POST'
@@ -429,8 +443,61 @@ const handleDownload = () => {
 }
 
 const goHome = () => {
+  // Set flag to allow navigation without warning
+  allowNavigation.value = true
   // Navigate to home page - use navigateTo for proper Nuxt routing
   navigateTo('/')
+}
+
+// Flag to allow navigation after intentional exit (e.g., goHome button, download complete)
+const allowNavigation = ref(false)
+
+// Check if draft is in progress (phases 0-5, not yet downloaded in phase 6)
+const isDraftInProgress = computed(() => {
+  if (!draft.value) return false
+  // Phase 0-5 are active phases, phase 6 is download (completed)
+  return draft.value.gamestate.phase >= 0 && draft.value.gamestate.phase < 6
+})
+
+// Prevent accidental navigation away from draft in progress
+onBeforeRouteLeave((to, from, next) => {
+  // Always allow if explicitly allowed (e.g., from goHome button or after download)
+  if (allowNavigation.value) {
+    next()
+    return
+  }
+  
+  // If draft is in progress, warn before leaving
+  if (isDraftInProgress.value) {
+    const answer = window.confirm(
+      'You are still in an active draft session. Are you sure you want to leave?\n\nLeaving will disconnect you from the draft.'
+    )
+    if (!answer) {
+      next(false)
+      return
+    }
+  }
+  next()
+})
+
+// Also protect against browser close/refresh during active draft
+if (typeof window !== 'undefined') {
+  const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+    if (isDraftInProgress.value && !allowNavigation.value) {
+      event.preventDefault()
+      // Modern browsers require returnValue to be set for the prompt to show
+      event.returnValue = 'You are still in an active draft session. Are you sure you want to leave?'
+      return event.returnValue
+    }
+  }
+  
+  onMounted(() => {
+    window.addEventListener('beforeunload', handleBeforeUnload)
+  })
+  
+  onUnmounted(() => {
+    window.removeEventListener('beforeunload', handleBeforeUnload)
+  })
 }
 
 // Helper to get cookie value
@@ -789,7 +856,20 @@ onUnmounted(() => {
 
 .techtree-fullscreen .tech-tree-full {
   flex: 1;
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
+}
+
+/* Ensure TechTree fullscreen mode works in draft context */
+.techtree-fullscreen :deep(.techtree-container.is-maximized) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  min-height: 100vh;
+  height: 100vh;
 }
 
 .techtree-container {
@@ -885,6 +965,25 @@ onUnmounted(() => {
 }
 
 .waiting-text {
+  color: #f0e6d2;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  text-align: center;
+  max-width: 500px;
+}
+
+/* Creating phase box (for better contrast with loading spinner) */
+.creating-phase-box {
+  background: linear-gradient(to bottom, rgba(139, 69, 19, 0.9), rgba(101, 67, 33, 0.9));
+  border: 3px solid hsl(52, 100%, 50%);
+  border-radius: 8px;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  max-width: 600px;
+}
+
+.creating-text {
   color: #f0e6d2;
   font-size: 1.2rem;
   margin-top: 2rem;

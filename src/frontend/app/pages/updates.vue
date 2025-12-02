@@ -154,7 +154,10 @@ function parseChangelogMarkdown(markdown: string): string {
 
 onMounted(async () => {
   try {
-    const response = await fetch('/civbuilder/CHANGELOG.md')
+    // CHANGELOG.md is always served at /civbuilder/CHANGELOG.md by the server
+    // regardless of the Nuxt app baseURL configuration
+    const changelogUrl = '/civbuilder/CHANGELOG.md'
+    const response = await fetch(changelogUrl)
     if (!response.ok) {
       throw new Error('Failed to load changelog')
     }
