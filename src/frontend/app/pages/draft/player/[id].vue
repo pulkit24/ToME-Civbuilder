@@ -119,28 +119,16 @@
       
       <!-- Show tech tree if not done yet -->
       <template v-else>
-        <h1 class="phase-title">Tech Tree</h1>
-        
-        <div class="techtree-fullscreen">
-          <!-- Sidebar with selected bonuses -->
-          <DraftSidebar
-            v-if="currentPlayer"
-            :player="currentPlayer"
-            :show-bonuses="true"
-          />
-          
-          <!-- Tech Tree - fills remaining space -->
-          <div class="tech-tree-full">
-            <TechTree
-              v-model="civConfig.tree"
-              :points="techTreePoints"
-              :editable="true"
-              :relative-path="techtreePath"
-              :show-pastures="showPasturesInTechtree"
-              @done="handleTechTreeDone"
-            />
-          </div>
-        </div>
+        <TechTree
+          v-model="civConfig.tree"
+          :points="techTreePoints"
+          :editable="true"
+          :relative-path="techtreePath"
+          :show-pastures="showPasturesInTechtree"
+          :sidebar-content="sidebarContent"
+          :sidebar-title="sidebarTitle"
+          @done="handleTechTreeDone"
+        />
       </template>
     </div>
 
@@ -200,7 +188,6 @@ import { PASTURES_BONUS_ID } from '~/composables/useCivConstants'
 import type { CivConfig } from '~/composables/useCivData'
 import DraftLobby from '~/components/draft/DraftLobby.vue'
 import DraftBoard from '~/components/draft/DraftBoard.vue'
-import DraftSidebar from '~/components/draft/DraftSidebar.vue'
 import FlagCreator from '~/components/FlagCreator.vue'
 import ArchitectureSelector from '~/components/ArchitectureSelector.vue'
 import LanguageSelector from '~/components/LanguageSelector.vue'
@@ -287,6 +274,98 @@ const showPasturesInTechtree = computed(() => {
   // Check if PASTURES_BONUS_ID is selected in civ bonuses (bonuses[0] array)
   if (!currentPlayer.value?.bonuses?.[0]) return false
   return currentPlayer.value.bonuses[0].includes(PASTURES_BONUS_ID)
+})
+
+// Generate sidebar HTML content from player's selected bonuses
+const sidebarContent = computed(() => {
+  if (!currentPlayer.value) return '<p>No player data available</p>'
+  
+  const player = currentPlayer.value
+  
+  // Check if player has any bonuses at all
+  if (!player.bonuses || !Array.isArray(player.bonuses)) {
+    return '<p>Loading bonuses...</p>'
+  }
+  
+  // Get all bonus cards by type
+  const allCards = {
+    civBonuses: getBonusCards('civ'),
+    uniqueUnits: getBonusCards('uu'),
+    castleTechs: getBonusCards('castle'),
+    imperialTechs: getBonusCards('imp'),
+    teamBonuses: getBonusCards('team'),
+  }
+  
+  let html = ''
+  let hasAnyBonus = false
+  
+  // Civilization Bonuses
+  if (player.bonuses[0] && Array.isArray(player.bonuses[0]) && player.bonuses[0].length > 0) {
+    html += '<h3>Civilization Bonuses</h3><ul>'
+    player.bonuses[0].forEach((id: number) => {
+      const bonus = allCards.civBonuses[id]
+      if (bonus && bonus.name) {
+        html += `<li>${bonus.name}</li>`
+        hasAnyBonus = true
+      }
+    })
+    html += '</ul>'
+  }
+  
+  // Unique Unit
+  if (player.bonuses[1] && Array.isArray(player.bonuses[1]) && player.bonuses[1].length > 0) {
+    const unitId = player.bonuses[1][0]
+    const unit = allCards.uniqueUnits[unitId]
+    if (unit && unit.name) {
+      if (hasAnyBonus) html += '<hr>'
+      html += `<h3>Unique Unit</h3><p>${unit.name}</p>`
+      hasAnyBonus = true
+    }
+  }
+  
+  // Castle Age Tech
+  if (player.bonuses[2] && Array.isArray(player.bonuses[2]) && player.bonuses[2].length > 0) {
+    const techId = player.bonuses[2][0]
+    const tech = allCards.castleTechs[techId]
+    if (tech && tech.name) {
+      if (hasAnyBonus) html += '<hr>'
+      html += `<h3>Castle Age Tech</h3><p>${tech.name}</p>`
+      hasAnyBonus = true
+    }
+  }
+  
+  // Imperial Age Tech
+  if (player.bonuses[3] && Array.isArray(player.bonuses[3]) && player.bonuses[3].length > 0) {
+    const techId = player.bonuses[3][0]
+    const tech = allCards.imperialTechs[techId]
+    if (tech && tech.name) {
+      if (hasAnyBonus) html += '<hr>'
+      html += `<h3>Imperial Age Tech</h3><p>${tech.name}</p>`
+      hasAnyBonus = true
+    }
+  }
+  
+  // Team Bonus
+  if (player.bonuses[4] && Array.isArray(player.bonuses[4]) && player.bonuses[4].length > 0) {
+    const bonusId = player.bonuses[4][0]
+    const bonus = allCards.teamBonuses[bonusId]
+    if (bonus && bonus.name) {
+      if (hasAnyBonus) html += '<hr>'
+      html += `<h3>Team Bonus</h3><p>${bonus.name}</p>`
+      hasAnyBonus = true
+    }
+  }
+  
+  // If no bonuses were found, this shouldn't happen in tech tree phase
+  if (!hasAnyBonus) {
+    return '<p style="color: #f00;">Error: No bonuses found. This is a bug.</p>'
+  }
+  
+  return html
+})
+
+const sidebarTitle = computed(() => {
+  return currentPlayer.value?.alias || currentPlayer.value?.name || 'Your Civilization'
 })
 
 const displayCards = computed(() => {
@@ -524,6 +603,19 @@ onUnmounted(() => {
 <style scoped>
 .draft-player-page {
   min-height: 100vh;
+  width: 100vw;
+}
+
+/* Override default layout for draft pages */
+:global(.app-layout) {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Override default layout padding for draft pages */
+:global(.content) {
+  padding: 0 !important;
+  width: 100vw;
 }
 
 /* Join Form Styles */
@@ -917,36 +1009,10 @@ onUnmounted(() => {
 
 /* Tech tree phase (Phase 3) */
 .techtree-phase {
-  min-height: 100vh;
-  padding: 0;
-}
-
-/* Fullscreen tech tree layout */
-.techtree-fullscreen {
-  display: flex;
   height: 100vh;
   width: 100%;
-}
-
-.techtree-fullscreen .tech-tree-full {
-  flex: 1;
+  padding: 0;
   overflow: hidden;
-}
-
-.techtree-container {
-  display: flex;
-  gap: 2rem;
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
-.techtree-container .tech-tree-section {
-  flex: 1;
-  background: linear-gradient(to bottom, rgba(139, 69, 19, 0.9), rgba(101, 67, 33, 0.9));
-  border: 3px solid hsl(52, 100%, 50%);
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 /* Waiting phase */

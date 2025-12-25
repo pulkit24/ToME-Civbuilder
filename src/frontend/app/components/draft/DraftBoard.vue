@@ -430,7 +430,7 @@ function formatArmorStat(basic: number, elite: number): string {
 }
 
 function getUnitGraphicUrl(unitId: number): string {
-  return `/img/unitgraphics/uu_${unitId}.png`
+  return `/v2/img/unitgraphics/uu_${unitId}.jpg`
 }
 
 function getStatIconUrl(stat: string): string {
@@ -440,15 +440,15 @@ function getStatIconUrl(stat: string): string {
     'stone': 'stone.png',
     'gold': 'gold.png',
     'hp': 'hp.png',
-    'meleeAttack': 'attack-melee.png',
-    'pierceAttack': 'attack-pierce.png',
+    'meleeAttack': 'damage.png',
+    'pierceAttack': 'pierceAttack.png',
     'range': 'range.png',
-    'reloadTime': 'reload-time.png',
-    'movementSpeed': 'movement-speed.png',
-    'armor': 'armor-melee.png',
-    'range-armor': 'armor-pierce.png',
+    'reloadTime': 'reloadTime.png',
+    'movementSpeed': 'movementSpeed.png',
+    'armor': 'armor.png',
+    'range-armor': 'range-armor.png',
   }
-  return `${techtreeBasePath.value}/img/${iconMap[stat] || 'hp.png'}`
+  return `/v2/img/staticons/${iconMap[stat] || 'hp.png'}`
 }
 
 function getAttackIcon(stats: UnitStats): string {
@@ -553,10 +553,11 @@ onMounted(() => {
 <style scoped>
 .draft-board {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   background: url('/img/draftbackground.jpg') center/cover;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .board-header {
@@ -591,6 +592,7 @@ onMounted(() => {
   gap: 1rem;
   padding: 1rem;
   overflow: hidden;
+  min-height: 0;
 }
 
 .players-sidebar {
@@ -665,7 +667,8 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  overflow-y: auto;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .cards-container {
@@ -677,7 +680,9 @@ onMounted(() => {
   padding: 1rem;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 8px;
-  min-height: 400px;
+  min-height: 200px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 /* Mouse-following tooltip - matches /build style with black background and colored border */
