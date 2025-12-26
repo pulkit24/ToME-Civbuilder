@@ -274,6 +274,7 @@ interface Props {
   sidebarContent?: string
   sidebarTitle?: string
   showPastures?: boolean
+  mode?: 'build' | 'draft'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -284,6 +285,7 @@ const props = withDefaults(defineProps<Props>(), {
   sidebarContent: '',
   sidebarTitle: 'Civilization Info',
   showPastures: false,
+  mode: 'draft',
 })
 
 const emit = defineEmits<{
@@ -407,7 +409,12 @@ const ageIcons = computed(() => {
   ]
 })
 
-const pointsLabel = computed(() => props.editable ? 'Points Remaining' : 'Points Spent')
+const pointsLabel = computed(() => {
+  if (props.mode === 'build') {
+    return 'Points Spent'
+  }
+  return props.editable ? 'Points Remaining' : 'Points Spent'
+})
 
 const doneButtonText = computed(() => 'Done')
 
@@ -505,7 +512,13 @@ watch(() => props.initialTree, (newTree) => {
     // Recalculate points when tree is loaded from props
     if (data.value && props.editable) {
       const usedPoints = calculatePoints()
-      techtreePoints.value = props.points - usedPoints
+      if (props.mode === 'build') {
+        // Build mode: show total points spent
+        techtreePoints.value = usedPoints
+      } else {
+        // Draft mode: show remaining points
+        techtreePoints.value = props.points - usedPoints
+      }
       emit('update:points', techtreePoints.value)
     }
   }
@@ -554,7 +567,13 @@ async function loadData() {
     // Recalculate points after data is loaded if tree was already set
     if (props.editable && localtree.value.some(arr => arr.length > 0)) {
       const usedPoints = calculatePoints()
-      techtreePoints.value = props.points - usedPoints
+      if (props.mode === 'build') {
+        // Build mode: show total points spent
+        techtreePoints.value = usedPoints
+      } else {
+        // Draft mode: show remaining points
+        techtreePoints.value = props.points - usedPoints
+      }
       emit('update:points', techtreePoints.value)
     }
   } catch (error) {
@@ -802,18 +821,25 @@ function enableCaret(caretId: string) {
   if (!localtree.value[type].includes(id)) {
     const techCost = getCaretCost(caretId)
     
-    // Prevent going negative - check if we have enough points
-    if (techtreePoints.value < techCost) {
-      // Not enough points to enable this caret
-      return
-    }
-    
-    localtree.value[type].push(id)
-    techtreePoints.value -= techCost
-    
-    // Ensure we never go negative (safety check)
-    if (techtreePoints.value < 0) {
-      techtreePoints.value = 0
+    if (props.mode === 'build') {
+      // Build mode: add points (no limit)
+      localtree.value[type].push(id)
+      techtreePoints.value += techCost
+    } else {
+      // Draft mode: subtract points (with limit check)
+      // Prevent going negative - check if we have enough points
+      if (techtreePoints.value < techCost) {
+        // Not enough points to enable this caret
+        return
+      }
+      
+      localtree.value[type].push(id)
+      techtreePoints.value -= techCost
+      
+      // Ensure we never go negative (safety check)
+      if (techtreePoints.value < 0) {
+        techtreePoints.value = 0
+      }
     }
   }
   
@@ -837,7 +863,14 @@ function disableCaret(caretId: string) {
   if (index !== -1) {
     localtree.value[type].splice(index, 1)
     const techCost = getCaretCost(caretId)
-    techtreePoints.value += techCost
+    
+    if (props.mode === 'build') {
+      // Build mode: subtract points when disabling
+      techtreePoints.value -= techCost
+    } else {
+      // Draft mode: add points back when disabling
+      techtreePoints.value += techCost
+    }
   }
   
   // Disable children
@@ -903,15 +936,17 @@ function handleFill() {
   
   // Enable as many techs as possible within the point budget
   for (const { id, cost } of enableableCarets) {
-    if (cost <= availablePoints) {
+    // In build mode, ignore point limit (unlimited points)
+    // In draft mode, check if we have enough points
+    if (props.mode === 'build' || cost <= availablePoints) {
       // Check if not already enabled (could have been enabled as parent)
       if (!isEnabled(id)) {
         enableCaret(id)
         availablePoints = techtreePoints.value // Update from actual points
       }
     }
-    // Stop if no points left
-    if (availablePoints <= 0) break
+    // Stop if no points left (only in draft mode)
+    if (props.mode === 'draft' && availablePoints <= 0) break
   }
   
   emit('update:tree', localtree.value)
@@ -924,7 +959,15 @@ function handleReset() {
     [12, 45, 49, 50, 68, 70, 72, 79, 82, 84, 87, 101, 103, 104, 109, 199, 209, 276, 562, 584, 598, 621, 792],
     [22, 101, 102, 103, 408],
   ]
-  techtreePoints.value = props.points
+  
+  if (props.mode === 'build') {
+    // Build mode: reset to 0 (starting point)
+    techtreePoints.value = 0
+  } else {
+    // Draft mode: reset to initial points limit
+    techtreePoints.value = props.points
+  }
+  
   emit('update:tree', localtree.value)
   emit('update:points', techtreePoints.value)
 }
