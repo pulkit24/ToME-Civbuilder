@@ -585,6 +585,8 @@ const handleSaveCivInfo = () => {
       playerNumber.value,
       civConfig.value.alias,
       civConfig.value.flag_palette,
+      civConfig.value.customFlag,
+      civConfig.value.customFlagData,
       civConfig.value.architecture,
       civConfig.value.language,
       civConfig.value.wonder
