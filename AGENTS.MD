@@ -56,6 +56,7 @@ The project has two parallel frontends:
 - uses playwright and locally installed chromium -> u have all the tools to run the tests
 - location: likely `src/frontend/tests/` or `__tests__/e2e/`
 - u are NOT allowed to increase timeouts. If we run into a timeout in nearly all cases selectors are wrong, the flow changed, something is really broken.
+- use Page Object Model for better maintainability
 
 ### Tools and Utilities
 
