@@ -10,25 +10,23 @@
     </div>
 
     <div class="demo-content">
+      <!-- Validation Dashboard Sidebar (wide screens only) -->
+      <aside class="validation-sidebar" v-if="editorRef && customUnit">
+        <ValidationDashboard 
+          :unit="customUnit"
+          :validation-errors="validationErrors"
+          :current-points="powerBudget"
+          :max-points="maxPoints"
+        />
+      </aside>
+      
       <!-- Main Editor -->
       <div class="editor-container">
-        <!-- Validation Dashboard - Always visible, positioned above editor -->
-        <div class="dashboard-wrapper">
-          <ValidationDashboard 
-            v-if="editorUnit"
-            :unit="editorUnit"
-            :validation-errors="editorValidationErrors"
-            :current-points="editorPowerBudget"
-            :max-points="editorMaxPoints"
-          />
-          <div v-else class="dashboard-placeholder">
-            <h3>Validation Dashboard</h3>
-            <p>This dashboard will show real-time validation rules and budget status once you select a unit type below.</p>
-            <p class="help-hint">👇 Click on a unit type (Infantry, Cavalry, Archer, or Siege) to get started</p>
-          </div>
-        </div>
-        
-        <CustomUUEditor :show-mode-selector="true" ref="editorRef" />
+        <CustomUUEditor 
+          :show-mode-selector="true" 
+          :show-validation-dashboard="false" 
+          ref="editorRef" 
+        />
       </div>
 
       <!-- Documentation Sidebar -->
@@ -104,7 +102,7 @@
           </p>
           <p>
             <strong>Hero Mode:</strong> Enable this to create a powerful unit that can only be trained once.
-            Hero units are more expensive but grant bonus points for other customizations.
+            Hero units cost 30 points from your budget, are more expensive, but can have enhanced stats.
           </p>
         </section>
 
@@ -164,28 +162,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
 import CustomUUEditor from '~/components/CustomUUEditor.vue';
 import ValidationDashboard from '~/components/ValidationDashboard.vue';
-import { useCustomUU } from '~/composables/useCustomUU';
+import { ref, computed } from 'vue';
 
-// Get shared state from composable
-const {
-  customUnit,
-  validateUnit,
-  calculatePowerBudget,
-  maxPoints
-} = useCustomUU();
+const editorRef = ref(null);
 
-// Computed properties for dashboard
-const editorUnit = computed(() => customUnit.value);
-const editorValidationErrors = computed(() => {
-  return customUnit.value ? validateUnit(customUnit.value) : [];
-});
-const editorPowerBudget = computed(() => {
-  return customUnit.value ? calculatePowerBudget(customUnit.value) : 0;
-});
-const editorMaxPoints = computed(() => maxPoints.value);
+// Access editor's exposed data for validation dashboard
+const customUnit = computed(() => editorRef.value?.customUnit || null);
+const validationErrors = computed(() => editorRef.value?.validationErrors || []);
+const powerBudget = computed(() => editorRef.value?.powerBudget || 0);
+const maxPoints = computed(() => editorRef.value?.maxPoints || null);
 
 const loadExample = (type: string) => {
   // Feature to be implemented - would load example unit into editor
@@ -233,16 +220,30 @@ const loadExample = (type: string) => {
 
 .demo-content {
   display: grid;
-  grid-template-columns: 1fr 350px;
+  grid-template-columns: 350px 1fr 350px;
   gap: 2rem;
-  max-width: 1600px;
+  max-width: 1800px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+@media (max-width: 1400px) {
+  .demo-content {
+    grid-template-columns: 1fr 350px;
+  }
+  
+  .validation-sidebar {
+    display: none;
+  }
 }
 
 @media (max-width: 1200px) {
   .demo-content {
     grid-template-columns: 1fr;
+  }
+  
+  .validation-sidebar {
+    display: none;
   }
   
   .documentation {
@@ -258,6 +259,17 @@ const loadExample = (type: string) => {
 }
 
 .documentation {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  position: sticky;
+  top: 2rem;
+}
+
+.validation-sidebar {
   background: white;
   border-radius: 8px;
   padding: 1.5rem;

@@ -441,12 +441,12 @@
                   <strong>Draft Mode:</strong> 100 points maximum
                 </div>
                 <div class="mode-item">
-                  <strong>Hero Mode Bonus:</strong> +30 points when hero mode is enabled
+                  <strong>Hero Mode Cost:</strong> Costs 30 points when hero mode is enabled
                 </div>
               </div>
               <div class="description">
                 In Build and Draft modes, sliders automatically limit to available points.
-                Hero mode grants bonus points but makes the unit trainable only once and more expensive.
+                Hero mode costs 30 points from your budget but makes the unit trainable only once and more expensive.
               </div>
             </div>
           </div>
@@ -575,7 +575,7 @@
 }
 
 .rule-category h2 {
-  color: #d4af37;
+  color: #d4af37; /* Gold color as requested */
   font-size: 2rem;
   margin-bottom: 0.5rem;
   border-bottom: 3px solid #d4af37;
@@ -620,10 +620,11 @@
 
 .type-specific {
   font-size: 1.05rem;
-  color: #d4af37;
-  background: rgba(212, 175, 55, 0.1);
+  color: #8B6914; /* Darker gold for better contrast */
+  background: rgba(212, 175, 55, 0.15);
   padding: 0.5rem;
   border-radius: 4px;
+  font-weight: 600;
 }
 
 .description {
@@ -651,11 +652,13 @@
 .example.pass {
   background: #e8f5e9;
   border-left: 4px solid #4caf50;
+  color: #1b5e20; /* Dark green text for readability */
 }
 
 .example.fail {
   background: #ffebee;
   border-left: 4px solid #f44336;
+  color: #b71c1c; /* Dark red text for readability */
 }
 
 .example.warning-example {
@@ -699,6 +702,7 @@
   padding: 0.5rem;
   border-radius: 4px;
   border: 1px solid #e0e0e0;
+  color: #333; /* Dark text for readability */
 }
 
 .budget-list,
@@ -715,7 +719,8 @@
   background: white;
   padding: 0.75rem;
   border-radius: 4px;
-  border-left: 4px solid #d4af37;
+  border-left: 4px solid #4d3617; /* Darker color for visibility */
+  color: #333; /* Ensure text is dark */
 }
 
 .elite-grid {
@@ -740,6 +745,7 @@
   margin-bottom: 0.5rem;
   border-radius: 4px;
   border-left: 3px solid #4caf50;
+  color: #333; /* Dark text for readability */
 }
 
 @media (max-width: 768px) {
