@@ -5,28 +5,28 @@ module.exports = {
 };
 
 const uniqueNames = [
-	"Forest Warden",
-	"Throwing Axemen",
+	"Forest Warden", // Longbowmen
+	"x Throwing Axemen",
 	"x Huskarls",
-	"Black Númenórean",
-	"Dúnedain Ranger",
-	"Steelbow Archer",
-	"Eorlinga",
+	"Black Númenórean", // Teutonic Knights
+	"Dúnedain Ranger", // Samurai
+	"Steelbow Archer", // Chu Ko No
+	"Eorlinga", // Cataphracts
 	"x Mamelukes",
-	"Battle Mûmak",
-	"Ringwraith",
-	"Elflord",
-	"Brigand",
-	"Uruk-hai",
-	"Black Rider",
+	"Battle Mûmak", // War Elephants
+	"Ringwraith", // Janissaries
+	"Elflord", // Berserks
+	"Brigand", // Mangudai
+	"Uruk-hai", // Woad Raiders
+	"Black Rider", // Conquistadors
 	"x Jaguar Warriors",
-	"Maethor",
-	"Serpent Knight",
-	"Olog-hai",
-	"Ithilien Ranger",
-	"Tower Guard",
-	"Aithran",
-	"Dunlending",
+	"Maethor", // Plumed Archers
+	"Serpent Knight", // Tarkans
+	"Olog-hai", // War Wagons
+	"Ithilien Ranger", // Genoese Crossbowmen
+	"Tower Guard", // Ghulam
+	"Aithran", // Kamayuks
+	"Dunlending", // Magyar Huszars
 	"x Boyars",
 	"x Organ Guns",
 	"x Shotel Warriors",
@@ -36,14 +36,14 @@ const uniqueNames = [
 	"x Karambit Warriors",
 	"x Arambai",
 	"x Rattan Archers",
-	"Stone Troll",
+	"Stone Troll", // Konniks
 	"x Keshiks",
-	"Spiderling",
+	"Spiderling", // Kipchaks
 	"x Leitis",
-	"Roquentar",
-	"Great Wain",
+	"Roquentar", // Coustilliers
+	"Great Wain", // Serjeants
 	"x Obuch",
-	"Cave Troll",
+	"Cave Troll", // Hussite Wagons
 	"x Crusader Knights",
 	"x Xolotl Warriors",
 	"x Saboteurs",
@@ -80,12 +80,12 @@ const uniqueNames = [
 	"x Silahtar",
 	"x Jaridah",
 	"x Wolf Warriors",
-	"Mírdan",
+	"Mírdan", // Warrior Monks
 	"x Castellan",
 	"x Wind Warriors",
 	"x Chakram Throwers",
 	"x Urumi Swordsmen",
-	"Wainrider",
+	"Wainrider", // Rathas
 	"x Composite Bowmen",
 	"x Monaspas",
 	"x White Feather Guard",
